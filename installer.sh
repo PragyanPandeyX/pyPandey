@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-REPO="https://github.com/TeamPandey/Pandey.git"
+REPO="https://github.com/PragyanPandeyX/pypandey.git"
 CURRENT_DIR="$(pwd)"
 ENV_FILE_PATH=".env"
-DIR="/root/TeamPandey"
+DIR="/root/TeamUltroid"
 
 while [ $# -gt 0 ]; do
     case "$1" in
     --dir=*)
-        DIR="${1#*=}" || DIR="/root/TeamPandey"
+        DIR="${1#*=}" || DIR="/root/TeamUltroid"
         ;;
     --branch=*)
         BRANCH="${1#*=}" || BRANCH="main"
