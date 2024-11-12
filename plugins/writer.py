@@ -20,10 +20,10 @@ import os
 from htmlwebshot import WebShot
 from PIL import Image, ImageDraw, ImageFont
 
-from . import async_searcher, eod, get_string, ultroid_cmd, text_set
+from . import async_searcher, eod, get_string, Pragyan_cmd, text_set
 
 
-@ultroid_cmd(pattern="gethtml( (.*)|$)")
+@Pragyan_cmd(pattern="gethtml( (.*)|$)")
 async def ghtml(e):
     if txt := e.pattern_match.group(1).strip():
         link = e.text.split(maxsplit=1)[1]
@@ -35,7 +35,7 @@ async def ghtml(e):
     await e.reply(file="file.html")
 
 
-@ultroid_cmd(pattern="image( (.*)|$)")
+@Pragyan_cmd(pattern="image( (.*)|$)")
 async def f2i(e):
     txt = e.pattern_match.group(1).strip()
     html = None
@@ -58,7 +58,7 @@ async def f2i(e):
     if os.path.exists(html):
         os.remove(html)
 
-@ultroid_cmd(pattern="write( (.*)|$)")
+@Pragyan_cmd(pattern="write( (.*)|$)")
 async def writer(e):
     if e.reply_to:
         reply = await e.get_reply_message()

@@ -64,11 +64,11 @@ from . import (
     quotly,
     types,
     pdB,
-    ultroid_cmd,
+    Pragyan_cmd,
 )
 
 
-@ultroid_cmd(pattern="packkang")
+@Pragyan_cmd(pattern="packkang")
 async def pack_kangish(_):
     _e = await _.get_reply_message()
     local = None
@@ -144,7 +144,7 @@ async def pack_kangish(_):
     )
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="kang",
 )
 async def hehe(args):
@@ -368,7 +368,7 @@ async def hehe(args):
             pass
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="round$",
 )
 async def ultdround(event):
@@ -405,16 +405,16 @@ async def ultdround(event):
     os.remove("ult.webp")
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="destroy$",
 )
 async def ultdestroy(event):
     ult = await event.get_reply_message()
     if not (ult and ult.media and "animated" in mediainfo(ult.media)):
         return await event.eor(get_string("sts_2"))
-    await event.client.download_media(ult, "ultroid.tgs")
+    await event.client.download_media(ult, "Pragyan.tgs")
     xx = await event.eor(get_string("com_1"))
-    await bash("lottie_convert.py ultroid.tgs json.json")
+    await bash("lottie_convert.py Pragyan.tgs json.json")
     with open("json.json") as json:
         jsn = json.read()
     jsn = (
@@ -433,11 +433,11 @@ async def ultdestroy(event):
         .replace("[9]", "[110]")
     )
     open("json.json", "w").write(jsn)
-    file = await con.animated_sticker("json.json", "ultroid.tgs")
+    file = await con.animated_sticker("json.json", "Pragyan.tgs")
     if file:
         await event.client.send_file(
             event.chat_id,
-            file="ultroid.tgs",
+            file="Pragyan.tgs",
             force_document=False,
             reply_to=event.reply_to_msg_id,
         )
@@ -445,7 +445,7 @@ async def ultdestroy(event):
     os.remove("json.json")
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="tiny$",
 )
 async def ultiny(event):
@@ -455,7 +455,7 @@ async def ultiny(event):
         return
     xx = await event.eor(get_string("com_1"))
     ik = await reply.download_media()
-    im1 = Image.open("resources/extras/ultroid_blank.png")
+    im1 = Image.open("resources/extras/Pragyan_blank.png")
     if ik.endswith(".tgs"):
         await con.animated_sticker(ik, "json.json")
         with open("json.json") as json:

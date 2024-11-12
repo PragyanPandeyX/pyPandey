@@ -89,7 +89,7 @@ async def DummyHandler(ult):
         if pdB.get_key("ULTROID_BANS"):
             try:
                 is_banned = await async_searcher(
-                    "https://bans.ultroid.tech/api/status",
+                    "https://bans.Pragyan.tech/api/status",
                     json={"userId": user.id},
                     post=True,
                     re_json=True,

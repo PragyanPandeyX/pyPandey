@@ -17,10 +17,10 @@
 
 from pyPandey.dB.nsfw_db import profan_chat, rem_profan
 
-from . import get_string, ultroid_cmd
+from . import get_string, Pragyan_cmd
 
 
-@ultroid_cmd(pattern="(add|rem)profanity$", admins_only=True)
+@Pragyan_cmd(pattern="(add|rem)profanity$", admins_only=True)
 async def addp(e):
     cas = e.pattern_match.group(1)
     add = cas == "add"

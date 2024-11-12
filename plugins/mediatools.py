@@ -29,7 +29,7 @@ from . import (
     get_string,
     is_url_ok,
     mediainfo,
-    ultroid_cmd,
+    Pragyan_cmd,
 )
 
 try:
@@ -40,7 +40,7 @@ except ImportError:
 
 uploader = CatboxUploader(userhash="")
 
-@ultroid_cmd(pattern="mediainfo( (.*)|$)")
+@Pragyan_cmd(pattern="mediainfo( (.*)|$)")
 async def mi(e):
     r = await e.get_reply_message()
     match = e.pattern_match.group(1).strip()
@@ -111,7 +111,7 @@ async def mi(e):
         os.remove(naam)
 
 
-@ultroid_cmd(pattern="rotate( (.*)|$)")
+@Pragyan_cmd(pattern="rotate( (.*)|$)")
 async def rotate_(ult):
     match = ult.pattern_match.group(1).strip()
     if not ult.is_reply:

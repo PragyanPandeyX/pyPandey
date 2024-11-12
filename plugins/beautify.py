@@ -15,7 +15,7 @@ import random
 
 from telethon.utils import get_display_name
 from urllib.parse import urlencode
-from . import Carbon, ultroid_cmd, get_string, inline_mention, LOGS
+from . import Carbon, Pragyan_cmd, get_string, inline_mention, LOGS
 from secrets import token_hex
 
 _colorspath = "resources/colorlist.txt"
@@ -27,7 +27,7 @@ else:
     all_col = []
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="(rc|c)arbon",
 )
 async def cr_bn(event):
@@ -48,7 +48,7 @@ async def cr_bn(event):
             code = event.text.split(" ", maxsplit=1)[1]
         except IndexError:
             return await xxxx.eor(get_string("carbon_2"))
-    xx = await Carbon(code=code, file_name="ultroid_carbon", backgroundColor=col)
+    xx = await Carbon(code=code, file_name="Pragyan_carbon", backgroundColor=col)
     if isinstance(xx, dict):
         await xxxx.edit(f"`{xx}`")
         return
@@ -59,7 +59,7 @@ async def cr_bn(event):
     )
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="ccarbon( (.*)|$)",
 )
 async def crbn(event):
@@ -109,7 +109,7 @@ RaySoTheme = [
 ]
 
 
-@ultroid_cmd(pattern="rayso")
+@Pragyan_cmd(pattern="rayso")
 async def pass_on(ult):
     try:
         from playwright.async_api import async_playwright

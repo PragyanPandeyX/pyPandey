@@ -10,7 +10,7 @@ import platform
 import sys
 
 import psutil
-from . import ultroid_cmd
+from . import Pragyan_cmd
 from pyPandey.version import __version__ as UltVer
 from telethon import __version__
 
@@ -53,7 +53,7 @@ text = (
 )
 
 
-@ultroid_cmd(pattern="sinfo$")
+@Pragyan_cmd(pattern="sinfo$")
 async def serverinfo_cmd(m):
     await m.edit("<b><i>🔄 Getting server info...</i></b>", parse_mode="html")
 

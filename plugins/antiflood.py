@@ -18,7 +18,7 @@ from pyPandey.dB import DEVLIST
 from pyPandey.dB.antiflood_db import get_flood, get_flood_limit, rem_flood, set_flood
 from pyPandey.fns.admins import admin_check
 
-from . import Button, Redis, asst, callback, eod, get_string, Pragyan_bot, ultroid_cmd
+from . import Button, Redis, asst, callback, eod, get_string, Pragyan_bot, Pragyan_cmd
 
 _check_flood = {}
 
@@ -82,7 +82,7 @@ async def unmuting(e):
     )
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="setflood ?(\\d+)",
     admins_only=True,
 )
@@ -96,7 +96,7 @@ async def setflood(e):
         return await eod(e, get_string("antiflood_4").format(input_))
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="remflood$",
     admins_only=True,
 )
@@ -111,7 +111,7 @@ async def remove_flood(e):
     await e.eor(get_string("antiflood_2"), time=5)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="getflood$",
     admins_only=True,
 )

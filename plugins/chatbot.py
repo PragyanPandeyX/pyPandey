@@ -12,7 +12,7 @@ __doc__ = get_help("help_chatbot")
 
 from pyPandey.fns.tools import get_chatbot_reply, get_oracle_reply
 
-from . import LOGS, eod, get_string, inline_mention, pdB, Pragyan_bot, ultroid_cmd
+from . import LOGS, eod, get_string, inline_mention, pdB, Pragyan_bot, Pragyan_cmd
 
 try:
     mongouri = pdB.get_key("MONGO_URI")
@@ -24,7 +24,7 @@ except AttributeError:
         LOGS.error("PLeasde set a MONGO_URI")
 
 
-@ultroid_cmd(pattern="repoai")
+@Pragyan_cmd(pattern="repoai")
 async def im_oracle(event):
     if event.reply_to:
         message = (await event.get_reply_message()).text.strip()
@@ -39,17 +39,17 @@ async def im_oracle(event):
     await event.eor(reply_)
 
 
-@ultroid_cmd(pattern="addoai")
+@Pragyan_cmd(pattern="addoai")
 async def add_oracle(event):
     await oracle_bot_fn(event, type_="add")
 
 
-@ultroid_cmd(pattern="remoai")
+@Pragyan_cmd(pattern="remoai")
 async def rem_oracle(event):
     await oracle_bot_fn(event, type_="remov")
 
 
-@ultroid_cmd(pattern="listoai")
+@Pragyan_cmd(pattern="listoai")
 async def listoracle(event):
     key = pdB.get_key("ORACLE_USERS") or {}
     users = key.get(event.chat_id, [])
@@ -100,7 +100,7 @@ async def oracle_bot_fn(event, type_):
     await event.eor(f"**Oracle:**\n{type_}ed {inline_mention(user_)}")
 
 
-@ultroid_cmd(pattern="repai")
+@Pragyan_cmd(pattern="repai")
 async def im_lonely_chat_with_me(event):
     if event.reply_to:
         message = (await event.get_reply_message()).message
@@ -113,17 +113,17 @@ async def im_lonely_chat_with_me(event):
     await event.eor(reply_)
 
 
-@ultroid_cmd(pattern="addai")
+@Pragyan_cmd(pattern="addai")
 async def add_chatBot(event):
     await chat_bot_fn(event, type_="add")
 
 
-@ultroid_cmd(pattern="remai")
+@Pragyan_cmd(pattern="remai")
 async def rem_chatBot(event):
     await chat_bot_fn(event, type_="remov")
 
 
-@ultroid_cmd(pattern="listai")
+@Pragyan_cmd(pattern="listai")
 async def lister(event):
     key = pdB.get_key("CHATBOT_USERS") or {}
     users = key.get(event.chat_id, [])

@@ -46,7 +46,7 @@ from pyPandey.fns.tools import metadata, translate
 from . import *
 from . import HNDLR, LOGS, ULTConfig, bash, con, eor, get_string
 from . import humanbytes as hb
-from . import inline_mention, mediainfo, ultroid_cmd
+from . import inline_mention, mediainfo, Pragyan_cmd
 
 
 def sanga_seperator(sanga_list):
@@ -61,7 +61,7 @@ def mentionuser(name, userid):
     return f"[{name}](tg://user?id={userid})"
 
 
-@ultroid_cmd(pattern="tl( (.*)|$)", manager=True)
+@Pragyan_cmd(pattern="tl( (.*)|$)", manager=True)
 async def _(event):
     input_ = event.pattern_match.group(1).strip().split(maxsplit=1)
     txt = input_[1] if len(input_) > 1 else None
@@ -86,7 +86,7 @@ async def _(event):
         await event.eor(str(exc), time=5)
 
 
-@ultroid_cmd(pattern="tr( (.*)|$)", manager=True)
+@Pragyan_cmd(pattern="tr( (.*)|$)", manager=True)
 async def _(event):
     input_ = event.pattern_match.group(1).strip().split(maxsplit=1)
     txt = input_[1] if len(input_) > 1 else None
@@ -119,7 +119,7 @@ async def _(event):
         await event.eor(str(exc), time=5)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="id( (.*)|$)",
     manager=True,
 )
@@ -144,7 +144,7 @@ async def _(event):
     await ult.eor(data)
 
 
-@ultroid_cmd(pattern="bots( (.*)|$)", groups_only=True, manager=True)
+@Pragyan_cmd(pattern="bots( (.*)|$)", groups_only=True, manager=True)
 async def _(ult):
     mentions = "• **Bots in this Chat**: \n"
     if input_str := ult.pattern_match.group(1).strip():
@@ -169,7 +169,7 @@ async def _(ult):
     await ult.eor(mentions)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="hl( (.*)|$)",
 )
 async def _(ult):
@@ -186,7 +186,7 @@ async def _(ult):
     await ult.eor(f"[{text}]({input_})", link_preview=False)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="circle$",
 )
 async def _(e):
@@ -266,7 +266,7 @@ FilesEMOJI = {
 }
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="ls( (.*)|$)",
 )
 async def _(e):
@@ -346,7 +346,7 @@ async def _(e):
         await e.delete()
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="sg(|u)(?:\\s|$)([\\s\\S]*)",
     fullsudo=True,
 )
@@ -412,7 +412,7 @@ async def sangmata(event):
     await event.edit(output)
 
 
-@ultroid_cmd(pattern="webshot( (.*)|$)")
+@Pragyan_cmd(pattern="webshot( (.*)|$)")
 async def webss(event):
     xx = await event.eor(get_string("com_1"))
     xurl = event.pattern_match.group(1).strip()
@@ -441,7 +441,7 @@ async def webss(event):
     await xx.delete()
 
 
-@ultroid_cmd(pattern="shorturl ?(.*)")
+@Pragyan_cmd(pattern="shorturl ?(.*)")
 async def short_url(event):
     input_url = event.pattern_match.group(1)
 

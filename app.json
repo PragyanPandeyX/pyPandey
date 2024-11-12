@@ -7,10 +7,10 @@
         "telegram",
         "userbot",
         "python",
-        "ultroid"
+        "Pragyan"
     ],
     "repository": "https://github.com/TeamPandey/Pandey",
-    "website": "https://ultroid.tech",
+    "website": "https://Pragyan.tech",
     "success_url": "https://t.me/TeamPandey",
     "stack": "container",
     "env": {
@@ -48,7 +48,7 @@
         }
     },
     "formation": {
-        "ultroid": {
+        "Pragyan": {
             "quantity": 1,
             "size": "eco"
         }

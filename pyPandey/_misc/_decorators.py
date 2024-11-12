@@ -45,7 +45,7 @@ from ..fns.admins import admin_check
 from ..fns.helper import bash
 from ..fns.helper import time_formatter as tf
 from ..version import __version__ as pyver
-from ..version import ultroid_version as ult_ver
+from ..version import Pragyan_version as ult_ver
 from . import SUDO_M, owner_and_sudos
 from ._wrappers import eod
 
@@ -66,7 +66,7 @@ def compile_pattern(data, hndlr):
     return re.compile("\\" + hndlr + data)
 
 
-def ultroid_cmd(
+def Pragyan_cmd(
     pattern=None, manager=False, Pragyan_bot=Pragyan_bot, asst=asst, **kwargs
 ):
     owner_only = kwargs.get("owner_only", False)

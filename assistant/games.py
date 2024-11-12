@@ -21,7 +21,7 @@ from telethon.errors.rpcerrorlist import BotMethodInvalidError
 from telethon.events import Raw
 from telethon.tl.types import InputMediaPoll, Poll, PollAnswer, UpdateMessagePollVote
 
-from pyPandey._misc._decorators import ultroid_cmd
+from pyPandey._misc._decorators import Pragyan_cmd
 from pyPandey.fns.helper import inline_mention
 from pyPandey.fns.tools import async_searcher
 
@@ -31,7 +31,7 @@ games = {}
 aki_photo = "https://graph.org/file/3cc8825c029fd0cab9edc.jpg"
 
 
-@ultroid_cmd(pattern="akinator")
+@Pragyan_cmd(pattern="akinator")
 async def akina(e):
     sta = Akinator()
     games[e.chat_id] = {e.id: sta}

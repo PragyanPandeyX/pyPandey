@@ -11,7 +11,7 @@ from telethon.errors import (
     ChatSendMediaForbiddenError,
 )
 
-from . import LOG_CHANNEL, LOGS, Button, asst, eor, get_string, ultroid_cmd
+from . import LOG_CHANNEL, LOGS, Button, asst, eor, get_string, Pragyan_cmd
 
 REPOMSG = """
 • **ULTROID USERBOT** •\n
@@ -33,7 +33,7 @@ ULTSTRING = """🎇 **Thanks for Deploying Pandey Userbot!**
 • Here, are the Some Basic stuff from, where you can Know, about its Usage."""
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="repo$",
     manager=True,
 )
@@ -53,7 +53,7 @@ async def repify(e):
     await e.eor(REPOMSG)
 
 
-@ultroid_cmd(pattern="ultroid$")
+@Pragyan_cmd(pattern="Pragyan$")
 async def usePandey(rs):
     button = Button.inline("Start >>", "initft_2")
     msg = await asst.send_message(

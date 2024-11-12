@@ -16,12 +16,12 @@ from telethon.tl.functions.photos import UploadProfilePhotoRequest
 from pyPandey.fns.helper import download_file
 from pyPandey.fns.tools import get_google_images
 
-from . import LOGS, get_help, get_string, pdB, Pragyan_bot, ultroid_cmd
+from . import LOGS, get_help, get_string, pdB, Pragyan_bot, Pragyan_cmd
 
 __doc__ = get_help("help_autopic")
 
 
-@ultroid_cmd(pattern="autopic( (.*)|$)")
+@Pragyan_cmd(pattern="autopic( (.*)|$)")
 async def autopic(e):
     search = e.pattern_match.group(1).strip()
     if pdB.get_key("AUTOPIC") and not search:

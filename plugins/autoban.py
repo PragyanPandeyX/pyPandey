@@ -13,7 +13,7 @@ from telethon import events
 
 from pyPandey.dB.base import KeyManager
 
-from . import LOGS, asst, Pragyan_bot, ultroid_cmd
+from . import LOGS, asst, Pragyan_bot, Pragyan_cmd
 
 Keym = KeyManager("DND_CHATS", cast=list)
 
@@ -32,7 +32,7 @@ async def dnd_func(event):
     await event.delete()
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="autokick (on|off)$",
     admins_only=True,
     manager=True,

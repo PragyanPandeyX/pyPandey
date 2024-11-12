@@ -1,9 +1,9 @@
-from . import eor, SUDO_HNDLR, ultroid_cmd
+from . import eor, SUDO_HNDLR, Pragyan_cmd
 from os import mkdir
 from . import HNDLR, get_string, inline_mention, pdB, Pragyan_bot
 from pyPandey._misc import sudoers  # Correct import for sudoers
 
-@ultroid_cmd(pattern="sur")
+@Pragyan_cmd(pattern="sur")
 async def szudo(e):
     reply = await e.get_reply_message()
     rid = "{}".format(reply.sender_id)
@@ -25,7 +25,7 @@ HNDLR : {HNDLR}
 SUDO_HNDLR : {SUDO_HNDLR}
 """)
 
-@ultroid_cmd(pattern="su$")
+@Pragyan_cmd(pattern="su$")
 async def _(ult):
     x = await ult.eor("**Adding.....**")
     n = pdB.get_key("SUDOS") or []
@@ -72,7 +72,7 @@ SUDO_HNDLR : {SUDO_HNDLR}""")
     b, _ = await ult.client.fast_uploader(f"list.txt")
     c = await ult.client.send_file(ult.chat, b)
 
-@ultroid_cmd(pattern="blocksudo")
+@Pragyan_cmd(pattern="blocksudo")
 async def block_sudo(e):
     reply = await e.get_reply_message()
     if not reply:

@@ -81,11 +81,11 @@ from . import (
     get_string,
     requests,
     pdB,
-    ultroid_cmd,
+    Pragyan_cmd,
 )
 
 
-@ultroid_cmd(pattern="color$")
+@Pragyan_cmd(pattern="color$")
 async def _(event):
     reply = await event.get_reply_message()
     if not (reply and reply.media):
@@ -115,7 +115,7 @@ async def _(event):
     await xx.delete()
 
 
-@ultroid_cmd(pattern="(grey|blur|negative|danger|mirror|quad|sketch|flip|toon)$")
+@Pragyan_cmd(pattern="(grey|blur|negative|danger|mirror|quad|sketch|flip|toon)$")
 async def ult_tools(event):
     match = event.pattern_match.group(1)
     ureply = await event.get_reply_message()
@@ -129,34 +129,34 @@ async def ult_tools(event):
     file = await con.convert(ultt, convert_to="png", outname="ult")
     ult = cv2.imread(file)
     if match == "grey":
-        ultroid = cv2.cvtColor(ult, cv2.COLOR_BGR2GRAY)
+        Pragyan = cv2.cvtColor(ult, cv2.COLOR_BGR2GRAY)
     elif match == "blur":
-        ultroid = cv2.GaussianBlur(ult, (35, 35), 0)
+        Pragyan = cv2.GaussianBlur(ult, (35, 35), 0)
     elif match == "negative":
-        ultroid = cv2.bitwise_not(ult)
+        Pragyan = cv2.bitwise_not(ult)
     elif match == "danger":
         dan = cv2.cvtColor(ult, cv2.COLOR_BGR2RGB)
-        ultroid = cv2.cvtColor(dan, cv2.COLOR_HSV2BGR)
+        Pragyan = cv2.cvtColor(dan, cv2.COLOR_HSV2BGR)
     elif match == "mirror":
         ish = cv2.flip(ult, 1)
-        ultroid = cv2.hconcat([ult, ish])
+        Pragyan = cv2.hconcat([ult, ish])
     elif match == "flip":
         trn = cv2.flip(ult, 1)
         ish = cv2.rotate(trn, cv2.ROTATE_180)
-        ultroid = cv2.vconcat([ult, ish])
+        Pragyan = cv2.vconcat([ult, ish])
     elif match == "quad":
         ult = cv2.imread(file)
         roid = cv2.flip(ult, 1)
         mici = cv2.hconcat([ult, roid])
         fr = cv2.flip(mici, 1)
         trn = cv2.rotate(fr, cv2.ROTATE_180)
-        ultroid = cv2.vconcat([mici, trn])
+        Pragyan = cv2.vconcat([mici, trn])
     elif match == "sketch":
         gray_image = cv2.cvtColor(ult, cv2.COLOR_BGR2GRAY)
         inverted_gray_image = 255 - gray_image
         blurred_img = cv2.GaussianBlur(inverted_gray_image, (21, 21), 0)
         inverted_blurred_img = 255 - blurred_img
-        ultroid = cv2.divide(gray_image, inverted_blurred_img, scale=256.0)
+        Pragyan = cv2.divide(gray_image, inverted_blurred_img, scale=256.0)
     elif match == "toon":
         height, width, _ = ult.shape
         samples = np.zeros([height * width, 3], dtype=np.float32)
@@ -175,8 +175,8 @@ async def ult_tools(event):
         )
         centers = np.uint8(centers)
         ish = centers[labels.flatten()]
-        ultroid = ish.reshape(ult.shape)
-    cv2.imwrite("ult.jpg", ultroid)
+        Pragyan = ish.reshape(ult.shape)
+    cv2.imwrite("ult.jpg", Pragyan)
     await ureply.reply(
         file="ult.jpg",
         force_document=False,
@@ -186,7 +186,7 @@ async def ult_tools(event):
     os.remove(file)
 
 
-@ultroid_cmd(pattern="csample (.*)")
+@Pragyan_cmd(pattern="csample (.*)")
 async def sampl(ult):
     if color := ult.pattern_match.group(1).strip():
         img = Image.new("RGB", (200, 100), f"{color}")
@@ -204,7 +204,7 @@ async def sampl(ult):
         await ult.eor("Wrong Color Name/Hex Code specified!")
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="blue$",
 )
 async def ultd(event):
@@ -240,7 +240,7 @@ async def ultd(event):
     os.remove(ultt)
 
 
-@ultroid_cmd(pattern="border( (.*)|$)")
+@Pragyan_cmd(pattern="border( (.*)|$)")
 async def ok(event):
     hm = await event.get_reply_message()
     if not (hm and (hm.photo or hm.sticker)):
@@ -268,7 +268,7 @@ async def ok(event):
     await event.delete()
 
 
-@ultroid_cmd(pattern="pixelator( (.*)|$)")
+@Pragyan_cmd(pattern="pixelator( (.*)|$)")
 async def pixelator(event):
     reply_message = await event.get_reply_message()
     if not (reply_message and (reply_message.photo or reply_message.sticker)):

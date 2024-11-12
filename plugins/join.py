@@ -23,10 +23,10 @@
 from telethon.errors.rpcerrorlist import UserAlreadyParticipantError, InviteHashExpiredError
 from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon.tl.functions.channels import JoinChannelRequest
-from . import ultroid_cmd
+from . import Pragyan_cmd
 
-@ultroid_cmd(pattern="join (.+)")
-async def ultroid_join(event):
+@Pragyan_cmd(pattern="join (.+)")
+async def Pragyan_join(event):
     join_link = event.pattern_match.group(1)
 
     try:

@@ -42,7 +42,7 @@ from telethon.tl import functions
 fn = functions
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="sysinfo$",
 )
 async def _(e):
@@ -61,7 +61,7 @@ async def _(e):
     remove("neo.txt")
 
 
-@ultroid_cmd(pattern="bash", fullsudo=True, only_devs=True)
+@Pragyan_cmd(pattern="bash", fullsudo=True, only_devs=True)
 async def _(event):
     carb, rayso, yamlf = None, None, False
     try:
@@ -165,7 +165,7 @@ async def _(event):
 
 
 pp = pprint  # ignore: pylint
-bot = ultroid = Pragyan_bot
+bot = Pragyan = Pragyan_bot
 
 
 class u:
@@ -196,7 +196,7 @@ def _parse_eval(value=None):
     return str(value)
 
 
-@ultroid_cmd(pattern="eval", fullsudo=True, only_devs=True)
+@Pragyan_cmd(pattern="eval", fullsudo=True, only_devs=True)
 async def _(event):
     try:
         cmd = event.text.split(maxsplit=1)[1]
@@ -347,7 +347,7 @@ int main(){
 """
 
 
-@ultroid_cmd(pattern="cpp", only_devs=True)
+@Pragyan_cmd(pattern="cpp", only_devs=True)
 async def doie(e):
     match = e.text.split(" ", maxsplit=1)
     try:
@@ -358,13 +358,13 @@ async def doie(e):
     if "main(" not in match:
         new_m = "".join(" " * 4 + i + "\n" for i in match.split("\n"))
         match = DUMMY_CPP.replace("!code", new_m)
-    open("cpp-ultroid.cpp", "w").write(match)
-    m = await bash("g++ -o CppPandey cpp-ultroid.cpp")
+    open("cpp-Pragyan.cpp", "w").write(match)
+    m = await bash("g++ -o CppPandey cpp-Pragyan.cpp")
     o_cpp = f"• **Eval-Cpp**\n`{match}`"
     if m[1]:
         o_cpp += f"\n\n**• Error :**\n`{m[1]}`"
         if len(o_cpp) > 3000:
-            os.remove("cpp-ultroid.cpp")
+            os.remove("cpp-Pragyan.cpp")
             if os.path.exists("CppPandey"):
                 os.remove("CppPandey")
             with BytesIO(str.encode(o_cpp)) as out_file:
@@ -383,4 +383,4 @@ async def doie(e):
     else:
         await eor(msg, o_cpp)
     os.remove("CppPandey")
-    os.remove("cpp-ultroid.cpp")
+    os.remove("cpp-Pragyan.cpp")

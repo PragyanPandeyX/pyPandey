@@ -31,11 +31,11 @@ from . import (
     get_string,
     progress,
     time_formatter,
-    ultroid_cmd,
+    Pragyan_cmd,
 )
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="download( (.*)|$)",
 )
 async def down(event):
@@ -69,7 +69,7 @@ async def down(event):
     await msg.eor(f"`{filename}` `downloaded in {time_formatter(d*1000)}.`")
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="dl( (.*)|$)",
 )
 async def download(event):
@@ -130,7 +130,7 @@ async def download(event):
     await xx.eor(get_string("udl_2").format(file_name, t))
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="ul( (.*)|$)",
 )
 async def _(event):

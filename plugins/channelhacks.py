@@ -17,7 +17,7 @@ from telethon.utils import get_display_name, get_peer_id
 
 from pyPandey.dB.base import KeyManager
 
-from . import LOGS, asst, eor, events, get_string, pdB, Pragyan_bot, ultroid_cmd
+from . import LOGS, asst, eor, events, get_string, pdB, Pragyan_bot, Pragyan_cmd
 
 ERROR = {}
 SourceM = KeyManager("CH_SOURCE", cast=list)
@@ -44,7 +44,7 @@ async def autopost_func(e):
                 await asst.send_message(pdB.get_key("LOG_CHANNEL"), Error)
 
 
-@ultroid_cmd(pattern="shift (.*)")
+@Pragyan_cmd(pattern="shift (.*)")
 async def _(e):
     x = e.pattern_match.group(1).strip()
     z = await e.eor(get_string("com_1"))
@@ -72,7 +72,7 @@ async def _(e):
     await z.edit("Done")
 
 
-@ultroid_cmd(pattern="asource (.*)")
+@Pragyan_cmd(pattern="asource (.*)")
 async def source(e):
     if x := e.pattern_match.group(1).strip():
         try:
@@ -90,7 +90,7 @@ async def source(e):
         await e.eor(get_string("cha_3"))
 
 
-@ultroid_cmd(pattern="dsource( (.*)|$)")
+@Pragyan_cmd(pattern="dsource( (.*)|$)")
 async def dd(event):
     chat_id = event.pattern_match.group(1).strip()
     x = await event.eor(get_string("com_1"))
@@ -114,7 +114,7 @@ async def dd(event):
         await eor(x, "Source channel is already removed from database. ", time=3)
 
 
-@ultroid_cmd(pattern="listsource")
+@Pragyan_cmd(pattern="listsource")
 async def list_all(event):
     x = await event.eor(get_string("com_1"))
     num = SourceM.count()
@@ -145,7 +145,7 @@ async def list_all(event):
         await x.edit(msg)
 
 
-@ultroid_cmd(pattern="adest (.*)")
+@Pragyan_cmd(pattern="adest (.*)")
 async def destination(e):
     if x := e.pattern_match.group(1).strip():
         try:
@@ -162,7 +162,7 @@ async def destination(e):
         await e.eor("Destination channel already added")
 
 
-@ultroid_cmd(pattern="ddest( (.*)|$)")
+@Pragyan_cmd(pattern="ddest( (.*)|$)")
 async def dd(event):
     chat_id = event.pattern_match.group(1).strip()
     x = await event.eor(get_string("com_1"))
@@ -186,7 +186,7 @@ async def dd(event):
         await eor(x, "Destination channel is already removed from database. ", time=5)
 
 
-@ultroid_cmd(pattern="listdest")
+@Pragyan_cmd(pattern="listdest")
 async def list_all(event):
     Pragyan_bot = event.client
     x = await event.eor(get_string("com_1"))

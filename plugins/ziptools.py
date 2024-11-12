@@ -33,12 +33,12 @@ from . import (
     downloader,
     get_all_files,
     get_string,
-    ultroid_cmd,
+    Pragyan_cmd,
     uploader,
 )
 
 
-@ultroid_cmd(pattern="zip( (.*)|$)")
+@Pragyan_cmd(pattern="zip( (.*)|$)")
 async def zipp(event):
     reply = await event.get_reply_message()
     t = time.time()
@@ -77,7 +77,7 @@ async def zipp(event):
     await xx.delete()
 
 
-@ultroid_cmd(pattern="unzip( (.*)|$)")
+@Pragyan_cmd(pattern="unzip( (.*)|$)")
 async def unzipp(event):
     reply = await event.get_reply_message()
     file = event.pattern_match.group(1).strip()
@@ -115,7 +115,7 @@ async def unzipp(event):
     await xx.delete()
 
 
-@ultroid_cmd(pattern="addzip$")
+@Pragyan_cmd(pattern="addzip$")
 async def azipp(event):
     reply = await event.get_reply_message()
     t = time.time()
@@ -144,19 +144,19 @@ async def azipp(event):
     )
 
 
-@ultroid_cmd(pattern="dozip( (.*)|$)")
+@Pragyan_cmd(pattern="dozip( (.*)|$)")
 async def do_zip(event):
     if not os.path.isdir("zip"):
         return await event.eor(get_string("zip_2").format(HNDLR))
     xx = await event.eor(get_string("com_1"))
     if event.pattern_match.group(1).strip():
         await bash(
-            f"zip -r --password {event.pattern_match.group(1).strip()} ultroid.zip zip/*"
+            f"zip -r --password {event.pattern_match.group(1).strip()} Pragyan.zip zip/*"
         )
     else:
-        await bash("zip -r ultroid.zip zip/*")
+        await bash("zip -r Pragyan.zip zip/*")
     k = time.time()
-    xxx = await uploader("ultroid.zip", "ultroid.zip", k, xx, get_string("com_6"))
+    xxx = await uploader("Pragyan.zip", "Pragyan.zip", k, xx, get_string("com_6"))
     await event.client.send_file(
         event.chat_id,
         xxx,
@@ -164,5 +164,5 @@ async def do_zip(event):
         thumb=ULTConfig.thumb,
     )
     await bash("rm -rf zip")
-    os.remove("ultroid.zip")
+    os.remove("Pragyan.zip")
     await xx.delete()

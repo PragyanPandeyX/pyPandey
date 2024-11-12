@@ -32,7 +32,7 @@ from telethon.utils import get_display_name
 from pyPandey.dB.mute_db import is_muted, mute, unmute
 from pyPandey.fns.admins import ban_time
 
-from . import asst, eod, get_string, inline_mention, Pragyan_bot, ultroid_cmd
+from . import asst, eod, get_string, inline_mention, Pragyan_bot, Pragyan_cmd
 
 
 @Pragyan_bot.on(events.NewMessage(incoming=True))
@@ -43,7 +43,7 @@ async def watcher(event):
         await event.delete()
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="dmute( (.*)|$)",
 )
 async def startmute(event):
@@ -74,7 +74,7 @@ async def startmute(event):
     await xx.eor("`Successfully muted...`", time=3)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="undmute( (.*)|$)",
 )
 async def endmute(event):
@@ -96,7 +96,7 @@ async def endmute(event):
     await xx.eor("`Successfully unmuted...`", time=3)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="tmute",
     groups_only=True,
     manager=True,
@@ -141,7 +141,7 @@ async def _(e):
         await xx.eor(f"`{m}`", time=5)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="unmute( (.*)|$)",
     admins_only=True,
     manager=True,
@@ -175,7 +175,7 @@ async def _(e):
         await xx.eor(f"`{m}`", time=5)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="mute( (.*)|$)", admins_only=True, manager=True, require="ban_users"
 )
 async def _(e):

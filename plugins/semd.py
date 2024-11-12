@@ -64,7 +64,7 @@ async def pastee(path):
         return ""
 
 
-@ultroid_cmd(pattern="semd ?(.*)")
+@Pragyan_cmd(pattern="semd ?(.*)")
 async def semd_plugin(ult):
     repo = "https://github.com/TeamPandey/Pandey"
     args = ult.pattern_match.group(1)

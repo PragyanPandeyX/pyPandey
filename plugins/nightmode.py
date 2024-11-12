@@ -42,12 +42,12 @@ from telethon.tl.types import ChatBannedRights
 
 from pyPandey.dB.base import KeyManager
 
-from . import get_string, pdB, Pragyan_bot, ultroid_cmd
+from . import get_string, pdB, Pragyan_bot, Pragyan_cmd
 
 keym = KeyManager("NIGHT_CHATS", cast=list)
 
 
-@ultroid_cmd(pattern="nmtime( (.*)|$)")
+@Pragyan_cmd(pattern="nmtime( (.*)|$)")
 async def set_time(e):
     if not e.pattern_match.group(1).strip():
         return await e.eor(get_string("nightm_1"))
@@ -62,7 +62,7 @@ async def set_time(e):
         await e.eor(get_string("nightm_1"))
 
 
-@ultroid_cmd(pattern="addnm( (.*)|$)")
+@Pragyan_cmd(pattern="addnm( (.*)|$)")
 async def add_grp(e):
     if pat := e.pattern_match.group(1).strip():
         try:
@@ -74,7 +74,7 @@ async def add_grp(e):
     await e.eor(get_string("nightm_3"))
 
 
-@ultroid_cmd(pattern="remnm( (.*)|$)")
+@Pragyan_cmd(pattern="remnm( (.*)|$)")
 async def r_em_grp(e):
     if pat := e.pattern_match.group(1).strip():
         try:
@@ -86,7 +86,7 @@ async def r_em_grp(e):
     await e.eor(get_string("nightm_4"))
 
 
-@ultroid_cmd(pattern="listnm$")
+@Pragyan_cmd(pattern="listnm$")
 async def rem_grp(e):
     chats = keym.get()
     name = "NightMode Groups Are-:\n\n"

@@ -163,7 +163,7 @@ async def autobot():
     if who.username:
         username = who.username + "_bot"
     else:
-        username = "ultroid_" + (str(who.id))[5:] + "_bot"
+        username = "Pragyan_" + (str(who.id))[5:] + "_bot"
     bf = "@BotFather"
     await Pragyan_bot(UnblockRequest(bf))
     await Pragyan_bot.send_message(bf, "/cancel")
@@ -198,7 +198,7 @@ async def autobot():
     await Pragyan_bot.send_read_acknowledge("botfather")
     if isdone.startswith("Sorry,"):
         ran = randint(1, 100)
-        username = "ultroid_" + (str(who.id))[6:] + str(ran) + "_bot"
+        username = "Pragyan_" + (str(who.id))[6:] + str(ran) + "_bot"
         await Pragyan_bot.send_message(bf, username)
         await asyncio.sleep(1)
         isdone = (await Pragyan_bot.get_messages(bf, limit=1))[0].text
@@ -347,7 +347,7 @@ async def customize():
             [
                 "https://graph.org/file/92cd6dbd34b0d1d73a0da.jpg",
                 "https://graph.org/file/a97973ee0425b523cdc28.jpg",
-                "resources/extras/ultroid_assistant.jpg",
+                "resources/extras/Pragyan_assistant.jpg",
             ]
         )
         if not os.path.exists(file):
@@ -442,7 +442,7 @@ async def fetch_ann():
     chat_id = pdB.get_key("LOG_CHANNEL")
     try:
         updts = await async_searcher(
-            "https://ultroid-api.vercel.app/announcements", post=True, re_json=True
+            "https://Pragyan-api.vercel.app/announcements", post=True, re_json=True
         )
         for upt in updts:
             key = list(upt.keys())[0]

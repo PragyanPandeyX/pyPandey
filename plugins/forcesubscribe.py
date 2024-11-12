@@ -45,13 +45,13 @@ from . import (
     inline_mention,
     pdB,
     Pragyan_bot,
-    ultroid_cmd,
+    Pragyan_cmd,
 )
 
 CACHE = {}
 
 
-@ultroid_cmd(pattern="fsub( (.*)|$)", admins_only=True, groups_only=True)
+@Pragyan_cmd(pattern="fsub( (.*)|$)", admins_only=True, groups_only=True)
 async def addfor(e):
     match = e.pattern_match.group(1).strip()
     if not match:
@@ -65,7 +65,7 @@ async def addfor(e):
     Pragyan_bot.add_handler(force_sub, events.NewMessage(incoming=True))
 
 
-@ultroid_cmd(pattern="remfsub$")
+@Pragyan_cmd(pattern="remfsub$")
 async def remor(e):
     res = rem_forcesub(e.chat_id)
     if not res:
@@ -73,7 +73,7 @@ async def remor(e):
     await e.eor("Removed ForceSub...")
 
 
-@ultroid_cmd(pattern="checkfsub$")
+@Pragyan_cmd(pattern="checkfsub$")
 async def getfsr(e):
     res = get_forcesetting(e.chat_id)
     if not res:

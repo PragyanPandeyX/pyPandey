@@ -26,10 +26,10 @@
 
 from pyPandey.dB.warn_db import add_warn, reset_warn, warns
 
-from . import eor, get_string, inline_mention, pdB, ultroid_cmd
+from . import eor, get_string, inline_mention, pdB, Pragyan_cmd
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="warn( (.*)|$)",
     manager=True,
     groups_only=True,
@@ -103,7 +103,7 @@ async def warn(e):
     )
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="resetwarn( (.*)|$)",
     manager=True,
     groups_only=True,
@@ -129,7 +129,7 @@ async def rwarn(e):
     await e.eor(f"Cleared All Warns of {user}.")
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="warns( (.*)|$)",
     manager=True,
     groups_only=True,
@@ -162,7 +162,7 @@ async def twarns(e):
         await e.eor("`No Warnings`")
 
 
-@ultroid_cmd(pattern="setwarn( (.*)|$)", manager=True)
+@Pragyan_cmd(pattern="setwarn( (.*)|$)", manager=True)
 async def warnset(e):
     ok = e.pattern_match.group(1).strip()
     if not ok:

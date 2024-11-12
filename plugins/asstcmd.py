@@ -20,10 +20,10 @@ except ImportError:
     uf = None
 from telethon import events, utils
 
-from . import asst, get_string, mediainfo, pdB, ultroid_cmd
+from . import asst, get_string, mediainfo, pdB, Pragyan_cmd
 
 
-@ultroid_cmd(pattern="addcmd( (.*)|$)")
+@Pragyan_cmd(pattern="addcmd( (.*)|$)")
 async def ac(e):
     wrd = (e.pattern_match.group(1).strip()).lower()
     wt = await e.get_reply_message()
@@ -69,7 +69,7 @@ async def ac(e):
     await e.eor(get_string("asstcmd_4").format(wrd))
 
 
-@ultroid_cmd(pattern="remcmd( (.*)|$)")
+@Pragyan_cmd(pattern="remcmd( (.*)|$)")
 async def rc(e):
     wrd = (e.pattern_match.group(1).strip()).lower()
     if not wrd:
@@ -79,7 +79,7 @@ async def rc(e):
     await e.eor(get_string("asstcmd_3").format(wrd))
 
 
-@ultroid_cmd(pattern="listcmd$")
+@Pragyan_cmd(pattern="listcmd$")
 async def lscmd(e):
     if list_cmds():
         ok = get_string("asstcmd_6")

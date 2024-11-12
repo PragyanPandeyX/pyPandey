@@ -19,11 +19,11 @@ from telethon.utils import pack_bot_file_id
 from pyPandey.dB.filter_db import add_filter, get_filter, list_filter, rem_filter
 from pyPandey.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import events, get_string, mediainfo, pdB, Pragyan_bot, ultroid_cmd
+from . import events, get_string, mediainfo, pdB, Pragyan_bot, Pragyan_cmd
 from ._inline import something
 
 
-@ultroid_cmd(pattern="addfilter( (.*)|$)")
+@Pragyan_cmd(pattern="addfilter( (.*)|$)")
 async def af(e):
     wrd = (e.pattern_match.group(1).strip()).lower()
     wt = await e.get_reply_message()
@@ -62,7 +62,7 @@ async def af(e):
     Pragyan_bot.add_handler(filter_func, events.NewMessage())
 
 
-@ultroid_cmd(pattern="remfilter( (.*)|$)")
+@Pragyan_cmd(pattern="remfilter( (.*)|$)")
 async def rf(e):
     wrd = (e.pattern_match.group(1).strip()).lower()
     chat = e.chat_id
@@ -72,7 +72,7 @@ async def rf(e):
     await e.eor(get_string("flr_5").format(wrd))
 
 
-@ultroid_cmd(pattern="listfilter$")
+@Pragyan_cmd(pattern="listfilter$")
 async def lsnote(e):
     if x := list_filter(e.chat_id):
         sd = "Filters Found In This Chats Are\n\n"

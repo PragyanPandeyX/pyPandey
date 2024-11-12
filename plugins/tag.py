@@ -35,10 +35,10 @@ from telethon.tl.types import UserStatusOffline as off
 from telethon.tl.types import UserStatusOnline as onn
 from telethon.tl.types import UserStatusRecently as rec
 
-from . import inline_mention, ultroid_cmd
+from . import inline_mention, Pragyan_cmd
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="tag(on|off|all|bots|rec|admins|owner)( (.*)|$)",
     groups_only=True,
 )

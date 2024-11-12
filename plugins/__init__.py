@@ -17,14 +17,14 @@ from telethon.tl.custom.message import CustomMarkdown
 
 from pyPandey import *
 from pyPandey._misc._assistant import asst_cmd, callback, in_pattern
-from pyPandey._misc._decorators import ultroid_cmd
+from pyPandey._misc._decorators import Pragyan_cmd
 from pyPandey._misc._wrappers import eod, eor
 from pyPandey.dB import DEVLIST, ULTROID_IMAGES
 from pyPandey.fns.helper import *
 from pyPandey.fns.misc import *
 from pyPandey.fns.tools import *
 from pyPandey.startup._database import _BaseDatabase as Database
-from pyPandey.version import __version__, ultroid_version
+from pyPandey.version import __version__, Pragyan_version
 from strings import get_help, get_string
 
 pdB: Database
@@ -57,7 +57,7 @@ List = []
 Dict = {}
 InlinePlugin = {}
 N = 0
-cmd = ultroid_cmd
+cmd = Pragyan_cmd
 STUFF = {}
 
 # Chats, which needs to be ignore for some cases

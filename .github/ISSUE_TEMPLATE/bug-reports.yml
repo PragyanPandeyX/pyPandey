@@ -62,7 +62,7 @@ body:
     id: terms
     attributes:
       label: Acknowledgement
-      description: By submitting this issue, you agree that you have read the [docs](https://ultroid.tech) and gone through the [deploy tutorial](https://www.youtube.com/watch?v=9wF7k9qA0Q4) at first.
+      description: By submitting this issue, you agree that you have read the [docs](https://Pragyan.tech) and gone through the [deploy tutorial](https://www.youtube.com/watch?v=9wF7k9qA0Q4) at first.
       options:
         - label: I have followed all of the above steps.
           required: true

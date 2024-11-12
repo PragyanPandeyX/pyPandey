@@ -3,7 +3,7 @@
 # This file is a part of < https://github.com/TeamPandey/Pandey/ >
 # PLease read the GNU Affero General Public License in <https://www.github.com/TeamPandey/Pandey/blob/main/LICENSE/>.
 
-FROM theteamultroid/ultroid:main
+FROM theteamPragyan/Pragyan:main
 
 # set timezone
 ENV TZ=Asia/Kolkata

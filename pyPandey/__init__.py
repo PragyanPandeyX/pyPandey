@@ -17,7 +17,7 @@ run_as_module = __package__ in sys.argv or sys.argv[0] == "-m"
 
 class ULTConfig:
     lang = "en"
-    thumb = "resources/extras/ultroid.jpg"
+    thumb = "resources/extras/Pragyan.jpg"
 
 
 def custom_resolver(hostname):
@@ -50,7 +50,7 @@ if run_as_module:
     from .startup.BaseClient import PandeyClient
     from .startup.connections import validate_session, vc_connection
     from .startup.funcs import _version_changes, autobot, enable_inline, update_envs
-    from .version import ultroid_version
+    from .version import Pragyan_version
 
     if not os.path.exists("./plugins"):
         LOGS.error(
@@ -92,7 +92,7 @@ if run_as_module:
         Pragyan_bot = PandeyClient(
             validate_session(Var.SESSION, LOGS),
             pdB=pdB,
-            app_version=ultroid_version,
+            app_version=Pragyan_version,
             device_model="Pandey",
         )
         Pragyan_bot.run_in_loop(autobot())

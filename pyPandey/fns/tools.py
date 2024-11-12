@@ -701,7 +701,7 @@ def telegraph_client():
     except Exception as er:
         if "SHORT_NAME_TOO_LONG" in str(er):
             TelegraphClient.create_account(
-                short_name="ultroiduser", author_name=gd_name, author_url=profile_url
+                short_name="Pragyanuser", author_name=gd_name, author_url=profile_url
             )
         else:
             LOGS.exception(er)
@@ -724,7 +724,7 @@ def make_html_telegraph(title, html=""):
 async def Carbon(
     code,
     base_url="https://carbonara.solopov.dev/api/cook",
-    file_name="ultroid",
+    file_name="Pragyan",
     download=False,
     rayso=False,
     **kwargs,

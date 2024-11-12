@@ -37,7 +37,7 @@ def load_addons(plugin_name):
     from .. import HNDLR, LOGS, asst, pdB, Pragyan_bot
     from .._misc import _supporter as config
     from .._misc._assistant import asst_cmd, callback, in_pattern
-    from .._misc._decorators import ultroid_cmd
+    from .._misc._decorators import Pragyan_cmd
     from .._misc._supporter import Config, admin_cmd, sudo_cmd
     from .._misc._wrappers import eod, eor
     from ..configs import Var
@@ -56,7 +56,7 @@ def load_addons(plugin_name):
     mod.Pragyan_bot = Pragyan_bot
     mod.ub = Pragyan_bot
     mod.bot = Pragyan_bot
-    mod.ultroid = Pragyan_bot
+    mod.Pragyan = Pragyan_bot
     mod.borg = Pragyan_bot
     mod.telebot = Pragyan_bot
     mod.jarvis = Pragyan_bot
@@ -74,8 +74,8 @@ def load_addons(plugin_name):
     mod.eor = eor
     mod.edit_or_reply = eor
     mod.asst_cmd = asst_cmd
-    mod.ultroid_cmd = ultroid_cmd
-    mod.on_cmd = ultroid_cmd
+    mod.Pragyan_cmd = Pragyan_cmd
+    mod.on_cmd = Pragyan_cmd
     mod.callback = callback
     mod.Redis = pdB.get_key
     mod.admin_cmd = admin_cmd

@@ -28,11 +28,11 @@ from telethon.utils import pack_bot_file_id
 from pyPandey.dB.notes_db import add_note, get_notes, list_note, rem_note
 from pyPandey.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import events, get_string, mediainfo, pdB, Pragyan_bot, ultroid_cmd
+from . import events, get_string, mediainfo, pdB, Pragyan_bot, Pragyan_cmd
 from ._inline import something
 
 
-@ultroid_cmd(pattern="addnote( (.*)|$)", admins_only=True)
+@Pragyan_cmd(pattern="addnote( (.*)|$)", admins_only=True)
 async def an(e):
     wrd = (e.pattern_match.group(1).strip()).lower()
     wt = await e.get_reply_message()
@@ -74,7 +74,7 @@ async def an(e):
     Pragyan_bot.add_handler(notes, events.NewMessage())
 
 
-@ultroid_cmd(pattern="remnote( (.*)|$)", admins_only=True)
+@Pragyan_cmd(pattern="remnote( (.*)|$)", admins_only=True)
 async def rn(e):
     wrd = (e.pattern_match.group(1).strip()).lower()
     chat = e.chat_id
@@ -86,7 +86,7 @@ async def rn(e):
     await e.eor(f"Done Note: `#{wrd}` Removed.")
 
 
-@ultroid_cmd(pattern="listnote$", admins_only=True)
+@Pragyan_cmd(pattern="listnote$", admins_only=True)
 async def lsnote(e):
     if x := list_note(e.chat_id):
         sd = "Notes Found In This Chats Are\n\n"

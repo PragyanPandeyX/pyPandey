@@ -13,10 +13,10 @@
 
 from pyPandey.fns.misc import unsplashsearch
 
-from . import asyncio, download_file, get_string, os, ultroid_cmd
+from . import asyncio, download_file, get_string, os, Pragyan_cmd
 
 
-@ultroid_cmd(pattern="unsplash( (.*)|$)")
+@Pragyan_cmd(pattern="unsplash( (.*)|$)")
 async def searchunsl(ult):
     match = ult.pattern_match.group(1).strip()
     if not match:

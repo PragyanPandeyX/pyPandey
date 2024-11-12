@@ -21,10 +21,10 @@
 """
 from pyPandey.fns.ytdl import download_yt, get_yt_link
 
-from . import get_string, requests, ultroid_cmd
+from . import get_string, requests, Pragyan_cmd
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="yt(a|v|sa|sv) ?(.*)",
 )
 async def download_from_youtube_(event):

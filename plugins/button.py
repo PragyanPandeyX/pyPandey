@@ -16,11 +16,11 @@ from telethon.utils import pack_bot_file_id
 
 from pyPandey.fns.tools import create_tl_btn, get_msg_button
 
-from . import HNDLR, get_string, mediainfo, ultroid_cmd
+from . import HNDLR, get_string, mediainfo, Pragyan_cmd
 from ._inline import something
 
 
-@ultroid_cmd(pattern="button")
+@Pragyan_cmd(pattern="button")
 async def butt(event):
     media, wut, text = None, None, None
     if event.reply_to:

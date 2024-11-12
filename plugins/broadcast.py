@@ -17,12 +17,12 @@ from telethon.utils import get_display_name
 
 from pyPandey.dB.base import KeyManager
 
-from . import HNDLR, LOGS, eor, get_string, pdB, Pragyan_bot, ultroid_cmd
+from . import HNDLR, LOGS, eor, get_string, pdB, Pragyan_bot, Pragyan_cmd
 
 KeyM = KeyManager("BROADCAST", cast=list)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="addch( (.*)|$)",
     allow_sudo=False,
 )
@@ -77,7 +77,7 @@ async def broadcast_adder(event):
     await x.delete()
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="remch( (.*)|$)",
     allow_sudo=False,
 )
@@ -98,7 +98,7 @@ async def broadcast_remover(event):
     await x.delete()
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="listchannels$",
 )
 async def list_all(event):
@@ -131,7 +131,7 @@ async def list_all(event):
         await x.edit(msg)
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="forward$",
     allow_sudo=False,
 )
@@ -173,7 +173,7 @@ async def forw(event):
         )
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="broadcast( (.*)|$)",
     allow_sudo=False,
 )

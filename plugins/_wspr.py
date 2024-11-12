@@ -25,13 +25,13 @@ from . import (
     in_pattern,
     inline_mention,
     Pragyan_bot,
-    ultroid_cmd,
+    Pragyan_cmd,
 )
 
 buddhhu = {}
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="wspr( (.*)|$)",
 )
 async def _(e):

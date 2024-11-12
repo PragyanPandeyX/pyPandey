@@ -36,13 +36,13 @@ from . import (
     get_paste,
     get_string,
     pdB,
-    ultroid_cmd,
+    Pragyan_cmd,
     uploader,
 )
 
 opn = []
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="thumbnail$",
 )
 async def _(e):
@@ -69,10 +69,10 @@ async def _(e):
 
     # Set custom thumbnail
     pdB.set_key("CUSTOM_THUMBNAIL", str(nn))
-    await bash(f"wget {nn} -O resources/extras/ultroid.jpg")
+    await bash(f"wget {nn} -O resources/extras/Pragyan.jpg")
     await e.eor(get_string("cvt_6").format(nn), link_preview=False)
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="rename( (.*)|$)",
 )
 async def imak(event):
@@ -124,7 +124,7 @@ conv_keys = {
     "tgs": "tgs",
 }
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="convert( (.*)|$)",
 )
 async def uconverter(event):
@@ -142,7 +142,7 @@ async def uconverter(event):
         convert = conv_keys[input_]
     except KeyError:
         return await xx.edit(get_string("sts_3").format("gif/img/sticker/webm"))
-    file = await con.convert(b, outname="ultroid", convert_to=convert)
+    file = await con.convert(b, outname="Pragyan", convert_to=convert)
     if file:
         await event.client.send_file(
             event.chat_id, file, reply_to=event.reply_to_msg_id or event.id
@@ -150,7 +150,7 @@ async def uconverter(event):
         os.remove(file)
     await xx.delete()
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="doc( (.*)|$)",
 )
 async def _(event):
@@ -168,7 +168,7 @@ async def _(event):
     await xx.delete()
     os.remove(input_str)
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="open( (.*)|$)",
 )
 async def _(event):

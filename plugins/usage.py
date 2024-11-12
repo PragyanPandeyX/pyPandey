@@ -31,7 +31,7 @@ from . import (
     get_string,
     humanbytes,
     pdB,
-    ultroid_cmd,
+    Pragyan_cmd,
 )
 
 HEROKU_API = None
@@ -51,7 +51,7 @@ if HOSTED_ON == "heroku":
         LOGS.exception(er)
 
 
-@ultroid_cmd(pattern="usage")
+@Pragyan_cmd(pattern="usage")
 async def usage_finder(event):
     x = await event.eor(get_string("com_1"))
     try:

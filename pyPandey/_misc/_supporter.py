@@ -16,7 +16,7 @@ from pathlib import Path
 
 from telethon import events, types
 
-from pyPandey._misc._decorators import compile_pattern, ultroid_cmd
+from pyPandey._misc._decorators import compile_pattern, Pragyan_cmd
 from pyPandey._misc._wrappers import eod, eor
 
 from .. import *
@@ -28,7 +28,7 @@ BOTLOG_CHATID = BOTLOG = pdB.get_key("LOG_CHANNEL")
 
 
 bot = borg = catub = friday = Pragyan_bot
-catub.cat_cmd = ultroid_cmd
+catub.cat_cmd = Pragyan_cmd
 
 black_list_chats = pdB.get_key("BLACKLIST_CHATS")
 
@@ -50,8 +50,8 @@ def admin_cmd(pattern=None, command=None, **args):
 
 
 friday_on_cmd = admin_cmd
-command = ultroid_cmd
-register = ultroid_cmd
+command = Pragyan_cmd
+register = Pragyan_cmd
 
 
 def sudo_cmd(allow_sudo=True, pattern=None, command=None, **args):

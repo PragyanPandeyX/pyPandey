@@ -30,12 +30,12 @@ from . import (
     math,
     mediainfo,
     time_formatter,
-    ultroid_cmd,
+    Pragyan_cmd,
     uploader,
 )
 
 
-@ultroid_cmd(pattern="compress( (.*)|$)")
+@Pragyan_cmd(pattern="compress( (.*)|$)")
 async def _(e):
     cr = e.pattern_match.group(1).strip()
     crf = 27

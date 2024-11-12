@@ -238,17 +238,17 @@ async def _(event):
     changelog_str = changelog + "\n\n" + get_string("inline_8")
     if len(changelog_str) > 1024:
         await event.edit(get_string("upd_4"))
-        with open("ultroid_updates.txt", "w+") as file:
+        with open("Pragyan_updates.txt", "w+") as file:
             file.write(tl_chnglog)
         await event.edit(
             get_string("upd_5"),
-            file="ultroid_updates.txt",
+            file="Pragyan_updates.txt",
             buttons=[
                 [Button.inline("• Uᴘᴅᴀᴛᴇ Nᴏᴡ •", data="updatenow")],
                 [Button.inline("« Bᴀᴄᴋ", data="ownr")],
             ],
         )
-        remove("ultroid_updates.txt")
+        remove("Pragyan_updates.txt")
     else:
         await event.edit(
             changelog_str,

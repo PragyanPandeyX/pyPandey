@@ -15,7 +15,7 @@ from telethon.tl.custom import Button
 from pyPandey.dB._core import HELP, LIST
 from pyPandey.fns.tools import cmd_regex_replace
 
-from . import HNDLR, LOGS, OWNER_NAME, asst, get_string, inline_pic, pdB, ultroid_cmd
+from . import HNDLR, LOGS, OWNER_NAME, asst, get_string, inline_pic, pdB, Pragyan_cmd
 
 _main_help_menu = [
     [
@@ -36,7 +36,7 @@ _main_help_menu = [
 ]
 
 
-@ultroid_cmd(pattern="help( (.*)|$)")
+@Pragyan_cmd(pattern="help( (.*)|$)")
 async def _help(ult):
     plug = ult.pattern_match.group(1).strip()
     chat = await ult.get_chat()

@@ -363,14 +363,14 @@ async def changes(okk):
     if len(changelog_str) > 1024:
         await okk.edit(get_string("upd_4"))
         await asyncio.sleep(2)
-        with open("ultroid_updates.txt", "w+") as file:
+        with open("Pragyan_updates.txt", "w+") as file:
             file.write(tl_chnglog)
         await okk.edit(
             get_string("upd_5"),
-            file="ultroid_updates.txt",
+            file="Pragyan_updates.txt",
             buttons=button,
         )
-        remove("ultroid_updates.txt")
+        remove("Pragyan_updates.txt")
         return
     await okk.edit(
         changelog_str,
@@ -593,7 +593,7 @@ async def pluginch(event):
     name = "Plugin Channel"
     async with event.client.conversation(pru) as conv:
         await conv.send_message(
-            "Send id or username of a channel from where u want to install all plugins\n\nOur Channel~ @ultroidplugins\n\nUse /cancel to cancel.",
+            "Send id or username of a channel from where u want to install all plugins\n\nOur Channel~ @Pragyanplugins\n\nUse /cancel to cancel.",
         )
         response = conv.wait_event(events.NewMessage(chats=pru))
         response = await response

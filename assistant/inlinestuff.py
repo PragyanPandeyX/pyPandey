@@ -645,7 +645,7 @@ InlinePlugin.update(
         "YᴏᴜTᴜʙᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ": "yt Ed Sheeran Perfect",
         "Piston Eval": "run javascript console.log('Hello Pandey')",
         "OʀᴀɴɢᴇFᴏx🦊": "ofox beryllium",
-        "Tᴡɪᴛᴛᴇʀ Usᴇʀ": "twitter theultroid",
+        "Tᴡɪᴛᴛᴇʀ Usᴇʀ": "twitter thePragyan",
         "Fᴅʀᴏɪᴅ Sᴇᴀʀᴄʜ": "fdroid telegram",
         "Sᴀᴀᴠɴ sᴇᴀʀᴄʜ": "saavn",
         "Tʟ Sᴇᴀʀᴄʜ": "tl",

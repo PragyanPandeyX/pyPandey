@@ -29,10 +29,10 @@ import qrcode
 from PIL import Image
 from telethon.tl.types import MessageMediaDocument as doc
 
-from . import check_filename, get_string, Pragyan_bot, ultroid_cmd
+from . import check_filename, get_string, Pragyan_bot, Pragyan_cmd
 
 
-@ultroid_cmd(pattern="qrcode( (.*)|$)")
+@Pragyan_cmd(pattern="qrcode( (.*)|$)")
 async def cd(e):
     reply = await e.get_reply_message()
     msg = e.pattern_match.group(1).strip()
@@ -65,7 +65,7 @@ async def cd(e):
         os.remove(cimg)
 
 
-@ultroid_cmd(pattern="addqr( (.*)|$)")
+@Pragyan_cmd(pattern="addqr( (.*)|$)")
 async def qrwater(e):
     msg = e.pattern_match.group(1).strip()
     r = await e.get_reply_message()
@@ -88,7 +88,7 @@ async def qrwater(e):
     os.remove(dl)
 
 
-@ultroid_cmd(pattern="qrdecode$")
+@Pragyan_cmd(pattern="qrdecode$")
 async def decod(e):
     r = await e.get_reply_message()
     if not (r and r.media):

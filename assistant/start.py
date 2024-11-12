@@ -29,7 +29,7 @@ if Owner_info_msg is None:
 
 **Message Forwards** - {pdB.get_key("PMBOT")}
 
-**Pandey [v{ultroid_version}](https://github.com/TeamPandey/Pandey), powered by @TeamPandey**
+**Pandey [v{Pragyan_version}](https://github.com/TeamPandey/Pandey), powered by @TeamPandey**
 """
 
 
@@ -85,7 +85,7 @@ async def closet(lol):
 
 
 @asst_cmd(pattern="start( (.*)|$)", forwards=False, func=lambda x: not x.is_group)
-async def ultroid(event):
+async def Pragyan(event):
     args = event.pattern_match.group(1).strip()
     keym = KeyManager("BOT_USERS", cast=list)
     if not keym.contains(event.sender_id) and event.sender_id not in owner_and_sudos():
@@ -150,7 +150,7 @@ async def ekekdhdb(e):
 
 
 @callback("mainmenu", owner=True, func=lambda x: not x.is_group)
-async def ultroid(event):
+async def Pragyan(event):
     await event.edit(
         get_string("ast_3").format(OWNER_NAME),
         buttons=_start,

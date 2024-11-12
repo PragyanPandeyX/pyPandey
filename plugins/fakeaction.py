@@ -14,10 +14,10 @@ import time
 
 from pyPandey.fns.admins import ban_time
 
-from . import asyncio, get_string, ultroid_cmd
+from . import asyncio, get_string, Pragyan_cmd
 
 
-@ultroid_cmd(
+@Pragyan_cmd(
     pattern="f(typing|audio|contact|document|game|location|sticker|photo|round|video)( (.*)|$)"
 )
 async def _(e):

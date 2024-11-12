@@ -12,14 +12,14 @@
 [![Forks](https://img.shields.io/github/forks/TeamPandey/Pandey?style=flat-square&color=orange)](https://github.com/TeamPandey/Pandey/fork)
 [![Size](https://img.shields.io/github/repo-size/TeamPandey/Pandey?style=flat-square&color=green)](https://github.com/TeamPandey/Pandey/)   
 [![Python](https://img.shields.io/badge/Python-v3.10.3-blue)](https://www.python.org/)
-[![CodeFactor](https://www.codefactor.io/repository/github/teamultroid/ultroid/badge/main)](https://www.codefactor.io/repository/github/teamultroid/ultroid/overview/main)
+[![CodeFactor](https://www.codefactor.io/repository/github/teamPragyan/Pragyan/badge/main)](https://www.codefactor.io/repository/github/teamPragyan/Pragyan/overview/main)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/TeamPandey/Pandey/graphs/commit-activity)
-[![Docker Pulls](https://img.shields.io/docker/pulls/theteamultroid/ultroid?style=flat-square)](https://img.shields.io/docker/pulls/theteamultroid/ultroid?style=flat-square)   
+[![Docker Pulls](https://img.shields.io/docker/pulls/theteamPragyan/Pragyan?style=flat-square)](https://img.shields.io/docker/pulls/theteamPragyan/Pragyan?style=flat-square)   
 [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/TeamPandey/Pandey)
 [![Contributors](https://img.shields.io/github/contributors/TeamPandey/Pandey?style=flat-square&color=green)](https://github.com/TeamPandey/Pandey/graphs/contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 [![License](https://img.shields.io/badge/License-AGPL-blue)](https://github.com/TeamPandey/Pandey/blob/main/LICENSE)   
-[![Sparkline](https://stars.medv.io/Teamultroid/Pandey.svg)](https://stars.medv.io/TeamPandey/Pandey)
+[![Sparkline](https://stars.medv.io/TeamPragyan/Pandey.svg)](https://stars.medv.io/TeamPandey/Pandey)
 ----
 
 # Deploy
@@ -28,7 +28,7 @@
 - [Local Machine](#deploy-locally)
 
 # Documentation 
-[![Documentation](https://img.shields.io/badge/Documentation-Pandey-blue)](http://ultroid.tech/)
+[![Documentation](https://img.shields.io/badge/Documentation-Pandey-blue)](http://Pragyan.tech/)
 
 # Tutorial 
 - Full Tutorial - [![Full Tutorial](https://img.shields.io/badge/Watch%20Now-blue)](https://www.youtube.com/watch?v=0wAV7pUzhDQ)
@@ -39,7 +39,7 @@
 ## Deploy to Heroku
 Get the [Necessary Variables](#Necessary-Variables) and then click the button below!  
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://deploy.ultroid.tech)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://deploy.Pragyan.tech)
 
 ## Deploy to Okteto
 Get the [Necessary Variables](#Necessary-Variables) and then click the button below!
@@ -49,12 +49,12 @@ Get the [Necessary Variables](#Necessary-Variables) and then click the button be
 ## Deploy Locally
 - [Traditional Method](#local-deploy---traditional-method)
 - [Easy Method](#local-deploy---easy-method)
-- [Pandey CLI](#ultroid-cli)
+- [Pandey CLI](#Pragyan-cli)
 
 ### Local Deploy - Easy Method
 - Linux - `wget -O locals.py https://git.io/JY9UM && python3 locals.py`
 - Windows - `cd desktop ; wget https://git.io/JY9UM -o locals.py ; python locals.py`
-- Termux - `wget -O install-termux https://tiny.ultroid.tech/termux && bash install-termux`
+- Termux - `wget -O install-termux https://tiny.Pragyan.tech/termux && bash install-termux`
 
 ### Local Deploy - Traditional Method
 - Get your [Necessary Variables](#Necessary-Variables)
@@ -76,7 +76,7 @@ Get the [Necessary Variables](#Necessary-Variables) and then click the button be
   - For Termux users:
     `wget -O session.py https://git.io/JY9JI && python session.py`
   - For Windows Users:
-    `cd desktop ; wget https://git.io/JY9JI -o ultroid.py ; python ultroid.py`
+    `cd desktop ; wget https://git.io/JY9JI -o Pragyan.py ; python Pragyan.py`
 - Fill your details in a `.env` file, as given in [`.env.sample`](https://github.com/TeamPandey/Pandey/blob/main/.env.sample).
 (You can either edit and rename the file or make a new file named `.env`.)
 - Run the bot:
@@ -102,7 +102,7 @@ One of the following database:
 Different ways to get your `SESSION`:
 * [![Run on Repl.it](https://replit.com/badge/github/TeamPandey/Pandey)](https://replit.com/@TeamPandey/PandeyStringSession)
 * Linux : `wget -O session.py https://git.io/JY9JI && python3 session.py`
-* PowerShell : `cd desktop ; wget https://git.io/JY9JI ; python ultroid.py`
+* PowerShell : `cd desktop ; wget https://git.io/JY9JI ; python Pragyan.py`
 * Termux : `wget -O session.py https://git.io/JY9JI && python session.py`
 * TelegramBot : [@SessionGeneratorBot](https://t.me/SessionGeneratorBot)
 
@@ -115,7 +115,7 @@ Pandey is licensed under [GNU Affero General Public License](https://www.gnu.org
 ---
 
 # Credits
-* [![TeamPandey-Devs](https://img.shields.io/static/v1?label=Teamultroid&message=devs&color=critical)](https://t.me/PandeyDevs)
+* [![TeamPandey-Devs](https://img.shields.io/static/v1?label=TeamPragyan&message=devs&color=critical)](https://t.me/PandeyDevs)
 * [Lonami](https://github.com/LonamiWebs/) for [Telethon.](https://github.com/LonamiWebs/Telethon)
 * [MarshalX](https://github.com/MarshalX) for [PyTgCalls.](https://github.com/MarshalX/tgcalls)
 

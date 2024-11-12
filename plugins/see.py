@@ -2,7 +2,7 @@ import re
 import base64
 import requests
 from os import remove
-from . import ultroid_cmd, LOGS, run_async
+from . import Pragyan_cmd, LOGS, run_async
 
 @run_async
 def analyze_image(encoded_image, prompt, bid):
@@ -30,7 +30,7 @@ def analyze_image(encoded_image, prompt, bid):
     response = requests.post(url, json=data, headers=headers)
     return response.json()
 
-@ultroid_cmd(pattern="see(image)?( (.*)|$)")
+@Pragyan_cmd(pattern="see(image)?( (.*)|$)")
 async def analyze_image_cmd(e):
     reply = await e.get_reply_message()
     
