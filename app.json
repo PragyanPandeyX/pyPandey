@@ -47,10 +47,10 @@
             "required": false
         }
     },
-      "formation": {
+     "formation": {
         "Pragyan": {
             "quantity": 1,
             "size": "worker"
         }
     }
-}  
+}
