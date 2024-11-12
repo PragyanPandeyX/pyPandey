@@ -3,12 +3,12 @@
 REPO="https://github.com/PragyanPandeyX/pypandey.git"
 CURRENT_DIR="$(pwd)"
 ENV_FILE_PATH=".env"
-DIR="/root/TeamUltroid"
+DIR="/root/pyPandey"
 
 while [ $# -gt 0 ]; do
     case "$1" in
     --dir=*)
-        DIR="${1#*=}" || DIR="/root/TeamUltroid"
+        DIR="${1#*=}" || DIR="/root/pyPandey"
         ;;
     --branch=*)
         BRANCH="${1#*=}" || BRANCH="main"
