@@ -25,12 +25,12 @@ except ImportError:
     LOGS.error("nsfwfilter: 'Profanitydetector' not installed!")
 from pyPandey.dB.nsfw_db import is_nsfw, nsfw_chat, rem_nsfw
 
-from . import HNDLR, async_searcher, eor, events, udB, ultroid_bot, ultroid_cmd
+from . import HNDLR, async_searcher, eor, events, pdB, ultroid_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="addnsfw( (.*)|$)", admins_only=True)
 async def addnsfw(e):
-    if not udB.get_key("DEEP_API"):
+    if not pdB.get_key("DEEP_API"):
         return await eor(
             e, f"Get Api from deepai.org and Add It `{HNDLR}setdb DEEP_API your-api`"
         )
@@ -54,7 +54,7 @@ NWARN = {}
 async def nsfw_check(e):
     chat = e.chat_id
     action = is_nsfw(chat)
-    if action and udB.get_key("DEEP_API") and e.media:
+    if action and pdB.get_key("DEEP_API") and e.media:
         pic, name, nsfw = "", "", 0
         try:
             pic = await e.download_media(thumb=-1)
@@ -74,7 +74,7 @@ async def nsfw_check(e):
                 },
                 post=True,
                 re_json=True,
-                headers={"api-key": udB.get_key("DEEP_API")},
+                headers={"api-key": pdB.get_key("DEEP_API")},
             )
             try:
                 k = float((r["output"]["nsfw_score"]))
@@ -145,5 +145,5 @@ async def nsfw_check(e):
                 )
 
 
-if udB.get_key("NSFW"):
+if pdB.get_key("NSFW"):
     ultroid_bot.add_handler(nsfw_check, events.NewMessage(incoming=True))

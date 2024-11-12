@@ -43,7 +43,7 @@ from . import (
     get_string,
     in_pattern,
     inline_mention,
-    udB,
+    pdB,
     ultroid_bot,
     ultroid_cmd,
 )
@@ -132,7 +132,7 @@ async def diesoon(e):
 
 
 async def force_sub(ult):
-    if not udB.get_key("FORCESUB"):
+    if not pdB.get_key("FORCESUB"):
         return
     user = await ult.get_sender()
     joinchat = get_forcesetting(ult.chat_id)
@@ -175,5 +175,5 @@ async def force_sub(ult):
     await res[0].click(ult.chat_id, reply_to=ult.id)
 
 
-if udB.get_key("FORCESUB"):
+if pdB.get_key("FORCESUB"):
     ultroid_bot.add_handler(force_sub, events.NewMessage(incoming=True))

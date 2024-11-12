@@ -5,11 +5,11 @@
 # PLease read the GNU Affero General Public License in
 # <https://github.com/TeamPandey/pyPandey/blob/main/LICENSE>.
 
-from .. import udB
+from .. import pdB
 
 
 def get_vcsudos():
-    return udB.get_key("VC_SUDOS") or []
+    return pdB.get_key("VC_SUDOS") or []
 
 
 def is_vcsudo(id):
@@ -19,11 +19,11 @@ def is_vcsudo(id):
 def add_vcsudo(id):
     sudos = get_vcsudos()
     sudos.append(id)
-    return udB.set_key("VC_SUDOS", sudos)
+    return pdB.set_key("VC_SUDOS", sudos)
 
 
 def del_vcsudo(id):
     if is_vcsudo(id):
         sudos = get_vcsudos()
         sudos.remove(id)
-        return udB.set_key("VC_SUDOS", sudos)
+        return pdB.set_key("VC_SUDOS", sudos)

@@ -30,7 +30,7 @@ from . import (
     inline_pic,
     split_list,
     start_time,
-    udB,
+    pdB,
 )
 from ._help import _main_help_menu
 
@@ -38,7 +38,7 @@ from ._help import _main_help_menu
 
 helps = get_string("inline_1")
 
-add_ons = udB.get_key("ADDONS")
+add_ons = pdB.get_key("ADDONS")
 
 zhelps = get_string("inline_3") if add_ons is False else get_string("inline_2")
 PLUGINS = HELP.get("Official", [])
@@ -319,10 +319,10 @@ async def on_plug_in_callback_query_handler(event):
 
 
 def page_num(index, key):
-    rows = udB.get_key("HELP_ROWS") or 5
-    cols = udB.get_key("HELP_COLUMNS") or 2
+    rows = pdB.get_key("HELP_ROWS") or 5
+    cols = pdB.get_key("HELP_COLUMNS") or 2
     loaded = HELP.get(key, [])
-    emoji = udB.get_key("EMOJI_IN_HELP") or "✘"
+    emoji = pdB.get_key("EMOJI_IN_HELP") or "✘"
     List = [
         Button.inline(f"{emoji} {x} {emoji}", data=f"uplugin_{key}_{x}|{index}")
         for x in sorted(loaded)

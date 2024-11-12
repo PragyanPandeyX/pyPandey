@@ -5,11 +5,11 @@
 # PLease read the GNU Affero General Public License in
 # <https://github.com/TeamPandey/pyPandey/blob/main/LICENSE>.
 
-from .. import udB
+from .. import pdB
 
 
 def get_stuff():
-    return udB.get_key("ECHO") or {}
+    return pdB.get_key("ECHO") or {}
 
 
 def add_echo(chat, user):
@@ -20,7 +20,7 @@ def add_echo(chat, user):
         x.update({int(chat): k})
     else:
         x.update({int(chat): [int(user)]})
-    return udB.set_key("ECHO", x)
+    return pdB.set_key("ECHO", x)
 
 
 def rem_echo(chat, user):
@@ -29,7 +29,7 @@ def rem_echo(chat, user):
         if user in k:
             k.remove(int(user))
         x.update({int(chat): k})
-    return udB.set_key("ECHO", x)
+    return pdB.set_key("ECHO", x)
 
 
 def check_echo(chat, user):

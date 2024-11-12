@@ -68,26 +68,26 @@ COUNT_PM = {}
 LASTMSG = {}
 WARN_MSGS = {}
 U_WARNS = {}
-if isinstance(udB.get_key("PMPERMIT"), (int, str)):
-    value = [udB.get_key("PMPERMIT")]
-    udB.set_key("PMPERMIT", value)
+if isinstance(pdB.get_key("PMPERMIT"), (int, str)):
+    value = [pdB.get_key("PMPERMIT")]
+    pdB.set_key("PMPERMIT", value)
 keym = KeyManager("PMPERMIT", cast=list)
 Logm = KeyManager("LOGUSERS", cast=list)
-PMPIC = udB.get_key("PMPIC")
-LOG_CHANNEL = udB.get_key("LOG_CHANNEL")
+PMPIC = pdB.get_key("PMPIC")
+LOG_CHANNEL = pdB.get_key("LOG_CHANNEL")
 UND = get_string("pmperm_1")
 UNS = get_string("pmperm_2")
 NO_REPLY = get_string("pmperm_3")
 
 UNAPPROVED_MSG = "**PMSecurity of {ON}!**\n\n{UND}\n\nYou have {warn}/{twarn} warnings!"
-if udB.get_key("PM_TEXT"):
+if pdB.get_key("PM_TEXT"):
     UNAPPROVED_MSG = (
         "**PMSecurity of {ON}!**\n\n"
-        + udB.get_key("PM_TEXT")
+        + pdB.get_key("PM_TEXT")
         + "\n\nYou have {warn}/{twarn} warnings!"
     )
 # 1
-WARNS = udB.get_key("PMWARNS") or 4
+WARNS = pdB.get_key("PMWARNS") or 4
 PMCMDS = [
     f"{HNDLR}a",
     f"{HNDLR}approve",
@@ -124,7 +124,7 @@ async def delete_pm_warn_msgs(chat: int):
 # =================================================================
 
 
-if udB.get_key("PMLOG"):
+if pdB.get_key("PMLOG"):
 
     @ultroid_cmd(
         pattern="logpm$",
@@ -160,11 +160,11 @@ if udB.get_key("PMLOG"):
         user = await event.get_sender()
         if user.bot or user.is_self or user.verified or Logm.contains(user.id):
             return
-        await event.forward_to(udB.get_key("PMLOGGROUP") or LOG_CHANNEL)
+        await event.forward_to(pdB.get_key("PMLOGGROUP") or LOG_CHANNEL)
 
 
-if udB.get_key("PMSETTING"):
-    if udB.get_key("AUTOAPPROVE"):
+if pdB.get_key("PMSETTING"):
+    if pdB.get_key("AUTOAPPROVE"):
 
         @ultroid_bot.on(
             events.NewMessage(
@@ -220,7 +220,7 @@ if udB.get_key("PMSETTING"):
                     await ultroid_bot.edit_folder(user.id, folder=1)
                 except BaseException as er:
                     LOGS.info(er)
-            if event.media and not udB.get_key("DISABLE_PMDEL"):
+            if event.media and not pdB.get_key("DISABLE_PMDEL"):
                 await event.delete()
             name = user.first_name
             fullname = get_display_name(user)
@@ -230,7 +230,7 @@ if udB.get_key("PMSETTING"):
             try:
                 wrn = COUNT_PM[user.id] + 1
                 await asst.edit_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
                     f"Incoming PM from **{mention}** [`{user.id}`] with **{wrn}/{WARNS}** warning!",
                     buttons=[
@@ -240,7 +240,7 @@ if udB.get_key("PMSETTING"):
                 )
             except KeyError:
                 _not_approved[user.id] = await asst.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     f"Incoming PM from **{mention}** [`{user.id}`] with **1/{WARNS}** warning!",
                     buttons=[
                         Button.inline("Approve PM", data=f"approve_{user.id}"),
@@ -371,14 +371,14 @@ if udB.get_key("PMSETTING"):
                     del LASTMSG[user.id]
                 except KeyError:
                     await asst.send_message(
-                        udB.get_key("LOG_CHANNEL"),
+                        pdB.get_key("LOG_CHANNEL"),
                         "PMPermit is messed! Pls restart the bot!!",
                     )
                     return LOGS.info("COUNT_PM is messed.")
                 await ultroid_bot(BlockRequest(user.id))
                 await ultroid_bot(ReportSpamRequest(peer=user.id))
                 await asst.edit_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
                     f"**{mention}** [`{user.id}`] was Blocked for spamming.",
                 )
@@ -387,10 +387,10 @@ if udB.get_key("PMSETTING"):
     async def _(e):
         x = e.pattern_match.group(1).strip()
         if x == "start":
-            udB.set_key("MOVE_ARCHIVE", "True")
+            pdB.set_key("MOVE_ARCHIVE", "True")
             await e.eor("Now I will move new Unapproved DM's to archive", time=5)
         elif x == "stop":
-            udB.set_key("MOVE_ARCHIVE", "False")
+            pdB.set_key("MOVE_ARCHIVE", "False")
             await e.eor("Now I won't move new Unapproved DM's to archive", time=5)
         elif x == "clear":
             try:
@@ -426,7 +426,7 @@ if udB.get_key("PMSETTING"):
             )
             try:
                 await asst.edit_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
                     f"#APPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was approved to PM you!</code>",
                     buttons=[
@@ -437,7 +437,7 @@ if udB.get_key("PMSETTING"):
                 )
             except KeyError:
                 _not_approved[user.id] = await asst.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     f"#APPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was approved to PM you!</code>",
                     buttons=[
                         Button.inline("Disapprove PM", data=f"disapprove_{user.id}"),
@@ -472,7 +472,7 @@ if udB.get_key("PMSETTING"):
             )
             try:
                 await asst.edit_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     _not_approved[user.id],
                     f"#DISAPPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was disapproved to PM you.</code>",
                     buttons=[
@@ -483,7 +483,7 @@ if udB.get_key("PMSETTING"):
                 )
             except KeyError:
                 _not_approved[user.id] = await asst.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     f"#DISAPPROVED\n\n<b>{inline_mention(user, html=True)}</b> [<code>{user.id}</code>] <code>was disapproved to PM you.</code>",
                     buttons=[
                         Button.inline("Approve PM", data=f"approve_{user.id}"),
@@ -525,7 +525,7 @@ async def blockpm(block):
         pass
     try:
         await asst.edit_message(
-            udB.get_key("LOG_CHANNEL"),
+            pdB.get_key("LOG_CHANNEL"),
             _not_approved[user],
             f"#BLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **blocked**.",
             buttons=[
@@ -534,7 +534,7 @@ async def blockpm(block):
         )
     except KeyError:
         _not_approved[user] = await asst.send_message(
-            udB.get_key("LOG_CHANNEL"),
+            pdB.get_key("LOG_CHANNEL"),
             f"#BLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **blocked**.",
             buttons=[
                 Button.inline("UnBlock", data=f"unblock_{user}"),
@@ -587,7 +587,7 @@ async def unblockpm(event):
         return await event.eor(f"ERROR - {et}")
     try:
         await asst.edit_message(
-            udB.get_key("LOG_CHANNEL"),
+            pdB.get_key("LOG_CHANNEL"),
             _not_approved[user],
             f"#UNBLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **unblocked**.",
             buttons=[
@@ -596,7 +596,7 @@ async def unblockpm(event):
         )
     except KeyError:
         _not_approved[user] = await asst.send_message(
-            udB.get_key("LOG_CHANNEL"),
+            pdB.get_key("LOG_CHANNEL"),
             f"#UNBLOCKED\n\n{inline_mention(aname)} [`{user}`] has been **unblocked**.",
             buttons=[
                 Button.inline("Block", data=f"block_{user}"),

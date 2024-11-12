@@ -26,7 +26,7 @@ from . import (
     asst,
     get_string,
     mediainfo,
-    udB,
+    pdB,
     ultroid_bot,
     ultroid_cmd,
 )
@@ -97,7 +97,7 @@ async def set_afk(event):
 
 
 async def remove_afk(event):
-    if event.is_private and udB.get_key("PMSETTING") and not is_approved(event.chat_id):
+    if event.is_private and pdB.get_key("PMSETTING") and not is_approved(event.chat_id):
         return
     elif "afk" in event.text.lower():
         return
@@ -159,7 +159,7 @@ async def on_afk(event):
         old_afk_msg.append(msg2)
 
 
-if udB.get_key("AFK_DB"):
+if pdB.get_key("AFK_DB"):
     ultroid_bot.add_handler(remove_afk, events.NewMessage(outgoing=True))
     ultroid_bot.add_handler(
         on_afk,

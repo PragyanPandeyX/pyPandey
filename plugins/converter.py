@@ -35,7 +35,7 @@ from . import (
     downloader,
     get_paste,
     get_string,
-    udB,
+    pdB,
     ultroid_cmd,
     uploader,
 )
@@ -68,7 +68,7 @@ async def _(e):
         os.remove(dl)
 
     # Set custom thumbnail
-    udB.set_key("CUSTOM_THUMBNAIL", str(nn))
+    pdB.set_key("CUSTOM_THUMBNAIL", str(nn))
     await bash(f"wget {nn} -O resources/extras/ultroid.jpg")
     await e.eor(get_string("cvt_6").format(nn), link_preview=False)
 

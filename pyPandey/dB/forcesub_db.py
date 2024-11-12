@@ -6,17 +6,17 @@
 # <https://github.com/TeamPandey/pyPandey/blob/main/LICENSE>.
 
 
-from .. import udB
+from .. import pdB
 
 
 def get_chats():
-    return udB.get_key("FORCESUB") or {}
+    return pdB.get_key("FORCESUB") or {}
 
 
 def add_forcesub(chat_id, chattojoin):
     omk = get_chats()
     omk.update({chat_id: chattojoin})
-    return udB.set_key("FORCESUB", omk)
+    return pdB.set_key("FORCESUB", omk)
 
 
 def get_forcesetting(chat_id):
@@ -30,6 +30,6 @@ def rem_forcesub(chat_id):
     if chat_id in omk.keys():
         try:
             del omk[chat_id]
-            return udB.set_key("FORCESUB", omk)
+            return pdB.set_key("FORCESUB", omk)
         except KeyError:
             return False

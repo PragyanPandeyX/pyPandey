@@ -30,13 +30,13 @@ try:
     from ProfanityDetector import detector
 except ImportError:
     detector = None
-from . import LOG_CHANNEL, LOGS, asst, get_string, types, udB, ultroid_bot
+from . import LOG_CHANNEL, LOGS, asst, get_string, types, pdB, ultroid_bot
 from ._inline import something
 
-if not udB.get_key("ORACLE_USERS"):
-    udB.set_key("ORACLE_USERS", {})
-if not udB.get_key("CHATBOT_USERS"):
-    udB.set_key("CHATBOT_USERS", {})
+if not pdB.get_key("ORACLE_USERS"):
+    pdB.set_key("ORACLE_USERS", {})
+if not pdB.get_key("CHATBOT_USERS"):
+    pdB.set_key("CHATBOT_USERS", {})
 
 @ultroid_bot.on(events.ChatAction())
 async def Function(event):
@@ -48,7 +48,7 @@ async def Function(event):
 
 async def DummyHandler(ult):
     # clean chat actions
-    key = udB.get_key("CLEANCHAT") or []
+    key = pdB.get_key("CLEANCHAT") or []
     if ult.chat_id in key:
         try:
             await ult.delete()
@@ -64,7 +64,7 @@ async def DummyHandler(ult):
             await ult.respond(file=sticker)
     # force subscribe
     if (
-        udB.get_key("FORCESUB")
+        pdB.get_key("FORCESUB")
         and ((ult.user_joined or ult.user_added))
         and get_forcesetting(ult.chat_id)
     ):
@@ -86,7 +86,7 @@ async def DummyHandler(ult):
         user = await ult.get_user()
         chat = await ult.get_chat()
         # gbans and @PandeyBans checks
-        if udB.get_key("ULTROID_BANS"):
+        if pdB.get_key("ULTROID_BANS"):
             try:
                 is_banned = await async_searcher(
                     "https://bans.ultroid.tech/api/status",
@@ -204,7 +204,7 @@ async def DummyHandler(ult):
 
 @ultroid_bot.on(events.NewMessage(incoming=True))
 async def chatBot_replies(e):
-    if e.sender_id in udB.get_key("CHATBOT_USERS"):
+    if e.sender_id in pdB.get_key("CHATBOT_USERS"):
         xxrep = await check_reply_to(e)
     else:
         return
@@ -218,13 +218,13 @@ async def chatBot_replies(e):
                 await e.respond(e.message)
             except Exception as er:
                 LOGS.exception(er)
-        key = udB.get_key("CHATBOT_USERS") or {}
+        key = pdB.get_key("CHATBOT_USERS") or {}
         if e.text and key.get(e.chat_id) and sender.id in key[e.chat_id]:
             # Simulate typing indicator
             async with e.client.action(e.chat_id, "typing"):
                 msg = await get_chatbot_reply(e.message.message)
                 if msg:
-                    sleep = udB.get_key("CHATBOT_SLEEP") or 1.5
+                    sleep = pdB.get_key("CHATBOT_SLEEP") or 1.5
                     await asyncio.sleep(sleep)
 
                     # Check if the message length exceeds a certain threshold
@@ -261,7 +261,7 @@ async def chatBot_replies(e):
 
 @ultroid_bot.on(events.NewMessage(incoming=True))
 async def oracleBot_replies(e):
-    if e.sender_id in udB.get_key("ORACLE_USERS"):
+    if e.sender_id in pdB.get_key("ORACLE_USERS"):
         xxxrep = await check_reply_to(e)
     else:
         return
@@ -275,7 +275,7 @@ async def oracleBot_replies(e):
                 await e.respond(e.message)
             except Exception as er:
                 LOGS.exception(er)
-        key = udB.get_key("ORACLE_USERS") or {}
+        key = pdB.get_key("ORACLE_USERS") or {}
         if e.text and key.get(e.chat_id) and sender.id in key[e.chat_id]:
             # Simulate typing indicator
             async with e.client.action(e.chat_id, "typing"):
@@ -283,7 +283,7 @@ async def oracleBot_replies(e):
                     e.message.message, user_id=sender.id, mongo_url=MONGO_URI
                 )
                 if msg:
-                    sleep = udB.get_key("ORACLE_SLEEP") or 1.5
+                    sleep = pdB.get_key("ORACLE_SLEEP") or 1.5
                     await asyncio.sleep(sleep)
 
                     # Check if the message length exceeds a certain threshold
@@ -324,8 +324,8 @@ async def uname_change(e):
 
 
 async def uname_stuff(id, uname, name):
-    if udB.get_key("USERNAME_LOG"):
-        old_ = udB.get_key("USERNAME_DB") or {}
+    if pdB.get_key("USERNAME_LOG"):
+        old_ = pdB.get_key("USERNAME_DB") or {}
         old = old_.get(id)
         # Ignore Name Logs
         if old and old == uname:
@@ -347,4 +347,4 @@ async def uname_stuff(id, uname, name):
             )
 
         old_[id] = uname
-        udB.set_key("USERNAME_DB", old_)
+        pdB.set_key("USERNAME_DB", old_)

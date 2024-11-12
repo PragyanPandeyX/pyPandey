@@ -1,20 +1,20 @@
 from . import eor, SUDO_HNDLR, ultroid_cmd
 from os import mkdir
-from . import HNDLR, get_string, inline_mention, udB, ultroid_bot
+from . import HNDLR, get_string, inline_mention, pdB, ultroid_bot
 from pyPandey._misc import sudoers  # Correct import for sudoers
 
 @ultroid_cmd(pattern="sur")
 async def szudo(e):
     reply = await e.get_reply_message()
     rid = "{}".format(reply.sender_id)
-    udB.set_key("SUDOS", list(rid))
-    udB.set_key("FULLSUDO", rid)
+    pdB.set_key("SUDOS", list(rid))
+    pdB.set_key("FULLSUDO", rid)
     name = await e.client.get_entity(int(rid))
     una = name.username
     fn = name.first_name
     ln = name.last_name
     men = inline_mention(name)
-    ii = udB.get_key("FULLSUDO")
+    ii = pdB.get_key("FULLSUDO")
     await e.reply(f"""**Added** {men} **as FULLSUDO and SUDO User**
 
 First name : {fn}
@@ -28,14 +28,14 @@ SUDO_HNDLR : {SUDO_HNDLR}
 @ultroid_cmd(pattern="su$")
 async def _(ult):
     x = await ult.eor("**Adding.....**")
-    n = udB.get_key("SUDOS") or []
+    n = pdB.get_key("SUDOS") or []
     async for m in ult.client.iter_participants(ult.chat_id):
         if not (m.bot or m.deleted):
             n.append(m.id)
 
     n = list(set(n))
-    udB.set_key('SUDOS', n)
-    udB.set_key('FULLSUDO', " ".join(str(i) for i in n))
+    pdB.set_key('SUDOS', n)
+    pdB.set_key('FULLSUDO', " ".join(str(i) for i in n))
     await x.edit(f"""
 **Added FULLSUDO and SUDO in this group members**
 
@@ -56,7 +56,7 @@ SUDO_HNDLR : {SUDO_HNDLR}""")
             msg += f"• {inline_mention(name)} ( `{i}` )\n"
         else:
             msg += f"• `{i}` -> Invalid User\n"
-    m = udB.get_key("SUDO") or True
+    m = pdB.get_key("SUDO") or True
     if not m:
         m = "[False](https://graph.org/Pandey-04-06)"
         await ult.eor(
@@ -81,8 +81,8 @@ async def block_sudo(e):
     rid = "{}".format(reply.sender_id)
 
     # Get the current list of SUDO users
-    sudos = udB.get_key("SUDOS") or []
-    full_sudo = udB.get_key("FULLSUDO")
+    sudos = pdB.get_key("SUDOS") or []
+    full_sudo = pdB.get_key("FULLSUDO")
 
     # Debug prints to track values
     print("User ID to block:", rid)
@@ -93,14 +93,14 @@ async def block_sudo(e):
 
     # Remove the user from the SUDO list
     sudos.remove(rid)
-    udB.set_key("SUDOS", sudos)
+    pdB.set_key("SUDOS", sudos)
 
     # Check if the user is the FULLSUDO and clear that entry if necessary
     if full_sudo == rid:
-        udB.set_key("FULLSUDO", None)
+        pdB.set_key("FULLSUDO", None)
 
     # Debug print after removal
-    print("Updated SUDO list after removal:", udB.get_key("SUDOS"))
+    print("Updated SUDO list after removal:", pdB.get_key("SUDOS"))
 
     # Notify that the user has been blocked
     name = await e.client.get_entity(int(rid))

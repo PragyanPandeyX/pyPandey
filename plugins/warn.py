@@ -26,7 +26,7 @@
 
 from pyPandey.dB.warn_db import add_warn, reset_warn, warns
 
-from . import eor, get_string, inline_mention, udB, ultroid_cmd
+from . import eor, get_string, inline_mention, pdB, ultroid_cmd
 
 
 @ultroid_cmd(
@@ -60,7 +60,7 @@ async def warn(e):
     count, r = warns(e.chat_id, user)
     r = f"{r}|$|{reason}" if r else reason
     try:
-        x = udB.get_key("SETWARN")
+        x = pdB.get_key("SETWARN")
         number, action = int(x.split()[0]), x.split()[1]
     except BaseException:
         number, action = 3, "kick"
@@ -174,7 +174,7 @@ async def warnset(e):
             return await e.eor(get_string("schdl_2"), time=5)
         if ("ban" or "kick" or "mute") not in action:
             return await e.eor("`Only mute / ban / kick option suported`", time=5)
-        udB.set_key("SETWARN", f"{number} {action}")
+        pdB.set_key("SETWARN", f"{number} {action}")
         await e.eor(f"Done Your Warn Count is now {number} and Action is {action}")
     else:
         await e.eor(get_string("schdl_2"), time=5)

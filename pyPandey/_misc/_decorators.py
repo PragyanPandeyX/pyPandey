@@ -49,9 +49,9 @@ from ..version import ultroid_version as ult_ver
 from . import SUDO_M, owner_and_sudos
 from ._wrappers import eod
 
-MANAGER = udB.get_key("MANAGER")
-TAKE_EDITS = udB.get_key("TAKE_EDITS")
-black_list_chats = udB.get_key("BLACKLIST_CHATS")
+MANAGER = pdB.get_key("MANAGER")
+TAKE_EDITS = pdB.get_key("TAKE_EDITS")
+black_list_chats = pdB.get_key("BLACKLIST_CHATS")
 allow_sudo = SUDO_M.should_allow_sudo
 
 
@@ -102,7 +102,7 @@ def ultroid_cmd(
                 return await eod(ult, get_string("py_d3"))
             elif admins_only and not (chat.admin_rights or chat.creator):
                 return await eod(ult, get_string("py_d5"))
-            if only_devs and not udB.get_key("I_DEV"):
+            if only_devs and not pdB.get_key("I_DEV"):
                 return await eod(
                     ult,
                     get_string("py_d4").format(HNDLR),
@@ -112,14 +112,14 @@ def ultroid_cmd(
                 await dec(ult)
             except FloodWaitError as fwerr:
                 await asst.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     f"`FloodWaitError:\n{str(fwerr)}\n\nSleeping for {tf((fwerr.seconds + 10)*1000)}`",
                 )
                 await ultroid_bot.disconnect()
                 await asyncio.sleep(fwerr.seconds + 10)
                 await ultroid_bot.connect()
                 await asst.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     "`Bot is working again`",
                 )
                 return
@@ -145,7 +145,7 @@ def ultroid_cmd(
             except AuthKeyDuplicatedError as er:
                 LOGS.exception(er)
                 await asst.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     "Session String expired, create new session from 👇",
                     buttons=[
                         Button.url("Bot", "t.me/SessionGeneratorBot?start="),
@@ -192,13 +192,13 @@ def ultroid_cmd(
                     with BytesIO(ftext.encode()) as file:
                         file.name = "logs.txt"
                         error_log = await asst.send_file(
-                            udB.get_key("LOG_CHANNEL"),
+                            pdB.get_key("LOG_CHANNEL"),
                             file,
                             caption="**Pandey Client Error:** `Forward this to` @PandeySupportChat\n\n",
                         )
                 else:
                     error_log = await asst.send_message(
-                        udB.get_key("LOG_CHANNEL"),
+                        pdB.get_key("LOG_CHANNEL"),
                         ftext,
                     )
                 if ult.out:
@@ -270,7 +270,7 @@ def ultroid_cmd(
                 try:
                     await dec(ult)
                 except Exception as er:
-                    if chat := udB.get_key("MANAGER_LOG"):
+                    if chat := pdB.get_key("MANAGER_LOG"):
                         text = f"**#MANAGER_LOG\n\nChat:** `{get_display_name(ult.chat)}` `{ult.chat_id}`"
                         text += f"\n**Replied :** `{ult.is_reply}`\n**Command :** {ult.text}\n\n**Error :** `{er}`"
                         try:

@@ -19,7 +19,7 @@ except ImportError:
 
 from yt_dlp import YoutubeDL
 
-from .. import LOGS, udB
+from .. import LOGS, pdB
 from .helper import download_file, humanbytes, run_async, time_formatter
 from .tools import set_attributes
 
@@ -231,8 +231,8 @@ async def dler(event, url, opts: dict = {}, download=False):
     await event.edit("`Getting Data...`")
     if "quiet" not in opts:
         opts["quiet"] = True
-    opts["username"] = udB.get_key("YT_USERNAME")
-    opts["password"] = udB.get_key("YT_PASSWORD")
+    opts["username"] = pdB.get_key("YT_USERNAME")
+    opts["password"] = pdB.get_key("YT_PASSWORD")
     if download:
         await ytdownload(url, opts)
     try:

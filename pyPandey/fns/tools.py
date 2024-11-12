@@ -62,9 +62,9 @@ try:
 except ImportError:
     BeautifulSoup = None
 try:
-    if udB.get_key("GOOGLEAPI") and udB.get_key("MONGO_URI"):
-        GOOGLEAPI = udB.get_key("GOOGLEAPI")
-        chatbot_mongo = udB.get_key("MONGO_URI")
+    if pdB.get_key("GOOGLEAPI") and pdB.get_key("MONGO_URI"):
+        GOOGLEAPI = pdB.get_key("GOOGLEAPI")
+        chatbot_mongo = pdB.get_key("MONGO_URI")
     else:
         raise ValueError("Missing required keys in the database, please set GOOGLEAPI and MONGO_URI for chatbot")
 except KeyError:
@@ -75,8 +75,8 @@ except ValueError:
     chatbot_mongo = None
 # ~~~~~~~~~~~~~~~~~~~~OFOX API~~~~~~~~~~~~~~~~~~~~
 # @buddhhu
-if udB.get_key("GOOGLEAPI"):
-    GOOGLEAPI = udB.get_key("GOOGLEAPI")
+if pdB.get_key("GOOGLEAPI"):
+    GOOGLEAPI = pdB.get_key("GOOGLEAPI")
 else:
     GOOGLEAPI = None
 
@@ -148,7 +148,7 @@ async def metadata(file):
         }
     if info.get("AudioCount"):
         data["title"] = info.get("Title", file)
-        data["performer"] = info.get("Performer") or udB.get_key("artist") or ""
+        data["performer"] = info.get("Performer") or pdB.get_key("artist") or ""
     if info.get("VideoCount"):
         data["height"] = int(float(_info[1].get("Height", 720)))
         data["width"] = int(float(_info[1].get("Width", 1280)))
@@ -437,7 +437,7 @@ async def get_google_images(query):
         "q": query,
         "engine": "google_images",
         "ijn": "0",
-        "api_key": udB.get_key("SERPAPI"),
+        "api_key": pdB.get_key("SERPAPI"),
     }
 
     search = GoogleSearch(params)
@@ -560,7 +560,7 @@ async def get_chatbot_reply(message):
 
 
 async def get_oracle_reply(query, user_id, mongo_url):
-    if not udB.get_key("MONGO_URI"):
+    if not pdB.get_key("MONGO_URI"):
         return "You cannot use this without setting a MONGO_URI first"
 
     response = await ChatBot(query).get_response_gemini_oracle(
@@ -679,10 +679,10 @@ def telegraph_client():
     if TELEGRAPH:
         return TELEGRAPH[0]
 
-    from .. import udB, ultroid_bot
+    from .. import pdB, ultroid_bot
 
-    token = udB.get_key("_TELEGRAPH_TOKEN")
-    TELEGRAPH_DOMAIN = udB.get_key("GRAPH_DOMAIN")
+    token = pdB.get_key("_TELEGRAPH_TOKEN")
+    TELEGRAPH_DOMAIN = pdB.get_key("GRAPH_DOMAIN")
     TelegraphClient = Telegraph(token, domain=TELEGRAPH_DOMAIN or "graph.org")
     if token:
         TELEGRAPH.append(TelegraphClient)
@@ -706,7 +706,7 @@ def telegraph_client():
         else:
             LOGS.exception(er)
             return
-    udB.set_key("_TELEGRAPH_TOKEN", TelegraphClient.get_access_token())
+    pdB.set_key("_TELEGRAPH_TOKEN", TelegraphClient.get_access_token())
     TELEGRAPH.append(TelegraphClient)
     return TelegraphClient
 
@@ -753,9 +753,9 @@ async def Carbon(
 
 
 async def get_file_link(msg):
-    from .. import udB
+    from .. import pdB
 
-    msg_id = await msg.forward_to(udB.get_key("LOG_CHANNEL"))
+    msg_id = await msg.forward_to(pdB.get_key("LOG_CHANNEL"))
     await msg_id.reply(
         "**Message has been stored to generate a shareable link. Do not delete it.**"
     )
@@ -766,13 +766,13 @@ async def get_file_link(msg):
 
 
 async def get_stored_file(event, hash):
-    from .. import udB
+    from .. import pdB
 
     msg_id = get_stored_msg(hash)
     if not msg_id:
         return
     try:
-        msg = await asst.get_messages(udB.get_key("LOG_CHANNEL"), ids=msg_id)
+        msg = await asst.get_messages(pdB.get_key("LOG_CHANNEL"), ids=msg_id)
     except Exception as er:
         LOGS.warning(f"FileStore, Error: {er}")
         return

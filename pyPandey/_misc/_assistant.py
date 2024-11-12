@@ -14,7 +14,7 @@ from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery, NewMessage
 from telethon.tl.types import InputWebDocument
 
-from .. import LOGS, asst, udB, ultroid_bot
+from .. import LOGS, asst, pdB, ultroid_bot
 from ..fns.admins import admin_check
 from . import append_or_update, owner_and_sudos
 
@@ -143,7 +143,7 @@ def in_pattern(pattern=None, owner=False, **kwargs):
                     LOGS.exception(err)
                 except Exception as er:
                     LOGS.exception(er)
-                    await asst.send_message(udB.get_key("LOG_CHANNEL"), error_text())
+                    await asst.send_message(pdB.get_key("LOG_CHANNEL"), error_text())
 
         asst.add_event_handler(wrapper, InlineQuery(pattern=pattern, **kwargs))
 

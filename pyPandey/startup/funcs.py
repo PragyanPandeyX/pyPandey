@@ -49,11 +49,11 @@ db_url = 0
 
 
 async def autoupdate_local_database():
-    from .. import Var, asst, udB, ultroid_bot
+    from .. import Var, asst, pdB, ultroid_bot
 
     global db_url
     db_url = (
-        udB.get_key("TGDB_URL") or Var.TGDB_URL or ultroid_bot._cache.get("TGDB_URL")
+        pdB.get_key("TGDB_URL") or Var.TGDB_URL or ultroid_bot._cache.get("TGDB_URL")
     )
     if db_url:
         _split = db_url.split("/")
@@ -72,7 +72,7 @@ async def autoupdate_local_database():
             pass
     try:
         LOG_CHANNEL = (
-            udB.get_key("LOG_CHANNEL")
+            pdB.get_key("LOG_CHANNEL")
             or Var.LOG_CHANNEL
             or asst._cache.get("LOG_CHANNEL")
             or "me"
@@ -81,37 +81,37 @@ async def autoupdate_local_database():
             LOG_CHANNEL, "**Do not delete this file.**", file="database.json"
         )
         asst._cache["TGDB_URL"] = msg.message_link
-        udB.set_key("TGDB_URL", msg.message_link)
+        pdB.set_key("TGDB_URL", msg.message_link)
     except Exception as ex:
         LOGS.error(f"Error on autoupdate_local_database: {ex}")
 
 
 def update_envs():
-    """Update Var. attributes to udB"""
-    from .. import udB
+    """Update Var. attributes to pdB"""
+    from .. import pdB
     _envs = [*list(os.environ)]
     if ".env" in os.listdir("."):
         [_envs.append(_) for _ in list(RepositoryEnv(config._find_file(".")).data)]
     for envs in _envs:
         if (
             envs in ["LOG_CHANNEL", "BOT_TOKEN", "BOTMODE", "DUAL_MODE", "language"]
-            or envs in udB.keys()
+            or envs in pdB.keys()
         ):
             if _value := os.environ.get(envs):
-                udB.set_key(envs, _value)
+                pdB.set_key(envs, _value)
             else:
-                udB.set_key(envs, config.config.get(envs))
+                pdB.set_key(envs, config.config.get(envs))
 
 
 async def startup_stuff():
-    from .. import udB
+    from .. import pdB
 
     x = ["resources/auth", "resources/downloads"]
     for x in x:
         if not os.path.isdir(x):
             os.mkdir(x)
 
-    CT = udB.get_key("CUSTOM_THUMBNAIL")
+    CT = pdB.get_key("CUSTOM_THUMBNAIL")
     if CT:
         path = "resources/extras/thumbnail.jpg"
         ULTConfig.thumb = path
@@ -121,21 +121,21 @@ async def startup_stuff():
             LOGS.exception(er)
     elif CT is False:
         ULTConfig.thumb = None
-    GT = udB.get_key("GDRIVE_AUTH_TOKEN")
+    GT = pdB.get_key("GDRIVE_AUTH_TOKEN")
     if GT:
         with open("resources/auth/gdrive_creds.json", "w") as t_file:
             t_file.write(GT)
 
-    if udB.get_key("AUTH_TOKEN"):
-        udB.del_key("AUTH_TOKEN")
+    if pdB.get_key("AUTH_TOKEN"):
+        pdB.del_key("AUTH_TOKEN")
 
-    MM = udB.get_key("MEGA_MAIL")
-    MP = udB.get_key("MEGA_PASS")
+    MM = pdB.get_key("MEGA_MAIL")
+    MP = pdB.get_key("MEGA_PASS")
     if MM and MP:
         with open(".megarc", "w") as mega:
             mega.write(f"[Login]\nUsername = {MM}\nPassword = {MP}")
 
-    TZ = udB.get_key("TIMEZONE")
+    TZ = pdB.get_key("TIMEZONE")
     if TZ and timezone:
         try:
             timezone(TZ)
@@ -152,9 +152,9 @@ async def startup_stuff():
 
 
 async def autobot():
-    from .. import udB, ultroid_bot
+    from .. import pdB, ultroid_bot
 
-    if udB.get_key("BOT_TOKEN"):
+    if pdB.get_key("BOT_TOKEN"):
         return
     await ultroid_bot.start()
     LOGS.info("MAKING A TELEGRAM BOT FOR YOU AT @BotFather, Kindly Wait")
@@ -204,7 +204,7 @@ async def autobot():
         isdone = (await ultroid_bot.get_messages(bf, limit=1))[0].text
     if isdone.startswith("Done!"):
         token = isdone.split("`")[1]
-        udB.set_key("BOT_TOKEN", token)
+        pdB.set_key("BOT_TOKEN", token)
         await enable_inline(ultroid_bot, username)
         LOGS.info(
             f"Done. Successfully created @{username} to be used as your assistant bot!"
@@ -220,21 +220,21 @@ async def autobot():
 
 
 async def autopilot():
-    from .. import asst, udB, ultroid_bot
+    from .. import asst, pdB, ultroid_bot
 
-    channel = udB.get_key("LOG_CHANNEL")
+    channel = pdB.get_key("LOG_CHANNEL")
     new_channel = None
     if channel:
         try:
             chat = await ultroid_bot.get_entity(channel)
         except BaseException as err:
             LOGS.exception(err)
-            udB.del_key("LOG_CHANNEL")
+            pdB.del_key("LOG_CHANNEL")
             channel = None
     if not channel:
 
         async def _save(exc):
-            udB._cache["LOG_CHANNEL"] = ultroid_bot.me.id
+            pdB._cache["LOG_CHANNEL"] = ultroid_bot.me.id
             await asst.send_message(
                 ultroid_bot.me.id, f"Failed to Create Log Channel due to {exc}.."
             )
@@ -267,7 +267,7 @@ async def autopilot():
         new_channel = True
         chat = r.chats[0]
         channel = get_peer_id(chat)
-        udB.set_key("LOG_CHANNEL", channel)
+        pdB.set_key("LOG_CHANNEL", channel)
     assistant = True
     try:
         await ultroid_bot.get_permissions(int(channel), asst.me.username)
@@ -330,11 +330,11 @@ async def autopilot():
 
 
 async def customize():
-    from .. import asst, udB, ultroid_bot
+    from .. import asst, pdB, ultroid_bot
 
     rem = None
     try:
-        chat_id = udB.get_key("LOG_CHANNEL")
+        chat_id = pdB.get_key("LOG_CHANNEL")
         if asst.me.photo:
             return
         LOGS.info("Customising Ur Assistant Bot in @BOTFATHER")
@@ -435,11 +435,11 @@ async def plug(plugin_channels):
 
 
 async def fetch_ann():
-    from .. import asst, udB
+    from .. import asst, pdB
     from ..fns.tools import async_searcher
 
-    get_ = udB.get_key("OLDANN") or []
-    chat_id = udB.get_key("LOG_CHANNEL")
+    get_ = pdB.get_key("OLDANN") or []
+    chat_id = pdB.get_key("LOG_CHANNEL")
     try:
         updts = await async_searcher(
             "https://ultroid-api.vercel.app/announcements", post=True, re_json=True
@@ -449,7 +449,7 @@ async def fetch_ann():
             if key not in get_:
                 cont = upt[key]
                 if isinstance(cont, dict) and cont.get("lang"):
-                    if cont["lang"] != (udB.get_key("language") or "en"):
+                    if cont["lang"] != (pdB.get_key("language") or "en"):
                         continue
                     cont = cont["msg"]
                 if isinstance(cont, str):
@@ -462,26 +462,26 @@ async def fetch_ann():
                         "Invalid Type of Announcement Detected!\nMake sure you are on latest version.."
                     )
                 get_.append(key)
-        udB.set_key("OLDANN", get_)
+        pdB.set_key("OLDANN", get_)
     except Exception as er:
         LOGS.exception(er)
 
 
 async def ready():
-    from .. import asst, udB, ultroid_bot
+    from .. import asst, pdB, ultroid_bot
 
-    chat_id = udB.get_key("LOG_CHANNEL")
+    chat_id = pdB.get_key("LOG_CHANNEL")
     spam_sent = None
-    if not udB.get_key("INIT_DEPLOY"):  # Detailed Message at Initial Deploy
+    if not pdB.get_key("INIT_DEPLOY"):  # Detailed Message at Initial Deploy
         MSG = """🎇 **Thanks for Deploying Pandey Userbot!**
 • Here, are the Some Basic stuff from, where you can Know, about its Usage."""
         PHOTO = "https://graph.org/file/54a917cc9dbb94733ea5f.jpg"
         BTTS = Button.inline("• Click to Start •", "initft_2")
-        udB.set_key("INIT_DEPLOY", "Done")
+        pdB.set_key("INIT_DEPLOY", "Done")
     else:
         MSG = f"**Pandey has been deployed!**\n➖➖➖➖➖➖➖➖➖➖\n**UserMode**: {inline_mention(ultroid_bot.me)}\n**Assistant**: @{asst.me.username}\n➖➖➖➖➖➖➖➖➖➖\n**Support**: @TeamPandey\n➖➖➖➖➖➖➖➖➖➖"
         BTTS, PHOTO = None, None
-        prev_spam = udB.get_key("LAST_UPDATE_LOG_SPAM")
+        prev_spam = pdB.get_key("LAST_UPDATE_LOG_SPAM")
         if prev_spam:
             try:
                 await ultroid_bot.delete_messages(chat_id, int(prev_spam))
@@ -505,7 +505,7 @@ async def ready():
         except Exception as ef:
             LOGS.exception(ef)
     if spam_sent and not spam_sent.media:
-        udB.set_key("LAST_UPDATE_LOG_SPAM", spam_sent.id)
+        pdB.set_key("LAST_UPDATE_LOG_SPAM", spam_sent.id)
 # TODO:    await fetch_ann()
 
 

@@ -6,24 +6,24 @@
 # <https://github.com/TeamPandey/pyPandey/blob/main/LICENSE>.
 
 
-from .. import udB
+from .. import pdB
 
 
 def get_stuff(key="NSFW"):
-    return udB.get_key(key) or {}
+    return pdB.get_key(key) or {}
 
 
 def nsfw_chat(chat, action):
     x = get_stuff()
     x.update({chat: action})
-    return udB.set_key("NSFW", x)
+    return pdB.set_key("NSFW", x)
 
 
 def rem_nsfw(chat):
     x = get_stuff()
     if x.get(chat):
         x.pop(chat)
-        return udB.set_key("NSFW", x)
+        return pdB.set_key("NSFW", x)
 
 
 def is_nsfw(chat):
@@ -35,14 +35,14 @@ def is_nsfw(chat):
 def profan_chat(chat, action):
     x = get_stuff("PROFANITY")
     x.update({chat: action})
-    return udB.set_key("PROFANITY", x)
+    return pdB.set_key("PROFANITY", x)
 
 
 def rem_profan(chat):
     x = get_stuff("PROFANITY")
     if x.get(chat):
         x.pop(chat)
-        return udB.set_key("PROFANITY", x)
+        return pdB.set_key("PROFANITY", x)
 
 
 def is_profan(chat):

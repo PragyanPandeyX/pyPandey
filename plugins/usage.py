@@ -30,7 +30,7 @@ from . import (
     async_searcher,
     get_string,
     humanbytes,
-    udB,
+    pdB,
     ultroid_cmd,
 )
 
@@ -168,17 +168,17 @@ async def heroku_usage():
 
 
 def db_usage():
-    if udB.name == "Mongo":
+    if pdB.name == "Mongo":
         total = 512
-    elif udB.name == "Redis":
+    elif pdB.name == "Redis":
         total = 30
-    elif udB.name == "SQL":
+    elif pdB.name == "SQL":
         total = 20
     total = total * (2**20)
-    used = udB.usage
+    used = pdB.usage
     a = f"{humanbytes(used)}/{humanbytes(total)}"
     b = f"{str(round((used / total) * 100, 2))}%"
-    return f"**{udB.name}**\n\n**Storage Used**: `{a}`\n**Usage percentage**: **{b}**"
+    return f"**{pdB.name}**\n\n**Storage Used**: `{a}`\n**Usage percentage**: **{b}**"
 
 
 async def get_full_usage():

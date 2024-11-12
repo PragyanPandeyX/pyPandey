@@ -24,13 +24,13 @@ from ..dB._core import LIST
 from . import CMD_HELP, SUDO_M  # ignore: pylint
 
 ALIVE_NAME = ultroid_bot.me.first_name
-BOTLOG_CHATID = BOTLOG = udB.get_key("LOG_CHANNEL")
+BOTLOG_CHATID = BOTLOG = pdB.get_key("LOG_CHANNEL")
 
 
 bot = borg = catub = friday = ultroid_bot
 catub.cat_cmd = ultroid_cmd
 
-black_list_chats = udB.get_key("BLACKLIST_CHATS")
+black_list_chats = pdB.get_key("BLACKLIST_CHATS")
 
 
 def admin_cmd(pattern=None, command=None, **args):
@@ -76,7 +76,7 @@ ENV = bool(os.environ.get("ENV", False))
 
 class Config((object)):
     if ENV:
-        from .. import asst, udB
+        from .. import asst, pdB
 
         LOGGER = True
         LOCATION = os.environ.get("LOCATION", None)
@@ -91,7 +91,7 @@ class Config((object)):
         OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
         TG_BOT_USER_NAME_BF_HER = asst.me.username
         UB_BLACK_LIST_CHAT = [
-            int(blacklist) for blacklist in udB.get_key("BLACKLIST_CHATS")
+            int(blacklist) for blacklist in pdB.get_key("BLACKLIST_CHATS")
         ]
         MAX_ANTI_FLOOD_MESSAGES = 10
         ANTI_FLOOD_WARN_MODE = types.ChatBannedRights(

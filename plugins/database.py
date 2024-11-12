@@ -13,7 +13,7 @@ __doc__ = get_help("help_database")
 
 import re
 
-from . import Redis, eor, get_string, udB, ultroid_cmd
+from . import Redis, eor, get_string, pdB, ultroid_cmd
 
 
 @ultroid_cmd(pattern="setdb( (.*)|$)", fullsudo=True)
@@ -26,8 +26,8 @@ async def _(ult):
         data = match.split(delim, maxsplit=1)
         if data[0] in ["--extend", "-e"]:
             data = data[1].split(maxsplit=1)
-            data[1] = f"{str(udB.get_key(data[0]))} {data[1]}"
-        udB.set_key(data[0], data[1])
+            data[1] = f"{str(pdB.get_key(data[0]))} {data[1]}"
+        pdB.set_key(data[0], data[1])
         await ult.eor(
             f"**DB Key Value Pair Updated\nKey :** `{data[0]}`\n**Value :** `{data[1]}`"
         )
@@ -45,10 +45,10 @@ async def _(ult):
     try:
         if _[0] == "-m":
             for key in _[1].split():
-                k = udB.del_key(key)
+                k = pdB.del_key(key)
             key = _[1]
         else:
-            k = udB.del_key(key)
+            k = pdB.del_key(key)
         if k == 0:
             return await ult.eor("`No Such Key.`")
         await ult.eor(f"`Successfully deleted key {key}`")
@@ -65,7 +65,7 @@ async def _(ult):
     data = match.split(delim)
     if Redis(data[0]):
         try:
-            udB.rename(data[0], data[1])
+            pdB.rename(data[0], data[1])
             await eor(
                 ult,
                 f"**DB Key Rename Successful\nOld Key :** `{data[0]}`\n**New Key :** `{data[1]}`",

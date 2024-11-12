@@ -17,7 +17,7 @@ from pyPandey.dB.blacklist_db import (
     rem_blacklist,
 )
 
-from . import events, get_string, udB, ultroid_bot, ultroid_cmd
+from . import events, get_string, pdB, ultroid_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="blacklist( (.*)|$)", admins_only=True)
@@ -65,5 +65,5 @@ async def blacklist(e):
                 pass
 
 
-if udB.get_key("BLACKLIST_DB"):
+if pdB.get_key("BLACKLIST_DB"):
     ultroid_bot.add_handler(blacklist, events.NewMessage(incoming=True))

@@ -5,17 +5,17 @@
 # PLease read the GNU Affero General Public License in
 # <https://github.com/TeamPandey/pyPandey/blob/main/LICENSE>.
 
-from .. import udB
+from .. import pdB
 
 
 def get_stored():
-    return udB.get_key("FILE_STORE") or {}
+    return pdB.get_key("FILE_STORE") or {}
 
 
 def store_msg(hash, msg_id):
     all = get_stored()
     all.update({hash: msg_id})
-    return udB.set_key("FILE_STORE", all)
+    return pdB.set_key("FILE_STORE", all)
 
 
 def list_all_stored_msgs():
@@ -32,4 +32,4 @@ def get_stored_msg(hash):
 def del_stored(hash):
     all = get_stored()
     all.pop(hash)
-    return udB.set_key("FILE_STORE", all)
+    return pdB.set_key("FILE_STORE", all)

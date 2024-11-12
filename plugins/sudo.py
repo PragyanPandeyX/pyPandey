@@ -21,7 +21,7 @@ from telethon.tl.types import User
 
 from pyPandey._misc import sudoers
 
-from . import get_string, inline_mention, udB, ultroid_bot, ultroid_cmd
+from . import get_string, inline_mention, pdB, ultroid_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="addsudo( (.*)|$)", fullsudo=True)
@@ -56,10 +56,10 @@ async def _(ult):
     elif id in sudoers():
         mmm = f"{name} `is already a SUDO User ...`"
     else:
-        udB.set_key("SUDO", "True")
+        pdB.set_key("SUDO", "True")
         key = sudoers()
         key.append(id)
-        udB.set_key("SUDOS", key)
+        pdB.set_key("SUDOS", key)
         mmm = f"**Added** {name} **as SUDO User**"
     await ult.eor(mmm, time=5)
 
@@ -94,7 +94,7 @@ async def _(ult):
     else:
         key = sudoers()
         key.remove(id)
-        udB.set_key("SUDOS", key)
+        pdB.set_key("SUDOS", key)
         mmm = f"**Removed** {name} **from SUDO User(s)**"
     await ult.eor(mmm, time=5)
 
@@ -116,7 +116,7 @@ async def _(ult):
             msg += f"• {inline_mention(name)} ( `{i}` )\n"
         else:
             msg += f"• `{i}` -> Invalid User\n"
-    m = udB.get_key("SUDO") or True
+    m = pdB.get_key("SUDO") or True
     if not m:
         m = "[False](https://graph.org/Pandey-04-06)"
     return await ult.eor(

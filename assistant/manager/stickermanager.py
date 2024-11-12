@@ -21,7 +21,7 @@ from telethon.utils import get_display_name, get_input_document
 from pyPandey.fns.misc import Quotly
 from pyPandey.fns.tools import TgConverter
 
-from . import LOGS, asst, asst_cmd, udB
+from . import LOGS, asst, asst_cmd, pdB
 
 
 @asst_cmd(
@@ -69,7 +69,7 @@ async def kang_cmd(ult):
         file = get_input_document(
             await ult.client(UploadMediaRequest(InputPeerSelf(), upl))
         )
-    get_ = udB.get_key("STICKERS") or {}
+    get_ = pdB.get_key("STICKERS") or {}
     type_ = "anim" if animated else "static"
     if not get_.get(ult.sender_id) or not get_.get(ult.sender_id, {}).get(type_):
         sn = f"{pre}_{ult.sender_id}"
@@ -107,7 +107,7 @@ async def kang_cmd(ult):
             get_.update({ult.sender_id: {type_: [sn]}})
         else:
             get_[ult.sender_id].update({type_: [sn]})
-        udB.set_key("STICKERS", get_)
+        pdB.set_key("STICKERS", get_)
         return await ult.reply(
             f"**Kanged Successfully!\nEmoji :** {emoji}\n**Link :** [Click Here](https://t.me/addstickers/{sn})"
         )
@@ -143,7 +143,7 @@ async def kang_cmd(ult):
         except Exception as er:
             return await ult.eor(str(er))
         get_[ult.sender_id][type_].append(pack.set.short_name)
-        udB.set_key("STICKERS", get_)
+        pdB.set_key("STICKERS", get_)
         return await ult.reply(
             f"**Created New Kang Pack!\nEmoji :** {emoji}\n**Link :** [Click Here](https://t.me/addstickers/{sn})"
         )
@@ -157,7 +157,7 @@ async def kang_cmd(ult):
 
 @asst_cmd(pattern="listpack")
 async def do_magic(ult):
-    ko = udB.get_key("STICKERS") or {}
+    ko = pdB.get_key("STICKERS") or {}
     if not ko.get(ult.sender_id):
         return await ult.reply("No Sticker Pack Found!")
     al_ = []
@@ -176,5 +176,5 @@ async def do_magic(ult):
                 ul["vid"].remove(_)
             else:
                 ul["static"].remove(_)
-            udB.set_key("STICKERS", ko)
+            pdB.set_key("STICKERS", ko)
     await ult.reply(msg)

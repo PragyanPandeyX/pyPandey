@@ -5,24 +5,24 @@
 # PLease read the GNU Affero General Public License in
 # <https://github.com/TeamPandey/pyPandey/blob/main/LICENSE>.
 
-from .. import udB
+from .. import pdB
 
 
 def list_gbanned():
-    return udB.get_key("GBAN") or {}
+    return pdB.get_key("GBAN") or {}
 
 
 def gban(user, reason):
     ok = list_gbanned()
     ok.update({int(user): reason or "No Reason. "})
-    return udB.set_key("GBAN", ok)
+    return pdB.set_key("GBAN", ok)
 
 
 def ungban(user):
     ok = list_gbanned()
     if ok.get(int(user)):
         del ok[int(user)]
-        return udB.set_key("GBAN", ok)
+        return pdB.set_key("GBAN", ok)
 
 
 def is_gbanned(user):
@@ -34,14 +34,14 @@ def is_gbanned(user):
 def gmute(user):
     ok = list_gmuted()
     ok.append(int(user))
-    return udB.set_key("GMUTE", ok)
+    return pdB.set_key("GMUTE", ok)
 
 
 def ungmute(user):
     ok = list_gmuted()
     if user in ok:
         ok.remove(int(user))
-        return udB.set_key("GMUTE", ok)
+        return pdB.set_key("GMUTE", ok)
 
 
 def is_gmuted(user):
@@ -49,4 +49,4 @@ def is_gmuted(user):
 
 
 def list_gmuted():
-    return udB.get_key("GMUTE") or []
+    return pdB.get_key("GMUTE") or []

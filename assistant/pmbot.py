@@ -25,7 +25,7 @@ from pyPandey.fns.helper import inline_mention
 from . import *
 
 botb = KeyManager("BOTBLS", cast=list)
-FSUB = udB.get_key("PMBOT_FSUB")
+FSUB = pdB.get_key("PMBOT_FSUB")
 CACHE = {}
 # --------------------------------------- Incoming -------------------------------------------- #
 

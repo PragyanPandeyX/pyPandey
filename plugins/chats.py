@@ -33,7 +33,7 @@ from telethon.tl.types import (
     UserStatusRecently,
 )
 
-from . import HNDLR, LOGS, asst, con, get_string, mediainfo, os, types, udB, ultroid_cmd
+from . import HNDLR, LOGS, asst, con, get_string, mediainfo, os, types, pdB, ultroid_cmd
 
 
 @ultroid_cmd(
@@ -54,7 +54,7 @@ async def _(e):
     except no_admin:
         return await xx.eor(get_string("chats_2"), time=10)
     await e.client.send_message(
-        int(udB.get_key("LOG_CHANNEL")), get_string("chats_6").format(e.chat_id)
+        int(pdB.get_key("LOG_CHANNEL")), get_string("chats_6").format(e.chat_id)
     )
 
 

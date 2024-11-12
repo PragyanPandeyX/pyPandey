@@ -5,11 +5,11 @@
 # PLease read the GNU Affero General Public License in
 # <https://github.com/TeamPandey/pyPandey/blob/main/LICENSE>.
 
-from .. import udB
+from .. import pdB
 
 
 def get_stuff():
-    return udB.get_key("WARNS") or {}
+    return pdB.get_key("WARNS") or {}
 
 
 def add_warn(chat, user, count, reason):
@@ -18,7 +18,7 @@ def add_warn(chat, user, count, reason):
         x[chat].update({user: [count, reason]})
     except BaseException:
         x.update({chat: {user: [count, reason]}})
-    return udB.set_key("WARNS", x)
+    return pdB.set_key("WARNS", x)
 
 
 def warns(chat, user):
@@ -34,6 +34,6 @@ def reset_warn(chat, user):
     x = get_stuff()
     try:
         x[chat].pop(user)
-        return udB.set_key("WARNS", x)
+        return pdB.set_key("WARNS", x)
     except BaseException:
         return

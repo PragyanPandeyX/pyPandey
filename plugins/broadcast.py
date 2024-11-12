@@ -17,7 +17,7 @@ from telethon.utils import get_display_name
 
 from pyPandey.dB.base import KeyManager
 
-from . import HNDLR, LOGS, eor, get_string, udB, ultroid_bot, ultroid_cmd
+from . import HNDLR, LOGS, eor, get_string, pdB, ultroid_bot, ultroid_cmd
 
 KeyM = KeyManager("BROADCAST", cast=list)
 
@@ -65,7 +65,7 @@ async def broadcast_adder(event):
         await event.delete()
         return
     chat_id = event.chat_id
-    if chat_id == udB.get_key("LOG_CHANNEL"):
+    if chat_id == pdB.get_key("LOG_CHANNEL"):
         return
     if KeyM.contains(chat_id):
         await x.edit(get_string("bd_6"))
@@ -86,7 +86,7 @@ async def broadcast_remover(event):
     x = await event.eor(get_string("com_1"))
     if chat_id == "all":
         await x.edit(get_string("bd_8"))
-        udB.del_key("BROADCAST")
+        pdB.del_key("BROADCAST")
         await x.edit("Database cleared.")
         return
     if KeyM.contains(chat_id):
@@ -157,7 +157,7 @@ async def forw(event):
         except Exception:
             try:
                 await ultroid_bot.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     f"Error in sending at {channel}.",
                 )
             except Exception as Em:
@@ -169,7 +169,7 @@ async def forw(event):
     await x.edit(f"{sent_count} messages sent with {error_count} errors.")
     if error_count > 0:
         await ultroid_bot.send_message(
-            udB.get_key("LOG_CHANNEL"), f"{error_count} Errors"
+            pdB.get_key("LOG_CHANNEL"), f"{error_count} Errors"
         )
 
 
@@ -201,7 +201,7 @@ async def sending(event):
                     )
                 except Exception as error:
                     await ultroid_bot.send_message(
-                        udB.get_key("LOG_CHANNEL"),
+                        pdB.get_key("LOG_CHANNEL"),
                         f"Error in sending at {channel}.\n\n{error}",
                     )
                     error_count += 1
@@ -211,6 +211,6 @@ async def sending(event):
             await x.edit(f"{sent_count} messages sent with {error_count} errors.")
             if error_count > 0:
                 await ultroid_bot.send_message(
-                    udB.get_key("LOG_CHANNEL"),
+                    pdB.get_key("LOG_CHANNEL"),
                     f"{error_count} Errors",
                 )

@@ -12,15 +12,15 @@ __doc__ = get_help("help_chatbot")
 
 from pyPandey.fns.tools import get_chatbot_reply, get_oracle_reply
 
-from . import LOGS, eod, get_string, inline_mention, udB, ultroid_bot, ultroid_cmd
+from . import LOGS, eod, get_string, inline_mention, pdB, ultroid_bot, ultroid_cmd
 
 try:
-    mongouri = udB.get_key("MONGO_URI")
+    mongouri = pdB.get_key("MONGO_URI")
 except AttributeError:
-    if udB.get_key("MONGO_URI"):
-        mongouri = udB.get_key("MONGO_URI")
+    if pdB.get_key("MONGO_URI"):
+        mongouri = pdB.get_key("MONGO_URI")
     else:
-        udB.set_key("MONGO_URI", "")
+        pdB.set_key("MONGO_URI", "")
         LOGS.error("PLeasde set a MONGO_URI")
 
 
@@ -51,7 +51,7 @@ async def rem_oracle(event):
 
 @ultroid_cmd(pattern="listoai")
 async def listoracle(event):
-    key = udB.get_key("ORACLE_USERS") or {}
+    key = pdB.get_key("ORACLE_USERS") or {}
     users = key.get(event.chat_id, [])
     if not users:
         return await event.eor(get_string("chab_2"), time=5)
@@ -81,7 +81,7 @@ async def oracle_bot_fn(event, type_):
             event,
             get_string("chab_1"),
         )
-    key = udB.get_key("ORACLE_USERS") or {}
+    key = pdB.get_key("ORACLE_USERS") or {}
     chat = event.chat_id
     user = user_.id
     if type_ == "add":
@@ -96,7 +96,7 @@ async def oracle_bot_fn(event, type_):
                 key[chat].remove(user)
             if chat in key and not key[chat]:
                 del key[chat]
-    udB.set_key("ORACLE_USERS", key)
+    pdB.set_key("ORACLE_USERS", key)
     await event.eor(f"**Oracle:**\n{type_}ed {inline_mention(user_)}")
 
 
@@ -125,7 +125,7 @@ async def rem_chatBot(event):
 
 @ultroid_cmd(pattern="listai")
 async def lister(event):
-    key = udB.get_key("CHATBOT_USERS") or {}
+    key = pdB.get_key("CHATBOT_USERS") or {}
     users = key.get(event.chat_id, [])
     if not users:
         return await event.eor(get_string("chab_2"), time=5)
@@ -155,7 +155,7 @@ async def chat_bot_fn(event, type_):
             event,
             get_string("chab_1"),
         )
-    key = udB.get_key("CHATBOT_USERS") or {}
+    key = pdB.get_key("CHATBOT_USERS") or {}
     chat = event.chat_id
     user = user_.id
     if type_ == "add":
@@ -170,5 +170,5 @@ async def chat_bot_fn(event, type_):
                 key[chat].remove(user)
             if chat in key and not key[chat]:
                 del key[chat]
-    udB.set_key("CHATBOT_USERS", key)
+    pdB.set_key("CHATBOT_USERS", key)
     await event.eor(f"**ChatBot:**\n{type_}ed {inline_mention(user_)}")

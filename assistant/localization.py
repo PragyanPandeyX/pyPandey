@@ -14,7 +14,7 @@ from . import (
     get_back_button,
     get_languages,
     get_string,
-    udB,
+    pdB,
 )
 
 
@@ -40,7 +40,7 @@ async def settt(event):
     lang = event.data_match.group(1).decode("UTF-8")
     languages = get_languages()
     ULTConfig.lang = lang
-    udB.del_key("language") if lang == "en" else udB.set_key("language", lang)
+    pdB.del_key("language") if lang == "en" else pdB.set_key("language", lang)
     await event.edit(
         f"Your language has been set to {languages[lang]['natively']} [{lang}].",
         buttons=get_back_button("lang"),

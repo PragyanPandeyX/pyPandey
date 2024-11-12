@@ -28,7 +28,7 @@ from telethon.utils import pack_bot_file_id
 from pyPandey.dB.notes_db import add_note, get_notes, list_note, rem_note
 from pyPandey.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import events, get_string, mediainfo, udB, ultroid_bot, ultroid_cmd
+from . import events, get_string, mediainfo, pdB, ultroid_bot, ultroid_cmd
 from ._inline import something
 
 
@@ -108,5 +108,5 @@ async def notes(e):
             )
 
 
-if udB.get_key("NOTE"):
+if pdB.get_key("NOTE"):
     ultroid_bot.add_handler(notes, events.NewMessage())

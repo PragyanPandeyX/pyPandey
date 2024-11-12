@@ -17,7 +17,7 @@ from oauth2client.client import OOB_CALLBACK_URN, OAuth2WebServerFlow
 from oauth2client.client import logger as _logger
 from oauth2client.file import Storage
 
-from .. import udB
+from .. import pdB
 from .helper import humanbytes, time_formatter
 
 for log in [LOGGER, logger, _logger]:
@@ -36,8 +36,8 @@ class GDriveManager:
             "dir_mimetype": "application/vnd.google-apps.folder",
             "redirect_uri": OOB_CALLBACK_URN,
         }
-        self.auth_token = udB.get_key("GDRIVE_AUTH_TOKEN")
-        self.folder_id = udB.get_key("GDRIVE_FOLDER_ID")
+        self.auth_token = pdB.get_key("GDRIVE_AUTH_TOKEN")
+        self.folder_id = pdB.get_key("GDRIVE_FOLDER_ID")
         self.token_file = "resources/auth/gdrive_creds.json"
 
     @staticmethod
@@ -53,12 +53,12 @@ class GDriveManager:
             _auth_flow = self._flow["_"]
             credentials = _auth_flow.step2_exchange(code)
             Storage(self.token_file).put(credentials)
-            return udB.set_key("GDRIVE_AUTH_TOKEN", str(open(self.token_file).read()))
+            return pdB.set_key("GDRIVE_AUTH_TOKEN", str(open(self.token_file).read()))
         try:
             _auth_flow = OAuth2WebServerFlow(
-                udB.get_key("GDRIVE_CLIENT_ID")
+                pdB.get_key("GDRIVE_CLIENT_ID")
                 or "458306970678-jhfbv6o5sf1ar63o1ohp4c0grblp8qba.apps.googleusercontent.com",
-                udB.get_key("GDRIVE_CLIENT_SECRET")
+                pdB.get_key("GDRIVE_CLIENT_SECRET")
                 or "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",
                 self.gdrive_creds["oauth_scope"],
                 redirect_uri=self.gdrive_creds["redirect_uri"],

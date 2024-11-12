@@ -62,27 +62,27 @@ if run_as_module:
     _ult_cache = {}
     _ignore_eval = []
 
-    udB = PandeyDB()
+    pdB = PandeyDB()
     update_envs()
 
-    LOGS.info(f"Connecting to {udB.name}...")
-    if udB.ping():
-        LOGS.info(f"Connected to {udB.name} Successfully!")
+    LOGS.info(f"Connecting to {pdB.name}...")
+    if pdB.ping():
+        LOGS.info(f"Connected to {pdB.name} Successfully!")
 
-    BOT_MODE = udB.get_key("BOTMODE")
-    DUAL_MODE = udB.get_key("DUAL_MODE")
+    BOT_MODE = pdB.get_key("BOTMODE")
+    DUAL_MODE = pdB.get_key("DUAL_MODE")
 
-    USER_MODE = udB.get_key("USER_MODE")
+    USER_MODE = pdB.get_key("USER_MODE")
     if USER_MODE:
         DUAL_MODE = False
 
     if BOT_MODE:
         if DUAL_MODE:
-            udB.del_key("DUAL_MODE")
+            pdB.del_key("DUAL_MODE")
             DUAL_MODE = False
         ultroid_bot = None
 
-        if not udB.get_key("BOT_TOKEN"):
+        if not pdB.get_key("BOT_TOKEN"):
             LOGS.critical(
                 '"BOT_TOKEN" not Found! Please add it, in order to use "BOTMODE"'
             )
@@ -91,7 +91,7 @@ if run_as_module:
     else:
         ultroid_bot = PandeyClient(
             validate_session(Var.SESSION, LOGS),
-            udB=udB,
+            pdB=pdB,
             app_version=ultroid_version,
             device_model="Pandey",
         )
@@ -100,27 +100,27 @@ if run_as_module:
     if USER_MODE:
         asst = ultroid_bot
     else:
-        asst = PandeyClient("asst", bot_token=udB.get_key("BOT_TOKEN"), udB=udB)
+        asst = PandeyClient("asst", bot_token=pdB.get_key("BOT_TOKEN"), pdB=pdB)
 
     if BOT_MODE:
         ultroid_bot = asst
-        if udB.get_key("OWNER_ID"):
+        if pdB.get_key("OWNER_ID"):
             try:
                 ultroid_bot.me = ultroid_bot.run_in_loop(
-                    ultroid_bot.get_entity(udB.get_key("OWNER_ID"))
+                    ultroid_bot.get_entity(pdB.get_key("OWNER_ID"))
                 )
             except Exception as er:
                 LOGS.exception(er)
     elif not asst.me.bot_inline_placeholder and asst._bot:
         ultroid_bot.run_in_loop(enable_inline(ultroid_bot, asst.me.username))
 
-    vcClient = vc_connection(udB, ultroid_bot)
+    vcClient = vc_connection(pdB, ultroid_bot)
 
-    _version_changes(udB)
+    _version_changes(pdB)
 
-    HNDLR = udB.get_key("HNDLR") or "."
-    DUAL_HNDLR = udB.get_key("DUAL_HNDLR") or "/"
-    SUDO_HNDLR = udB.get_key("SUDO_HNDLR") or HNDLR
+    HNDLR = pdB.get_key("HNDLR") or "."
+    DUAL_HNDLR = pdB.get_key("DUAL_HNDLR") or "/"
+    SUDO_HNDLR = pdB.get_key("SUDO_HNDLR") or HNDLR
 else:
     print("pyPandey 2022 © TeamPandey")
 
@@ -128,4 +128,4 @@ else:
 
     LOGS = getLogger("pyPandey")
 
-    ultroid_bot = asst = udB = vcClient = None
+    ultroid_bot = asst = pdB = vcClient = None

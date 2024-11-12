@@ -5,11 +5,11 @@
 # PLease read the GNU Affero General Public License in
 # <https://github.com/TeamPandey/pyPandey/blob/main/LICENSE>.
 
-from .. import udB
+from .. import pdB
 
 
 def get_stuff():
-    return udB.get_key("NOTE") or {}
+    return pdB.get_key("NOTE") or {}
 
 
 def add_note(chat, word, msg, media, button):
@@ -18,21 +18,21 @@ def add_note(chat, word, msg, media, button):
         ok[int(chat)].update({word: {"msg": msg, "media": media, "button": button}})
     else:
         ok.update({int(chat): {word: {"msg": msg, "media": media, "button": button}}})
-    udB.set_key("NOTE", ok)
+    pdB.set_key("NOTE", ok)
 
 
 def rem_note(chat, word):
     ok = get_stuff()
     if ok.get(int(chat)) and ok[int(chat)].get(word):
         ok[int(chat)].pop(word)
-        return udB.set_key("NOTE", ok)
+        return pdB.set_key("NOTE", ok)
 
 
 def rem_all_note(chat):
     ok = get_stuff()
     if ok.get(int(chat)):
         ok.pop(int(chat))
-        return udB.set_key("NOTE", ok)
+        return pdB.set_key("NOTE", ok)
 
 
 def get_notes(chat, word):

@@ -27,7 +27,7 @@ from pyPandey.fns.helper import (
 )
 from pyPandey.fns.ytdl import dler, get_buttons, get_formats
 
-from . import LOGS, asst, callback, in_pattern, udB
+from . import LOGS, asst, callback, in_pattern, pdB
 
 try:
     from youtubesearchpython import VideosSearch
@@ -288,7 +288,7 @@ async def _(event):
         )
     except (FilePartLengthInvalidError, MediaEmptyError):
         file = await asst.send_message(
-            udB.get_key("LOG_CHANNEL"),
+            pdB.get_key("LOG_CHANNEL"),
             text,
             file=file,
             buttons=button,

@@ -17,7 +17,7 @@ from telethon.utils import get_display_name, get_peer_id
 
 from pyPandey.dB.base import KeyManager
 
-from . import LOGS, asst, eor, events, get_string, udB, ultroid_bot, ultroid_cmd
+from . import LOGS, asst, eor, events, get_string, pdB, ultroid_bot, ultroid_cmd
 
 ERROR = {}
 SourceM = KeyManager("CH_SOURCE", cast=list)
@@ -25,7 +25,7 @@ DestiM = KeyManager("CH_DESTINATIONS", cast=list)
 
 
 async def autopost_func(e):
-    if not udB.get_key("AUTOPOST"):
+    if not pdB.get_key("AUTOPOST"):
         return
     x = SourceM.get()
     th = await e.get_chat()
@@ -41,7 +41,7 @@ async def autopost_func(e):
             except KeyError:
                 ERROR.update({str(ex): ex})
                 Error = f"**Error on AUTOPOST**\n\n`{ex}`"
-                await asst.send_message(udB.get_key("LOG_CHANNEL"), Error)
+                await asst.send_message(pdB.get_key("LOG_CHANNEL"), Error)
 
 
 @ultroid_cmd(pattern="shift (.*)")
@@ -96,7 +96,7 @@ async def dd(event):
     x = await event.eor(get_string("com_1"))
     if chat_id == "all":
         await x.edit(get_string("bd_8"))
-        udB.del_key("CH_SOURCE")
+        pdB.del_key("CH_SOURCE")
         await x.edit(get_string("cha_4"))
         return
     if chat_id:
@@ -168,7 +168,7 @@ async def dd(event):
     x = await event.eor(get_string("com_1"))
     if chat_id == "all":
         await x.edit(get_string("bd_8"))
-        udB.del_key("CH_DESTINATION")
+        pdB.del_key("CH_DESTINATION")
         await x.edit("Destinations database cleared.")
         return
     if chat_id:
@@ -220,5 +220,5 @@ async def list_all(event):
         await x.edit(msg)
 
 
-if udB.get_key("AUTOPOST"):
+if pdB.get_key("AUTOPOST"):
     ultroid_bot.add_handler(autopost_func, events.NewMessage())

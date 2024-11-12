@@ -63,7 +63,7 @@ from . import (
     mediainfo,
     quotly,
     types,
-    udB,
+    pdB,
     ultroid_cmd,
 )
 
@@ -196,7 +196,7 @@ async def hehe(args):
         photo = await quotly.create_quotly(message)
     else:
         return await xx.edit(get_string("com_4"))
-    if not udB.get_key("language") or udB.get_key("language") == "en":
+    if not pdB.get_key("language") or pdB.get_key("language") == "en":
         ra = random.choice(KANGING_STR)
     else:
         ra = get_string("sts_11")

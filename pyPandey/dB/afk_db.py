@@ -7,16 +7,16 @@
 
 from datetime import datetime as dt
 
-from .. import udB
+from .. import pdB
 
 
 def get_stuff():
-    return udB.get_key("AFK_DB") or []
+    return pdB.get_key("AFK_DB") or []
 
 
 def add_afk(msg, media_type, media):
     time = dt.now().strftime("%b %d %Y %I:%M:%S%p")
-    udB.set_key("AFK_DB", [msg, media_type, media, time])
+    pdB.set_key("AFK_DB", [msg, media_type, media, time])
     return
 
 
@@ -30,4 +30,4 @@ def is_afk():
 
 
 def del_afk():
-    return udB.del_key("AFK_DB")
+    return pdB.del_key("AFK_DB")

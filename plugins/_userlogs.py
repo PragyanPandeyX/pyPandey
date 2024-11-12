@@ -31,7 +31,7 @@ from . import (
     events,
     get_string,
     inline_mention,
-    udB,
+    pdB,
     ultroid_bot,
 )
 
@@ -49,9 +49,9 @@ async def all_messages_catcher(e):
     x = await e.get_sender()
     if isinstance(x, User) and (x.bot or x.verified):
         return
-    if not udB.get_key("TAG_LOG"):
+    if not pdB.get_key("TAG_LOG"):
         return
-    NEEDTOLOG = udB.get_key("TAG_LOG")
+    NEEDTOLOG = pdB.get_key("TAG_LOG")
     buttons = await parse_buttons(e)
     try:
         sent = await asst.send_message(NEEDTOLOG, e.message, buttons=buttons)
@@ -93,7 +93,7 @@ async def all_messages_catcher(e):
             CACHE_SPAM[NEEDTOLOG]
         except KeyError:
             await asst.send_message(
-                udB.get_key("LOG_CHANNEL"), get_string("userlogs_1")
+                pdB.get_key("LOG_CHANNEL"), get_string("userlogs_1")
             )
             CACHE_SPAM.update({NEEDTOLOG: True})
     except ChatWriteForbiddenError:
@@ -111,7 +111,7 @@ async def all_messages_catcher(e):
         LOGS.exception(er)
 
 
-if udB.get_key("TAG_LOG"):
+if pdB.get_key("TAG_LOG"):
 
     @ultroid_bot.on(events.MessageEdited(func=lambda x: not x.out))
     async def upd_edits(event):
@@ -119,7 +119,7 @@ if udB.get_key("TAG_LOG"):
         if isinstance(x, User) and (x.bot or x.verified):
             return
         if event.chat_id not in TAG_EDITS:
-            if event.sender_id == udB.get_key("TAG_LOG"):
+            if event.sender_id == pdB.get_key("TAG_LOG"):
                 return
             if event.is_private:
                 return
@@ -137,7 +137,7 @@ if udB.get_key("TAG_LOG"):
                     text = f"**#Edited & #Mentioned**\n\n{event.text}"
                     try:
                         sent = await asst.send_message(
-                            udB.get_key("TAG_LOG"),
+                            pdB.get_key("TAG_LOG"),
                             text,
                             buttons=await parse_buttons(event),
                         )
@@ -163,7 +163,7 @@ if udB.get_key("TAG_LOG"):
         if d_["count"] > 10:
             return  # some limit to take edits
         try:
-            MSG = await asst.get_messages(udB.get_key("TAG_LOG"), ids=d_["id"])
+            MSG = await asst.get_messages(pdB.get_key("TAG_LOG"), ids=d_["id"])
         except Exception as er:
             return LOGS.exception(er)
         TEXT = MSG.text
@@ -187,7 +187,7 @@ if udB.get_key("TAG_LOG"):
     @ultroid_bot.on(
         events.NewMessage(
             outgoing=True,
-            chats=[udB.get_key("TAG_LOG")],
+            chats=[pdB.get_key("TAG_LOG")],
             func=lambda e: e.reply_to,
         )
     )
@@ -224,7 +224,7 @@ async def when_added_or_joined(event):
         text = f"#APPROVAL_LOG\n\n{inline_mention(user)} just got Chat Join Approval to {chat}."
     else:
         text = f"#JOIN_LOG\n\n{inline_mention(user)} just joined {chat}."
-    await asst.send_message(udB.get_key("LOG_CHANNEL"), text, buttons=buttons)
+    await asst.send_message(pdB.get_key("LOG_CHANNEL"), text, buttons=buttons)
 
 
 asst.add_event_handler(

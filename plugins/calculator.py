@@ -12,7 +12,7 @@ __doc__ = get_help("help_calculator")
 
 import re
 
-from . import Button, asst, callback, get_string, in_pattern, udB, ultroid_cmd
+from . import Button, asst, callback, get_string, in_pattern, pdB, ultroid_cmd
 
 CALC = {}
 
@@ -45,7 +45,7 @@ lst.append([Button.inline("=", data="calc=")])
 
 @ultroid_cmd(pattern="calc")
 async def icalc(e):
-    udB.del_key("calc")
+    pdB.del_key("calc")
     if e.client._bot:
         return await e.reply(get_string("calc_1"), buttons=lst)
     results = await e.client.inline_query(asst.me.username, "calc")

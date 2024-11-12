@@ -11,7 +11,7 @@ try:
 except ModuleNotFoundError:
     from pyPandey.fns.tools import safe_load
 
-ULTConfig.lang = udB.get_key("language") or os.getenv("LANGUAGE", "en")
+ULTConfig.lang = pdB.get_key("language") or os.getenv("LANGUAGE", "en")
 
 languages = {}
 PATH = "strings/strings/{}.yml"

@@ -19,7 +19,7 @@ from strings import get_string
 
 from . import *
 
-Owner_info_msg = udB.get_key("BOT_INFO_START")
+Owner_info_msg = pdB.get_key("BOT_INFO_START")
 custom_info = True
 if Owner_info_msg is None:
     custom_info = False
@@ -27,7 +27,7 @@ if Owner_info_msg is None:
 **Owner** - {OWNER_NAME}
 **OwnerID** - `{OWNER_ID}`
 
-**Message Forwards** - {udB.get_key("PMBOT")}
+**Message Forwards** - {pdB.get_key("PMBOT")}
 
 **Pandey [v{ultroid_version}](https://github.com/TeamPandey/Pandey), powered by @TeamPandey**
 """
@@ -90,7 +90,7 @@ async def ultroid(event):
     keym = KeyManager("BOT_USERS", cast=list)
     if not keym.contains(event.sender_id) and event.sender_id not in owner_and_sudos():
         keym.add(event.sender_id)
-        kak_uiw = udB.get_key("OFF_START_LOG")
+        kak_uiw = pdB.get_key("OFF_START_LOG")
         if not kak_uiw or kak_uiw != True:
             msg = f"{inline_mention(event.sender)} `[{event.sender_id}]` started your [Assistant bot](@{asst.me.username})."
             buttons = [[Button.inline("Info", "itkkstyo")]]
@@ -101,7 +101,7 @@ async def ultroid(event):
                     )
                 )
             await event.client.send_message(
-                udB.get_key("LOG_CHANNEL"), msg, buttons=buttons
+                pdB.get_key("LOG_CHANNEL"), msg, buttons=buttons
             )
     if event.sender_id not in SUDO_M.fullsudos:
         ok = ""
@@ -109,20 +109,20 @@ async def ultroid(event):
         mention = inline_mention(event.sender)
         if args and args != "set":
             await get_stored_file(event, args)
-        if not udB.get_key("STARTMSG"):
-            if udB.get_key("PMBOT"):
+        if not pdB.get_key("STARTMSG"):
+            if pdB.get_key("PMBOT"):
                 ok = "You can contact my master using this bot!!\n\nSend your Message, I will Deliver it To Master."
             await event.reply(
                 f"Hey there {mention}, this is Pandey Assistant of {me}!\n\n{ok}",
-                file=udB.get_key("STARTMEDIA"),
+                file=pdB.get_key("STARTMEDIA"),
                 buttons=[Button.inline("Info.", data="ownerinfo")]
                 if Owner_info_msg
                 else None,
             )
         else:
             await event.reply(
-                udB.get_key("STARTMSG").format(me=me, mention=mention),
-                file=udB.get_key("STARTMEDIA"),
+                pdB.get_key("STARTMSG").format(me=me, mention=mention),
+                file=pdB.get_key("STARTMEDIA"),
                 buttons=[Button.inline("Info.", data="ownerinfo")]
                 if Owner_info_msg
                 else None,
@@ -159,7 +159,7 @@ async def ultroid(event):
 
 @callback("stat", owner=True)
 async def botstat(event):
-    ok = len(udB.get_key("BOT_USERS") or [])
+    ok = len(pdB.get_key("BOT_USERS") or [])
     msg = """Pandey Assistant - Stats
 Total Users - {}""".format(
         ok,

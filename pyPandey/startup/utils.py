@@ -34,7 +34,7 @@ def load_addons(plugin_name):
         return
     from pyPandey import fns
 
-    from .. import HNDLR, LOGS, asst, udB, ultroid_bot
+    from .. import HNDLR, LOGS, asst, pdB, ultroid_bot
     from .._misc import _supporter as config
     from .._misc._assistant import asst_cmd, callback, in_pattern
     from .._misc._decorators import ultroid_cmd
@@ -49,8 +49,8 @@ def load_addons(plugin_name):
     for path in configPaths:
         modules[path] = config
     modules["pyPandey.functions"] = fns
-    mod.LOG_CHANNEL = udB.get_key("LOG_CHANNEL")
-    mod.udB = udB
+    mod.LOG_CHANNEL = pdB.get_key("LOG_CHANNEL")
+    mod.pdB = pdB
     mod.asst = asst
     mod.tgbot = asst
     mod.ultroid_bot = ultroid_bot
@@ -77,7 +77,7 @@ def load_addons(plugin_name):
     mod.ultroid_cmd = ultroid_cmd
     mod.on_cmd = ultroid_cmd
     mod.callback = callback
-    mod.Redis = udB.get_key
+    mod.Redis = pdB.get_key
     mod.admin_cmd = admin_cmd
     mod.sudo_cmd = sudo_cmd
     mod.HELP = HELP.get("Addons", {})

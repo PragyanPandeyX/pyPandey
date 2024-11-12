@@ -20,7 +20,7 @@ except ImportError:
     uf = None
 from telethon import events, utils
 
-from . import asst, get_string, mediainfo, udB, ultroid_cmd
+from . import asst, get_string, mediainfo, pdB, ultroid_cmd
 
 
 @ultroid_cmd(pattern="addcmd( (.*)|$)")
@@ -98,7 +98,7 @@ async def astcmds(e):
         await e.reply(msg, file=media, buttons=bt)
 
 
-if udB.get_key("ASST_CMDS"):
+if pdB.get_key("ASST_CMDS"):
     asst.add_handler(
         astcmds,
         events.NewMessage(
