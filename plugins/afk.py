@@ -27,7 +27,7 @@ from . import (
     get_string,
     mediainfo,
     pdB,
-    ultroid_bot,
+    Pragyan_bot,
     ultroid_cmd,
 )
 
@@ -59,8 +59,8 @@ async def set_afk(event):
                 media = reply.file.id
     await event.eor("`Done`", time=2)
     add_afk(text, media_type, media)
-    ultroid_bot.add_handler(remove_afk, events.NewMessage(outgoing=True))
-    ultroid_bot.add_handler(
+    Pragyan_bot.add_handler(remove_afk, events.NewMessage(outgoing=True))
+    Pragyan_bot.add_handler(
         on_afk,
         events.NewMessage(
             incoming=True, func=lambda e: bool(e.mentioned or e.is_private)
@@ -69,20 +69,20 @@ async def set_afk(event):
     msg1, msg2 = None, None
     if text and media:
         if "sticker" in media_type:
-            msg1 = await ultroid_bot.send_file(event.chat_id, file=media)
-            msg2 = await ultroid_bot.send_message(
+            msg1 = await Pragyan_bot.send_file(event.chat_id, file=media)
+            msg2 = await Pragyan_bot.send_message(
                 event.chat_id, get_string("afk_5").format(text)
             )
         else:
-            msg1 = await ultroid_bot.send_message(
+            msg1 = await Pragyan_bot.send_message(
                 event.chat_id, get_string("afk_5").format(text), file=media
             )
     elif media:
         if "sticker" in media_type:
-            msg1 = await ultroid_bot.send_file(event.chat_id, file=media)
-            msg2 = await ultroid_bot.send_message(event.chat_id, get_string("afk_6"))
+            msg1 = await Pragyan_bot.send_file(event.chat_id, file=media)
+            msg2 = await Pragyan_bot.send_message(event.chat_id, get_string("afk_6"))
         else:
-            msg1 = await ultroid_bot.send_message(
+            msg1 = await Pragyan_bot.send_message(
                 event.chat_id, get_string("afk_6"), file=media
             )
     elif text:
@@ -160,8 +160,8 @@ async def on_afk(event):
 
 
 if pdB.get_key("AFK_DB"):
-    ultroid_bot.add_handler(remove_afk, events.NewMessage(outgoing=True))
-    ultroid_bot.add_handler(
+    Pragyan_bot.add_handler(remove_afk, events.NewMessage(outgoing=True))
+    Pragyan_bot.add_handler(
         on_afk,
         events.NewMessage(
             incoming=True, func=lambda e: bool(e.mentioned or e.is_private)

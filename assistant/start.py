@@ -65,7 +65,7 @@ _start = [
 @callback("ownerinfo")
 async def own(event):
     msg = Owner_info_msg.format(
-        mention=inline_mention(event.sender), me=inline_mention(ultroid_bot.me)
+        mention=inline_mention(event.sender), me=inline_mention(Pragyan_bot.me)
     )
     if custom_info:
         msg += "\n\n• Powered by **@TeamPandey**"
@@ -105,7 +105,7 @@ async def ultroid(event):
             )
     if event.sender_id not in SUDO_M.fullsudos:
         ok = ""
-        me = inline_mention(ultroid_bot.me)
+        me = inline_mention(Pragyan_bot.me)
         mention = inline_mention(event.sender)
         if args and args != "set":
             await get_stored_file(event, args)

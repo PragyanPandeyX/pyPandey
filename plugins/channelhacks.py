@@ -17,7 +17,7 @@ from telethon.utils import get_display_name, get_peer_id
 
 from pyPandey.dB.base import KeyManager
 
-from . import LOGS, asst, eor, events, get_string, pdB, ultroid_bot, ultroid_cmd
+from . import LOGS, asst, eor, events, get_string, pdB, Pragyan_bot, ultroid_cmd
 
 ERROR = {}
 SourceM = KeyManager("CH_SOURCE", cast=list)
@@ -85,7 +85,7 @@ async def source(e):
     if not SourceM.contains(y):
         SourceM.add(y)
         await e.eor(get_string("cha_2"))
-        ultroid_bot.add_handler(autopost_func, events.NewMessage())
+        Pragyan_bot.add_handler(autopost_func, events.NewMessage())
     else:
         await e.eor(get_string("cha_3"))
 
@@ -188,7 +188,7 @@ async def dd(event):
 
 @ultroid_cmd(pattern="listdest")
 async def list_all(event):
-    ultroid_bot = event.client
+    Pragyan_bot = event.client
     x = await event.eor(get_string("com_1"))
     channels = DestiM.get()
     num = len(channels)
@@ -198,7 +198,7 @@ async def list_all(event):
     for channel in channels:
         name = ""
         try:
-            name = get_display_name(await ultroid_bot.get_entity(int(channel)))
+            name = get_display_name(await Pragyan_bot.get_entity(int(channel)))
         except BaseException:
             name = ""
         msg += f"\n=> **{name}** [`{channel}`]"
@@ -207,7 +207,7 @@ async def list_all(event):
         MSG = msg.replace("*", "").replace("`", "")
         with io.BytesIO(str.encode(MSG)) as out_file:
             out_file.name = "channels.txt"
-            await ultroid_bot.send_file(
+            await Pragyan_bot.send_file(
                 event.chat_id,
                 out_file,
                 force_document=True,
@@ -221,4 +221,4 @@ async def list_all(event):
 
 
 if pdB.get_key("AUTOPOST"):
-    ultroid_bot.add_handler(autopost_func, events.NewMessage())
+    Pragyan_bot.add_handler(autopost_func, events.NewMessage())

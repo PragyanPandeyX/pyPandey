@@ -14,7 +14,7 @@ import os
 from pyPandey.dB.filestore_db import del_stored, get_stored_msg, list_all_stored_msgs
 from pyPandey.fns.tools import get_file_link
 
-from . import HNDLR, asst, get_string, in_pattern, pdB, ultroid_bot, ultroid_cmd
+from . import HNDLR, asst, get_string, in_pattern, pdB, Pragyan_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="store$")
@@ -48,7 +48,7 @@ async def _(event):
             "`Message/Media of provided link was already deleted.`", time=5
         )
     del_stored(match[1])
-    await ultroid_bot.delete_messages(pdB.get_key("LOG_CHANNEL"), int(msg_id))
+    await Pragyan_bot.delete_messages(pdB.get_key("LOG_CHANNEL"), int(msg_id))
     await event.eor("__Deleted__")
 
 

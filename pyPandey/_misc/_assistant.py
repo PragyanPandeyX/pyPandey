@@ -14,16 +14,16 @@ from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery, NewMessage
 from telethon.tl.types import InputWebDocument
 
-from .. import LOGS, asst, pdB, ultroid_bot
+from .. import LOGS, asst, pdB, Pragyan_bot
 from ..fns.admins import admin_check
 from . import append_or_update, owner_and_sudos
 
-OWNER = ultroid_bot.full_name
+OWNER = Pragyan_bot.full_name
 
 MSG = f"""
 **Pandey - UserBot**
 ➖➖➖➖➖➖➖➖➖➖
-**Owner**: [{OWNER}](tg://user?id={ultroid_bot.uid})
+**Owner**: [{OWNER}](tg://user?id={Pragyan_bot.uid})
 **Support**: @TeamPandey
 ➖➖➖➖➖➖➖➖➖➖
 """
@@ -70,7 +70,7 @@ def callback(data=None, from_users=[], admins=False, owner=False, **kwargs):
     """Assistant's callback decorator"""
     if "me" in from_users:
         from_users.remove("me")
-        from_users.append(ultroid_bot.uid)
+        from_users.append(Pragyan_bot.uid)
 
     def ultr(func):
         async def wrapper(event):

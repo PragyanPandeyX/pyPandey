@@ -13,7 +13,7 @@ from telethon import events
 
 from pyPandey.dB.base import KeyManager
 
-from . import LOGS, asst, ultroid_bot, ultroid_cmd
+from . import LOGS, asst, Pragyan_bot, ultroid_cmd
 
 Keym = KeyManager("DND_CHATS", cast=list)
 
@@ -55,5 +55,5 @@ async def _(event):
 
 
 if Keym.get():
-    ultroid_bot.add_handler(dnd_func, events.ChatAction(func=join_func))
+    Pragyan_bot.add_handler(dnd_func, events.ChatAction(func=join_func))
     asst.add_handler(dnd_func, events.ChatAction(func=join_func))

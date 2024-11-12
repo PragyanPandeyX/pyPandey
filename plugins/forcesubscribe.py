@@ -44,7 +44,7 @@ from . import (
     in_pattern,
     inline_mention,
     pdB,
-    ultroid_bot,
+    Pragyan_bot,
     ultroid_cmd,
 )
 
@@ -62,7 +62,7 @@ async def addfor(e):
         return await e.eor(get_string("fsub_2"), time=5)
     add_forcesub(e.chat_id, match)
     await e.eor("Added ForceSub in This Chat !")
-    ultroid_bot.add_handler(force_sub, events.NewMessage(incoming=True))
+    Pragyan_bot.add_handler(force_sub, events.NewMessage(incoming=True))
 
 
 @ultroid_cmd(pattern="remfsub$")
@@ -86,14 +86,14 @@ async def getfsr(e):
 async def fcall(e):
     match = e.pattern_match.group(1).strip()
     spli = match.split("_")
-    user = await ultroid_bot.get_entity(int(spli[0]))
-    cl = await ultroid_bot.get_entity(int(spli[1]))
+    user = await Pragyan_bot.get_entity(int(spli[0]))
+    cl = await Pragyan_bot.get_entity(int(spli[1]))
     text = f"Hi {inline_mention(user)}, You Need to Join"
     text += f" {cl.title} in order to Chat in this Group."
     el = (
         f"https://t.me/{cl.username}"
         if cl.username
-        else (await ultroid_bot(ExportChatInviteRequest(cl))).link
+        else (await Pragyan_bot(ExportChatInviteRequest(cl))).link
     )
 
     res = [
@@ -116,7 +116,7 @@ async def diesoon(e):
     if e.sender_id != int(spli[0]):
         return await e.answer(get_string("fsub_7"), alert=True)
     try:
-        values = await ultroid_bot(GetParticipantRequest(int(spli[1]), int(spli[0])))
+        values = await Pragyan_bot(GetParticipantRequest(int(spli[1]), int(spli[0])))
         if isinstance(values.participant, ChannelParticipantLeft) or (
             isinstance(values.participant, ChannelParticipantBanned) and values.left
         ):
@@ -125,7 +125,7 @@ async def diesoon(e):
         return await e.answer(
             "Please Join That Channel !\nThen Click This Button !", alert=True
         )
-    await ultroid_bot.edit_permissions(
+    await Pragyan_bot.edit_permissions(
         e.chat_id, int(spli[0]), send_messages=True, until_date=None
     )
     await e.edit(get_string("fsub_8"))
@@ -152,28 +152,28 @@ async def force_sub(ult):
     if count in range(2, 11):
         return
     try:
-        await ultroid_bot.get_permissions(int(joinchat), user.id)
+        await Pragyan_bot.get_permissions(int(joinchat), user.id)
         return
     except UserNotParticipantError:
         pass
     if isinstance(user, Channel):
         try:
-            await ultroid_bot.edit_permissions(
+            await Pragyan_bot.edit_permissions(
                 ult.chat_id, user.id, view_messages=False
             )
             return
         except BaseException as er:
             LOGS.exception(er)
     try:
-        await ultroid_bot.edit_permissions(ult.chat_id, user.id, send_messages=False)
+        await Pragyan_bot.edit_permissions(ult.chat_id, user.id, send_messages=False)
     except ChatAdminRequiredError:
         return
     except Exception as e:
         await ult.delete()
         LOGS.info(e)
-    res = await ultroid_bot.inline_query(asst.me.username, f"fsub {user.id}_{joinchat}")
+    res = await Pragyan_bot.inline_query(asst.me.username, f"fsub {user.id}_{joinchat}")
     await res[0].click(ult.chat_id, reply_to=ult.id)
 
 
 if pdB.get_key("FORCESUB"):
-    ultroid_bot.add_handler(force_sub, events.NewMessage(incoming=True))
+    Pragyan_bot.add_handler(force_sub, events.NewMessage(incoming=True))

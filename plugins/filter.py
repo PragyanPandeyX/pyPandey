@@ -19,7 +19,7 @@ from telethon.utils import pack_bot_file_id
 from pyPandey.dB.filter_db import add_filter, get_filter, list_filter, rem_filter
 from pyPandey.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import events, get_string, mediainfo, pdB, ultroid_bot, ultroid_cmd
+from . import events, get_string, mediainfo, pdB, Pragyan_bot, ultroid_cmd
 from ._inline import something
 
 
@@ -59,7 +59,7 @@ async def af(e):
             txt, btn = get_msg_button(wt.text)
         add_filter(chat, wrd, txt, None, btn)
     await e.eor(get_string("flr_4").format(wrd))
-    ultroid_bot.add_handler(filter_func, events.NewMessage())
+    Pragyan_bot.add_handler(filter_func, events.NewMessage())
 
 
 @ultroid_cmd(pattern="remfilter( (.*)|$)")
@@ -99,4 +99,4 @@ async def filter_func(e):
 
 
 if pdB.get_key("FILTERS"):
-    ultroid_bot.add_handler(filter_func, events.NewMessage())
+    Pragyan_bot.add_handler(filter_func, events.NewMessage())

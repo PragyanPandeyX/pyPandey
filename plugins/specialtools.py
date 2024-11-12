@@ -52,7 +52,7 @@ from . import (
     get_string,
     mediainfo,
     quotly,
-    ultroid_bot,
+    Pragyan_bot,
     ultroid_cmd,
     uploader,
 )

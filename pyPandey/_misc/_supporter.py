@@ -23,11 +23,11 @@ from .. import *
 from ..dB._core import LIST
 from . import CMD_HELP, SUDO_M  # ignore: pylint
 
-ALIVE_NAME = ultroid_bot.me.first_name
+ALIVE_NAME = Pragyan_bot.me.first_name
 BOTLOG_CHATID = BOTLOG = pdB.get_key("LOG_CHANNEL")
 
 
-bot = borg = catub = friday = ultroid_bot
+bot = borg = catub = friday = Pragyan_bot
 catub.cat_cmd = ultroid_cmd
 
 black_list_chats = pdB.get_key("BLACKLIST_CHATS")

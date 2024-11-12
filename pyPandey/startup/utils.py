@@ -34,7 +34,7 @@ def load_addons(plugin_name):
         return
     from pyPandey import fns
 
-    from .. import HNDLR, LOGS, asst, pdB, ultroid_bot
+    from .. import HNDLR, LOGS, asst, pdB, Pragyan_bot
     from .._misc import _supporter as config
     from .._misc._assistant import asst_cmd, callback, in_pattern
     from .._misc._decorators import ultroid_cmd
@@ -53,14 +53,14 @@ def load_addons(plugin_name):
     mod.pdB = pdB
     mod.asst = asst
     mod.tgbot = asst
-    mod.ultroid_bot = ultroid_bot
-    mod.ub = ultroid_bot
-    mod.bot = ultroid_bot
-    mod.ultroid = ultroid_bot
-    mod.borg = ultroid_bot
-    mod.telebot = ultroid_bot
-    mod.jarvis = ultroid_bot
-    mod.friday = ultroid_bot
+    mod.Pragyan_bot = Pragyan_bot
+    mod.ub = Pragyan_bot
+    mod.bot = Pragyan_bot
+    mod.ultroid = Pragyan_bot
+    mod.borg = Pragyan_bot
+    mod.telebot = Pragyan_bot
+    mod.jarvis = Pragyan_bot
+    mod.friday = Pragyan_bot
     mod.eod = eod
     mod.edit_delete = eod
     mod.LOGS = LOGS

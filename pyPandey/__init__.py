@@ -80,7 +80,7 @@ if run_as_module:
         if DUAL_MODE:
             pdB.del_key("DUAL_MODE")
             DUAL_MODE = False
-        ultroid_bot = None
+        Pragyan_bot = None
 
         if not pdB.get_key("BOT_TOKEN"):
             LOGS.critical(
@@ -89,32 +89,32 @@ if run_as_module:
 
             sys.exit()
     else:
-        ultroid_bot = PandeyClient(
+        Pragyan_bot = PandeyClient(
             validate_session(Var.SESSION, LOGS),
             pdB=pdB,
             app_version=ultroid_version,
             device_model="Pandey",
         )
-        ultroid_bot.run_in_loop(autobot())
+        Pragyan_bot.run_in_loop(autobot())
 
     if USER_MODE:
-        asst = ultroid_bot
+        asst = Pragyan_bot
     else:
         asst = PandeyClient("asst", bot_token=pdB.get_key("BOT_TOKEN"), pdB=pdB)
 
     if BOT_MODE:
-        ultroid_bot = asst
+        Pragyan_bot = asst
         if pdB.get_key("OWNER_ID"):
             try:
-                ultroid_bot.me = ultroid_bot.run_in_loop(
-                    ultroid_bot.get_entity(pdB.get_key("OWNER_ID"))
+                Pragyan_bot.me = Pragyan_bot.run_in_loop(
+                    Pragyan_bot.get_entity(pdB.get_key("OWNER_ID"))
                 )
             except Exception as er:
                 LOGS.exception(er)
     elif not asst.me.bot_inline_placeholder and asst._bot:
-        ultroid_bot.run_in_loop(enable_inline(ultroid_bot, asst.me.username))
+        Pragyan_bot.run_in_loop(enable_inline(Pragyan_bot, asst.me.username))
 
-    vcClient = vc_connection(pdB, ultroid_bot)
+    vcClient = vc_connection(pdB, Pragyan_bot)
 
     _version_changes(pdB)
 
@@ -128,4 +128,4 @@ else:
 
     LOGS = getLogger("pyPandey")
 
-    ultroid_bot = asst = pdB = vcClient = None
+    Pragyan_bot = asst = pdB = vcClient = None

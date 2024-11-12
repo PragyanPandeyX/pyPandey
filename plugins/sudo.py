@@ -21,7 +21,7 @@ from telethon.tl.types import User
 
 from pyPandey._misc import sudoers
 
-from . import get_string, inline_mention, pdB, ultroid_bot, ultroid_cmd
+from . import get_string, inline_mention, pdB, Pragyan_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="addsudo( (.*)|$)", fullsudo=True)
@@ -51,7 +51,7 @@ async def _(ult):
     if name and isinstance(name, User) and (name.bot or name.verified):
         return await ult.eor(get_string("sudo_4"))
     name = inline_mention(name) if name else f"`{id}`"
-    if id == ultroid_bot.uid:
+    if id == Pragyan_bot.uid:
         mmm = get_string("sudo_2")
     elif id in sudoers():
         mmm = f"{name} `is already a SUDO User ...`"

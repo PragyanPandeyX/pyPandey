@@ -30,7 +30,7 @@ try:
     from ProfanityDetector import detector
 except ImportError:
     detector = None
-from . import LOG_CHANNEL, LOGS, asst, get_string, types, pdB, ultroid_bot
+from . import LOG_CHANNEL, LOGS, asst, get_string, types, pdB, Pragyan_bot
 from ._inline import something
 
 if not pdB.get_key("ORACLE_USERS"):
@@ -38,7 +38,7 @@ if not pdB.get_key("ORACLE_USERS"):
 if not pdB.get_key("CHATBOT_USERS"):
     pdB.set_key("CHATBOT_USERS", {})
 
-@ultroid_bot.on(events.ChatAction())
+@Pragyan_bot.on(events.ChatAction())
 async def Function(event):
     try:
         await DummyHandler(event)
@@ -72,12 +72,12 @@ async def DummyHandler(ult):
         if not user.bot:
             joinchat = get_forcesetting(ult.chat_id)
             try:
-                await ultroid_bot(GetParticipantRequest(int(joinchat), user.id))
+                await Pragyan_bot(GetParticipantRequest(int(joinchat), user.id))
             except UserNotParticipantError:
-                await ultroid_bot.edit_permissions(
+                await Pragyan_bot.edit_permissions(
                     ult.chat_id, user.id, send_messages=False
                 )
-                res = await ultroid_bot.inline_query(
+                res = await Pragyan_bot.inline_query(
                     asst.me.username, f"fsub {user.id}_{joinchat}"
                 )
                 await res[0].click(ult.chat_id, reply_to=ult.action_message.id)
@@ -202,7 +202,7 @@ async def DummyHandler(ult):
             await ult.reply(file=med)
 
 
-@ultroid_bot.on(events.NewMessage(incoming=True))
+@Pragyan_bot.on(events.NewMessage(incoming=True))
 async def chatBot_replies(e):
     if e.sender_id in pdB.get_key("CHATBOT_USERS"):
         xxrep = await check_reply_to(e)
@@ -259,7 +259,7 @@ async def chatBot_replies(e):
                 await e.delete()
 
 
-@ultroid_bot.on(events.NewMessage(incoming=True))
+@Pragyan_bot.on(events.NewMessage(incoming=True))
 async def oracleBot_replies(e):
     if e.sender_id in pdB.get_key("ORACLE_USERS"):
         xxxrep = await check_reply_to(e)
@@ -318,7 +318,7 @@ async def oracleBot_replies(e):
                 await e.delete()
 
 
-@ultroid_bot.on(events.Raw(types.UpdateUserName))
+@Pragyan_bot.on(events.Raw(types.UpdateUserName))
 async def uname_change(e):
     await uname_stuff(e.user_id, e.usernames[0] if e.usernames else None, e.first_name)
 

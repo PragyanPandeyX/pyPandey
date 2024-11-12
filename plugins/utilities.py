@@ -907,9 +907,9 @@ async def get_restricted_msg(event):
 async def get_last_private_message(event):
     xx = await event.eor(get_pstring("com_1", "load"))
     res = f"**Lᴀsᴛ PM Rᴇᴄɪᴇᴠᴇᴅ:**\n"
-    async for dialog in ultroid_bot.iter_dialogs():
+    async for dialog in Pragyan_bot.iter_dialogs():
         if dialog.is_user:
-            async for message in ultroid_bot.iter_messages(dialog.id, limit=10):
+            async for message in Pragyan_bot.iter_messages(dialog.id, limit=10):
                 if not message.out:
                     res += f"**Sᴇɴᴅᴇʀ ID:** __{message.sender_id}__\n"
                     res += f"**Mᴇssᴀɢᴇ:** __{message.text}__\n"

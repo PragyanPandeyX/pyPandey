@@ -49,11 +49,11 @@ db_url = 0
 
 
 async def autoupdate_local_database():
-    from .. import Var, asst, pdB, ultroid_bot
+    from .. import Var, asst, pdB, Pragyan_bot
 
     global db_url
     db_url = (
-        pdB.get_key("TGDB_URL") or Var.TGDB_URL or ultroid_bot._cache.get("TGDB_URL")
+        pdB.get_key("TGDB_URL") or Var.TGDB_URL or Pragyan_bot._cache.get("TGDB_URL")
     )
     if db_url:
         _split = db_url.split("/")
@@ -152,25 +152,25 @@ async def startup_stuff():
 
 
 async def autobot():
-    from .. import pdB, ultroid_bot
+    from .. import pdB, Pragyan_bot
 
     if pdB.get_key("BOT_TOKEN"):
         return
-    await ultroid_bot.start()
+    await Pragyan_bot.start()
     LOGS.info("MAKING A TELEGRAM BOT FOR YOU AT @BotFather, Kindly Wait")
-    who = ultroid_bot.me
+    who = Pragyan_bot.me
     name = who.first_name + "'s Bot"
     if who.username:
         username = who.username + "_bot"
     else:
         username = "ultroid_" + (str(who.id))[5:] + "_bot"
     bf = "@BotFather"
-    await ultroid_bot(UnblockRequest(bf))
-    await ultroid_bot.send_message(bf, "/cancel")
+    await Pragyan_bot(UnblockRequest(bf))
+    await Pragyan_bot.send_message(bf, "/cancel")
     await asyncio.sleep(1)
-    await ultroid_bot.send_message(bf, "/newbot")
+    await Pragyan_bot.send_message(bf, "/newbot")
     await asyncio.sleep(1)
-    isdone = (await ultroid_bot.get_messages(bf, limit=1))[0].text
+    isdone = (await Pragyan_bot.get_messages(bf, limit=1))[0].text
     if isdone.startswith("That I cannot do.") or "20 bots" in isdone:
         LOGS.critical(
             "Please make a Bot from @BotFather and add it's token in BOT_TOKEN, as an env var and restart me."
@@ -178,13 +178,13 @@ async def autobot():
         import sys
 
         sys.exit(1)
-    await ultroid_bot.send_message(bf, name)
+    await Pragyan_bot.send_message(bf, name)
     await asyncio.sleep(1)
-    isdone = (await ultroid_bot.get_messages(bf, limit=1))[0].text
+    isdone = (await Pragyan_bot.get_messages(bf, limit=1))[0].text
     if not isdone.startswith("Good."):
-        await ultroid_bot.send_message(bf, "My Assistant Bot")
+        await Pragyan_bot.send_message(bf, "My Assistant Bot")
         await asyncio.sleep(1)
-        isdone = (await ultroid_bot.get_messages(bf, limit=1))[0].text
+        isdone = (await Pragyan_bot.get_messages(bf, limit=1))[0].text
         if not isdone.startswith("Good."):
             LOGS.critical(
                 "Please make a Bot from @BotFather and add it's token in BOT_TOKEN, as an env var and restart me."
@@ -192,20 +192,20 @@ async def autobot():
             import sys
 
             sys.exit(1)
-    await ultroid_bot.send_message(bf, username)
+    await Pragyan_bot.send_message(bf, username)
     await asyncio.sleep(1)
-    isdone = (await ultroid_bot.get_messages(bf, limit=1))[0].text
-    await ultroid_bot.send_read_acknowledge("botfather")
+    isdone = (await Pragyan_bot.get_messages(bf, limit=1))[0].text
+    await Pragyan_bot.send_read_acknowledge("botfather")
     if isdone.startswith("Sorry,"):
         ran = randint(1, 100)
         username = "ultroid_" + (str(who.id))[6:] + str(ran) + "_bot"
-        await ultroid_bot.send_message(bf, username)
+        await Pragyan_bot.send_message(bf, username)
         await asyncio.sleep(1)
-        isdone = (await ultroid_bot.get_messages(bf, limit=1))[0].text
+        isdone = (await Pragyan_bot.get_messages(bf, limit=1))[0].text
     if isdone.startswith("Done!"):
         token = isdone.split("`")[1]
         pdB.set_key("BOT_TOKEN", token)
-        await enable_inline(ultroid_bot, username)
+        await enable_inline(Pragyan_bot, username)
         LOGS.info(
             f"Done. Successfully created @{username} to be used as your assistant bot!"
         )
@@ -220,13 +220,13 @@ async def autobot():
 
 
 async def autopilot():
-    from .. import asst, pdB, ultroid_bot
+    from .. import asst, pdB, Pragyan_bot
 
     channel = pdB.get_key("LOG_CHANNEL")
     new_channel = None
     if channel:
         try:
-            chat = await ultroid_bot.get_entity(channel)
+            chat = await Pragyan_bot.get_entity(channel)
         except BaseException as err:
             LOGS.exception(err)
             pdB.del_key("LOG_CHANNEL")
@@ -234,18 +234,18 @@ async def autopilot():
     if not channel:
 
         async def _save(exc):
-            pdB._cache["LOG_CHANNEL"] = ultroid_bot.me.id
+            pdB._cache["LOG_CHANNEL"] = Pragyan_bot.me.id
             await asst.send_message(
-                ultroid_bot.me.id, f"Failed to Create Log Channel due to {exc}.."
+                Pragyan_bot.me.id, f"Failed to Create Log Channel due to {exc}.."
             )
 
-        if ultroid_bot._bot:
+        if Pragyan_bot._bot:
             msg_ = "'LOG_CHANNEL' not found! Add it in order to use 'BOTMODE'"
             LOGS.error(msg_)
             return await _save(msg_)
         LOGS.info("Creating a Log Channel for You!")
         try:
-            r = await ultroid_bot(
+            r = await Pragyan_bot(
                 CreateChannelRequest(
                     title="My Pandey Logs",
                     about="My Pandey Log Group\n\n Join @TeamPandey",
@@ -270,10 +270,10 @@ async def autopilot():
         pdB.set_key("LOG_CHANNEL", channel)
     assistant = True
     try:
-        await ultroid_bot.get_permissions(int(channel), asst.me.username)
+        await Pragyan_bot.get_permissions(int(channel), asst.me.username)
     except UserNotParticipantError:
         try:
-            await ultroid_bot(InviteToChannelRequest(int(channel), [asst.me.username]))
+            await Pragyan_bot(InviteToChannelRequest(int(channel), [asst.me.username]))
         except BaseException as er:
             LOGS.info("Error while Adding Assistant to Log Channel")
             LOGS.exception(er)
@@ -300,7 +300,7 @@ async def autopilot():
                 manage_call=True,
             )
             try:
-                await ultroid_bot(
+                await Pragyan_bot(
                     EditAdminRequest(
                         int(channel), asst.me.username, rights, "Assistant"
                     )
@@ -316,9 +316,9 @@ async def autopilot():
         photo, _ = await download_file(
             "https://graph.org/file/27c6812becf6f376cbb10.jpg", "channelphoto.jpg"
         )
-        ll = await ultroid_bot.upload_file(photo)
+        ll = await Pragyan_bot.upload_file(photo)
         try:
-            await ultroid_bot(
+            await Pragyan_bot(
                 EditPhotoRequest(int(channel), InputChatUploadedPhoto(ll))
             )
         except BaseException as er:
@@ -330,7 +330,7 @@ async def autopilot():
 
 
 async def customize():
-    from .. import asst, pdB, ultroid_bot
+    from .. import asst, pdB, Pragyan_bot
 
     rem = None
     try:
@@ -339,10 +339,10 @@ async def customize():
             return
         LOGS.info("Customising Ur Assistant Bot in @BOTFATHER")
         UL = f"@{asst.me.username}"
-        if not ultroid_bot.me.username:
-            sir = ultroid_bot.me.first_name
+        if not Pragyan_bot.me.username:
+            sir = Pragyan_bot.me.first_name
         else:
-            sir = f"@{ultroid_bot.me.username}"
+            sir = f"@{Pragyan_bot.me.username}"
         file = random.choice(
             [
                 "https://graph.org/file/92cd6dbd34b0d1d73a0da.jpg",
@@ -357,31 +357,31 @@ async def customize():
             chat_id, "**Auto Customisation** Started on @Botfather"
         )
         await asyncio.sleep(1)
-        await ultroid_bot.send_message("botfather", "/cancel")
+        await Pragyan_bot.send_message("botfather", "/cancel")
         await asyncio.sleep(1)
-        await ultroid_bot.send_message("botfather", "/setuserpic")
+        await Pragyan_bot.send_message("botfather", "/setuserpic")
         await asyncio.sleep(1)
-        isdone = (await ultroid_bot.get_messages("botfather", limit=1))[0].text
+        isdone = (await Pragyan_bot.get_messages("botfather", limit=1))[0].text
         if isdone.startswith("Invalid bot"):
             LOGS.info("Error while trying to customise assistant, skipping...")
             return
-        await ultroid_bot.send_message("botfather", UL)
+        await Pragyan_bot.send_message("botfather", UL)
         await asyncio.sleep(1)
-        await ultroid_bot.send_file("botfather", file)
+        await Pragyan_bot.send_file("botfather", file)
         await asyncio.sleep(2)
-        await ultroid_bot.send_message("botfather", "/setabouttext")
+        await Pragyan_bot.send_message("botfather", "/setabouttext")
         await asyncio.sleep(1)
-        await ultroid_bot.send_message("botfather", UL)
+        await Pragyan_bot.send_message("botfather", UL)
         await asyncio.sleep(1)
-        await ultroid_bot.send_message(
+        await Pragyan_bot.send_message(
             "botfather", f"✨ Hello ✨!! I'm Assistant Bot of {sir}"
         )
         await asyncio.sleep(2)
-        await ultroid_bot.send_message("botfather", "/setdescription")
+        await Pragyan_bot.send_message("botfather", "/setdescription")
         await asyncio.sleep(1)
-        await ultroid_bot.send_message("botfather", UL)
+        await Pragyan_bot.send_message("botfather", UL)
         await asyncio.sleep(1)
-        await ultroid_bot.send_message(
+        await Pragyan_bot.send_message(
             "botfather",
             f"✨ Powerful Pandey Assistant Bot ✨\n✨ Master ~ {sir} ✨\n\n✨ Powered By ~ @TeamPandey ✨",
         )
@@ -395,10 +395,10 @@ async def customize():
 
 
 async def plug(plugin_channels):
-    from .. import ultroid_bot
+    from .. import Pragyan_bot
     from .utils import load_addons
 
-    if ultroid_bot._bot:
+    if Pragyan_bot._bot:
         LOGS.info("Plugin Channels can't be used in 'BOTMODE'")
         return
     if os.path.exists("addons") and not os.path.exists("addons/.git"):
@@ -407,12 +407,12 @@ async def plug(plugin_channels):
         os.mkdir("addons")
     if not os.path.exists("addons/__init__.py"):
         with open("addons/__init__.py", "w") as f:
-            f.write("from plugins import *\n\nbot = ultroid_bot")
+            f.write("from plugins import *\n\nbot = Pragyan_bot")
     LOGS.info("• Loading Plugins from Plugin Channel(s) •")
     for chat in plugin_channels:
         LOGS.info(f"{'•'*4} {chat}")
         try:
-            async for x in ultroid_bot.iter_messages(
+            async for x in Pragyan_bot.iter_messages(
                 chat, search=".py", filter=InputMessagesFilterDocument, wait_time=10
             ):
                 plugin = "addons/" + x.file.name.replace("_", "-").replace("|", "-")
@@ -468,7 +468,7 @@ async def fetch_ann():
 
 
 async def ready():
-    from .. import asst, pdB, ultroid_bot
+    from .. import asst, pdB, Pragyan_bot
 
     chat_id = pdB.get_key("LOG_CHANNEL")
     spam_sent = None
@@ -479,12 +479,12 @@ async def ready():
         BTTS = Button.inline("• Click to Start •", "initft_2")
         pdB.set_key("INIT_DEPLOY", "Done")
     else:
-        MSG = f"**Pandey has been deployed!**\n➖➖➖➖➖➖➖➖➖➖\n**UserMode**: {inline_mention(ultroid_bot.me)}\n**Assistant**: @{asst.me.username}\n➖➖➖➖➖➖➖➖➖➖\n**Support**: @TeamPandey\n➖➖➖➖➖➖➖➖➖➖"
+        MSG = f"**Pandey has been deployed!**\n➖➖➖➖➖➖➖➖➖➖\n**UserMode**: {inline_mention(Pragyan_bot.me)}\n**Assistant**: @{asst.me.username}\n➖➖➖➖➖➖➖➖➖➖\n**Support**: @TeamPandey\n➖➖➖➖➖➖➖➖➖➖"
         BTTS, PHOTO = None, None
         prev_spam = pdB.get_key("LAST_UPDATE_LOG_SPAM")
         if prev_spam:
             try:
-                await ultroid_bot.delete_messages(chat_id, int(prev_spam))
+                await Pragyan_bot.delete_messages(chat_id, int(prev_spam))
             except Exception as E:
                 LOGS.info("Error while Deleting Previous Update Message :" + str(E))
         if await updater():
@@ -494,14 +494,14 @@ async def ready():
         spam_sent = await asst.send_message(chat_id, MSG, file=PHOTO, buttons=BTTS)
     except ValueError as e:
         try:
-            await (await ultroid_bot.send_message(chat_id, str(e))).delete()
+            await (await Pragyan_bot.send_message(chat_id, str(e))).delete()
             spam_sent = await asst.send_message(chat_id, MSG, file=PHOTO, buttons=BTTS)
         except Exception as g:
             LOGS.info(g)
     except Exception as el:
         LOGS.info(el)
         try:
-            spam_sent = await ultroid_bot.send_message(chat_id, MSG)
+            spam_sent = await Pragyan_bot.send_message(chat_id, MSG)
         except Exception as ef:
             LOGS.exception(ef)
     if spam_sent and not spam_sent.media:
@@ -513,11 +513,11 @@ async def WasItRestart(udb):
     key = udb.get_key("_RESTART")
     if not key:
         return
-    from .. import asst, ultroid_bot
+    from .. import asst, Pragyan_bot
 
     try:
         data = key.split("_")
-        who = asst if data[0] == "bot" else ultroid_bot
+        who = asst if data[0] == "bot" else Pragyan_bot
         await who.edit_message(
             int(data[1]), int(data[2]), "__Restarted Successfully.__"
         )
@@ -549,11 +549,11 @@ def _version_changes(udb):
             udb.set_key(_, new_)
 
 
-async def enable_inline(ultroid_bot, username):
+async def enable_inline(Pragyan_bot, username):
     bf = "BotFather"
-    await ultroid_bot.send_message(bf, "/setinline")
+    await Pragyan_bot.send_message(bf, "/setinline")
     await asyncio.sleep(1)
-    await ultroid_bot.send_message(bf, f"@{username}")
+    await Pragyan_bot.send_message(bf, f"@{username}")
     await asyncio.sleep(1)
-    await ultroid_bot.send_message(bf, "Search")
-    await ultroid_bot.send_read_acknowledge(bf)
+    await Pragyan_bot.send_message(bf, "Search")
+    await Pragyan_bot.send_read_acknowledge(bf)

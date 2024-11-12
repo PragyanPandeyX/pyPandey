@@ -148,9 +148,9 @@ async def pack_kangish(_):
     pattern="kang",
 )
 async def hehe(args):
-    ultroid_bot = args.client
+    Pragyan_bot = args.client
     xx = await args.eor(get_string("com_1"))
-    user = ultroid_bot.me
+    user = Pragyan_bot.me
     username = user.username
     username = f"@{username}" if username else user.first_name
     message = await args.get_reply_message()
@@ -161,10 +161,10 @@ async def hehe(args):
         return await xx.eor(get_string("sts_6"))
     if message.photo:
         photo = io.BytesIO()
-        photo = await ultroid_bot.download_media(message.photo, photo)
+        photo = await Pragyan_bot.download_media(message.photo, photo)
     elif message.file and "image" in message.file.mime_type.split("/"):
         photo = io.BytesIO()
-        await ultroid_bot.download_file(message.media.document, photo)
+        await Pragyan_bot.download_file(message.media.document, photo)
         if (
             DocumentAttributeFilename(file_name="sticker.webp")
             in message.media.document.attributes
@@ -182,7 +182,7 @@ async def hehe(args):
             cv2.imwrite("ult.webp", lol)
             photo = "ult.webp"
     elif message.file and "tgsticker" in message.file.mime_type:
-        await ultroid_bot.download_file(
+        await Pragyan_bot.download_file(
             message.media.document,
             "AnimatedSticker.tgs",
         )
@@ -207,7 +207,7 @@ async def hehe(args):
         if not emoji:
             emoji = "🏵"
         if len(splat) == 3:
-            pack = splat[2]  # User sent ultroid_both
+            pack = splat[2]  # User sent Pragyan_both
             emoji = splat[1]
         elif len(splat) == 2:
             if splat[1].isnumeric():
@@ -240,12 +240,12 @@ async def hehe(args):
             "  A <strong>Telegram</strong> user has created the <strong>Sticker&nbsp;Set</strong>."
             not in htmlstr
         ):
-            async with ultroid_bot.conversation("@Stickers") as conv:
+            async with Pragyan_bot.conversation("@Stickers") as conv:
                 try:
                     await conv.send_message("/addsticker")
                 except YouBlockedUserError:
                     LOGS.info("Unblocking @Stickers for kang...")
-                    await ultroid_bot(functions.contacts.UnblockRequest("stickers"))
+                    await Pragyan_bot(functions.contacts.UnblockRequest("stickers"))
                     await conv.send_message("/addsticker")
                 await conv.get_response()
                 await conv.send_message(packname)
@@ -322,10 +322,10 @@ async def hehe(args):
                 await conv.get_response()
                 await conv.send_message("/done")
                 await conv.get_response()
-                await ultroid_bot.send_read_acknowledge(conv.chat_id)
+                await Pragyan_bot.send_read_acknowledge(conv.chat_id)
         else:
             await xx.edit("`Brewing a new Pack...`")
-            async with ultroid_bot.conversation("Stickers") as conv:
+            async with Pragyan_bot.conversation("Stickers") as conv:
                 await conv.send_message(cmd)
                 await conv.get_response()
                 await conv.send_message(packnick)
@@ -357,7 +357,7 @@ async def hehe(args):
                 await conv.get_response()
                 await conv.send_message(packname)
                 await conv.get_response()
-                await ultroid_bot.send_read_acknowledge(conv.chat_id)
+                await Pragyan_bot.send_read_acknowledge(conv.chat_id)
         await xx.edit(
             get_string("sts_12").format(emoji, packname),
             parse_mode="md",

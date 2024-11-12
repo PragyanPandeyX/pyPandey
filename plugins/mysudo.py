@@ -1,6 +1,6 @@
 from . import eor, SUDO_HNDLR, ultroid_cmd
 from os import mkdir
-from . import HNDLR, get_string, inline_mention, pdB, ultroid_bot
+from . import HNDLR, get_string, inline_mention, pdB, Pragyan_bot
 from pyPandey._misc import sudoers  # Correct import for sudoers
 
 @ultroid_cmd(pattern="sur")

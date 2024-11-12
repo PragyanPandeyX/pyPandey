@@ -42,7 +42,7 @@ from telethon.tl.types import ChatBannedRights
 
 from pyPandey.dB.base import KeyManager
 
-from . import get_string, pdB, ultroid_bot, ultroid_cmd
+from . import get_string, pdB, Pragyan_bot, ultroid_cmd
 
 keym = KeyManager("NIGHT_CHATS", cast=list)
 
@@ -66,7 +66,7 @@ async def set_time(e):
 async def add_grp(e):
     if pat := e.pattern_match.group(1).strip():
         try:
-            keym.add((await ultroid_bot.get_entity(pat)).id)
+            keym.add((await Pragyan_bot.get_entity(pat)).id)
             return await e.eor(f"Done, Added {pat} To Night Mode.")
         except BaseException:
             return await e.eor(get_string("nightm_5"), time=5)
@@ -78,7 +78,7 @@ async def add_grp(e):
 async def r_em_grp(e):
     if pat := e.pattern_match.group(1).strip():
         try:
-            keym.remove((await ultroid_bot.get_entity(pat)).id)
+            keym.remove((await Pragyan_bot.get_entity(pat)).id)
             return await e.eor(f"Done, Removed {pat} To Night Mode.")
         except BaseException:
             return await e.eor(get_string("nightm_5"), time=5)
@@ -92,7 +92,7 @@ async def rem_grp(e):
     name = "NightMode Groups Are-:\n\n"
     for x in chats:
         try:
-            ok = await ultroid_bot.get_entity(x)
+            ok = await Pragyan_bot.get_entity(x)
             name += f"@{ok.username}" if ok.username else ok.title
         except BaseException:
             name += str(x)
@@ -102,7 +102,7 @@ async def rem_grp(e):
 async def open_grp():
     for chat in keym.get():
         try:
-            await ultroid_bot(
+            await Pragyan_bot(
                 EditChatDefaultBannedRightsRequest(
                     chat,
                     banned_rights=ChatBannedRights(
@@ -117,7 +117,7 @@ async def open_grp():
                     ),
                 )
             )
-            await ultroid_bot.send_message(chat, "**NightMode Off**\n\nGroup Opened 🥳.")
+            await Pragyan_bot.send_message(chat, "**NightMode Off**\n\nGroup Opened 🥳.")
         except Exception as er:
             LOGS.info(er)
 
@@ -128,7 +128,7 @@ async def close_grp():
         _, __, h2, m2 = eval(pdB.get_key("NIGHT_TIME"))
     for chat in keym.get():
         try:
-            await ultroid_bot(
+            await Pragyan_bot(
                 EditChatDefaultBannedRightsRequest(
                     chat,
                     banned_rights=ChatBannedRights(
@@ -137,7 +137,7 @@ async def close_grp():
                     ),
                 )
             )
-            await ultroid_bot.send_message(
+            await Pragyan_bot.send_message(
                 chat, f"**NightMode : Group Closed**\n\nGroup Will Open At `{h2}:{m2}`"
             )
         except Exception as er:

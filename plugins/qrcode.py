@@ -29,7 +29,7 @@ import qrcode
 from PIL import Image
 from telethon.tl.types import MessageMediaDocument as doc
 
-from . import check_filename, get_string, ultroid_bot, ultroid_cmd
+from . import check_filename, get_string, Pragyan_bot, ultroid_cmd
 
 
 @ultroid_cmd(pattern="qrcode( (.*)|$)")
@@ -43,8 +43,8 @@ async def cd(e):
     default, cimg = ULTConfig.thumb, None
     if reply and (reply.sticker or reply.photo):
         cimg = await reply.download_media()
-    elif ultroid_bot.me.photo and not ultroid_bot.me.photo.has_video:
-        cimg = (await e.client.get_profile_photos(ultroid_bot.uid, limit=1))[0]
+    elif Pragyan_bot.me.photo and not Pragyan_bot.me.photo.has_video:
+        cimg = (await e.client.get_profile_photos(Pragyan_bot.uid, limit=1))[0]
 
     kk = await e.eor(get_string("com_1"))
     img = cimg or default

@@ -366,9 +366,9 @@ async def sangmata(event):
 
     try:
         if user.isdigit():
-            userinfo = await ultroid_bot.get_entity(int(user))
+            userinfo = await Pragyan_bot.get_entity(int(user))
         else:
-            userinfo = await ultroid_bot.get_entity(user)
+            userinfo = await Pragyan_bot.get_entity(user)
     except ValueError:
         userinfo = None
     if not isinstance(userinfo, types.User):
@@ -421,15 +421,15 @@ async def webss(event):
         y = "shot.jpg"
         with open(y, "wb") as f:
             f.write(x.content)
-        if (await ultroid_bot.get_me()).premium:
-            await ultroid_bot.send_file(
+        if (await Pragyan_bot.get_me()).premium:
+            await Pragyan_bot.send_file(
                 event.chat_id,
                 y,
                 caption=f"[📷](emoji/5258205968025525531)**WebShot Generated**\n[🔗](emoji/5983262173474853675)**URL** : {xurl}",
                 force_document=False,
             )
         else:
-            await ultroid_bot.send_file(
+            await Pragyan_bot.send_file(
                 event.chat_id,
                 y,
                 caption=f"📷**WebShot Generated**\n🔗**URL** : {xurl}",

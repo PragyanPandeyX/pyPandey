@@ -17,7 +17,7 @@ from telethon.utils import get_display_name
 
 from pyPandey.dB.base import KeyManager
 
-from . import HNDLR, LOGS, eor, get_string, pdB, ultroid_bot, ultroid_cmd
+from . import HNDLR, LOGS, eor, get_string, pdB, Pragyan_bot, ultroid_cmd
 
 KeyM = KeyManager("BROADCAST", cast=list)
 
@@ -138,7 +138,7 @@ async def list_all(event):
 async def forw(event):
     if not event.is_reply:
         return await event.eor(get_string("ex_1"))
-    ultroid_bot = event.client
+    Pragyan_bot = event.client
     channels = KeyM.get()
     x = await event.eor("Sending...")
     if not channels:
@@ -149,14 +149,14 @@ async def forw(event):
     error_count = 0
     for channel in channels:
         try:
-            await ultroid_bot.forward_messages(channel, previous_message)
+            await Pragyan_bot.forward_messages(channel, previous_message)
             sent_count += 1
             await x.edit(
                 f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
             )
         except Exception:
             try:
-                await ultroid_bot.send_message(
+                await Pragyan_bot.send_message(
                     pdB.get_key("LOG_CHANNEL"),
                     f"Error in sending at {channel}.",
                 )
@@ -168,7 +168,7 @@ async def forw(event):
             )
     await x.edit(f"{sent_count} messages sent with {error_count} errors.")
     if error_count > 0:
-        await ultroid_bot.send_message(
+        await Pragyan_bot.send_message(
             pdB.get_key("LOG_CHANNEL"), f"{error_count} Errors"
         )
 
@@ -194,13 +194,13 @@ async def sending(event):
             sent_count = 0
             for channel in channels:
                 try:
-                    await ultroid_bot.send_message(channel, previous_message)
+                    await Pragyan_bot.send_message(channel, previous_message)
                     sent_count += 1
                     await x.edit(
                         f"Sent : {sent_count}\nError : {error_count}\nTotal : {len(channels)}",
                     )
                 except Exception as error:
-                    await ultroid_bot.send_message(
+                    await Pragyan_bot.send_message(
                         pdB.get_key("LOG_CHANNEL"),
                         f"Error in sending at {channel}.\n\n{error}",
                     )
@@ -210,7 +210,7 @@ async def sending(event):
                     )
             await x.edit(f"{sent_count} messages sent with {error_count} errors.")
             if error_count > 0:
-                await ultroid_bot.send_message(
+                await Pragyan_bot.send_message(
                     pdB.get_key("LOG_CHANNEL"),
                     f"{error_count} Errors",
                 )

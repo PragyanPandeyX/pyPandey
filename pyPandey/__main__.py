@@ -34,22 +34,22 @@ def main():
     if (
         pdB.get_key("UPDATE_ON_RESTART")
         and os.path.exists(".git")
-        and ultroid_bot.run_in_loop(updater())
+        and Pragyan_bot.run_in_loop(updater())
     ):
-        ultroid_bot.run_in_loop(bash("bash installer.sh"))
+        Pragyan_bot.run_in_loop(bash("bash installer.sh"))
 
         os.execl(sys.executable, sys.executable, "-m", "pyPandey")
 
-    ultroid_bot.run_in_loop(startup_stuff())
+    Pragyan_bot.run_in_loop(startup_stuff())
 
-    ultroid_bot.me.phone = None
+    Pragyan_bot.me.phone = None
 
-    if not ultroid_bot.me.bot:
-        pdB.set_key("OWNER_ID", ultroid_bot.uid)
+    if not Pragyan_bot.me.bot:
+        pdB.set_key("OWNER_ID", Pragyan_bot.uid)
 
     LOGS.info("Initialising...")
 
-    ultroid_bot.run_in_loop(autopilot())
+    Pragyan_bot.run_in_loop(autopilot())
 
     pmbot = pdB.get_key("PMBOT")
     manager = pdB.get_key("MANAGER")
@@ -76,15 +76,15 @@ def main():
     plugin_channels = pdB.get_key("PLUGIN_CHANNEL")
 
     # Customize Pandey Assistant...
-    ultroid_bot.run_in_loop(customize())
+    Pragyan_bot.run_in_loop(customize())
 
     # Load Addons from Plugin Channels.
     if plugin_channels:
-        ultroid_bot.run_in_loop(plug(plugin_channels))
+        Pragyan_bot.run_in_loop(plug(plugin_channels))
 
     # Send/Ignore Deploy Message..
     if not pdB.get_key("LOG_OFF"):
-        ultroid_bot.run_in_loop(ready())
+        Pragyan_bot.run_in_loop(ready())
 
     # TODO: Announcement API IS DOWN
     # if AsyncIOScheduler:
@@ -93,7 +93,7 @@ def main():
     #     scheduler.start()
 
     # Edit Restarting Message (if It's restarting)
-    ultroid_bot.run_in_loop(WasItRestart(pdB))
+    Pragyan_bot.run_in_loop(WasItRestart(pdB))
 
     try:
         cleanup_cache()

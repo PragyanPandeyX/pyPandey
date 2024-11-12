@@ -67,7 +67,7 @@ def compile_pattern(data, hndlr):
 
 
 def ultroid_cmd(
-    pattern=None, manager=False, ultroid_bot=ultroid_bot, asst=asst, **kwargs
+    pattern=None, manager=False, Pragyan_bot=Pragyan_bot, asst=asst, **kwargs
 ):
     owner_only = kwargs.get("owner_only", False)
     groups_only = kwargs.get("groups_only", False)
@@ -115,9 +115,9 @@ def ultroid_cmd(
                     pdB.get_key("LOG_CHANNEL"),
                     f"`FloodWaitError:\n{str(fwerr)}\n\nSleeping for {tf((fwerr.seconds + 10)*1000)}`",
                 )
-                await ultroid_bot.disconnect()
+                await Pragyan_bot.disconnect()
                 await asyncio.sleep(fwerr.seconds + 10)
-                await ultroid_bot.connect()
+                await Pragyan_bot.connect()
                 await asst.send_message(
                     pdB.get_key("LOG_CHANNEL"),
                     "`Bot is working again`",
@@ -218,7 +218,7 @@ def ultroid_cmd(
         if _add_new:
             if pattern:
                 cmd = compile_pattern(pattern, SUDO_HNDLR)
-            ultroid_bot.add_event_handler(
+            Pragyan_bot.add_event_handler(
                 wrapp,
                 NewMessage(
                     pattern=cmd,
@@ -231,7 +231,7 @@ def ultroid_cmd(
             )
         if pattern:
             cmd = compile_pattern(pattern, HNDLR)
-        ultroid_bot.add_event_handler(
+        Pragyan_bot.add_event_handler(
             wrapp,
             NewMessage(
                 outgoing=True if _add_new else None,
@@ -247,7 +247,7 @@ def ultroid_cmd(
             def func_(x):
                 return not x.via_bot_id and not (x.is_channel and x.chat.broadcast)
 
-            ultroid_bot.add_event_handler(
+            Pragyan_bot.add_event_handler(
                 wrapp,
                 MessageEdited(
                     pattern=cmd,

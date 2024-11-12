@@ -679,7 +679,7 @@ def telegraph_client():
     if TELEGRAPH:
         return TELEGRAPH[0]
 
-    from .. import pdB, ultroid_bot
+    from .. import pdB, Pragyan_bot
 
     token = pdB.get_key("_TELEGRAPH_TOKEN")
     TELEGRAPH_DOMAIN = pdB.get_key("GRAPH_DOMAIN")
@@ -687,11 +687,11 @@ def telegraph_client():
     if token:
         TELEGRAPH.append(TelegraphClient)
         return TelegraphClient
-    gd_name = ultroid_bot.full_name
+    gd_name = Pragyan_bot.full_name
     short_name = gd_name[:30]
     profile_url = (
-        f"https://t.me/{ultroid_bot.me.username}"
-        if ultroid_bot.me.username
+        f"https://t.me/{Pragyan_bot.me.username}"
+        if Pragyan_bot.me.username
         else "https://t.me/TeamPandey"
     )
     try:

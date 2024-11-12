@@ -12,7 +12,7 @@ __doc__ = get_help("help_chatbot")
 
 from pyPandey.fns.tools import get_chatbot_reply, get_oracle_reply
 
-from . import LOGS, eod, get_string, inline_mention, pdB, ultroid_bot, ultroid_cmd
+from . import LOGS, eod, get_string, inline_mention, pdB, Pragyan_bot, ultroid_cmd
 
 try:
     mongouri = pdB.get_key("MONGO_URI")
@@ -34,7 +34,7 @@ async def im_oracle(event):
         except IndexError:
             return await eod(event, get_string("tban_1"), time=10)
     reply_ = await get_oracle_reply(
-        query=message, user_id=ultroid_bot.me.id, mongo_url=mongouri
+        query=message, user_id=Pragyan_bot.me.id, mongo_url=mongouri
     )
     await event.eor(reply_)
 

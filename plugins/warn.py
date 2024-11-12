@@ -36,7 +36,7 @@ from . import eor, get_string, inline_mention, pdB, ultroid_cmd
     admins_only=True,
 )
 async def warn(e):
-    ultroid_bot = e.client
+    Pragyan_bot = e.client
     reply = await e.get_reply_message()
     if len(e.text) > 5 and " " not in e.text[5]:
         return
@@ -47,7 +47,7 @@ async def warn(e):
         try:
             user = e.text.split()[1]
             if user.startswith("@"):
-                ok = await ultroid_bot.get_entity(user)
+                ok = await Pragyan_bot.get_entity(user)
                 user = ok.id
             else:
                 user = int(user)
@@ -69,24 +69,24 @@ async def warn(e):
     if count + 1 >= number:
         if "ban" in action:
             try:
-                await ultroid_bot.edit_permissions(e.chat_id, user, view_messages=False)
+                await Pragyan_bot.edit_permissions(e.chat_id, user, view_messages=False)
             except BaseException:
                 return await e.eor("`Something Went Wrong.`", time=5)
         elif "kick" in action:
             try:
-                await ultroid_bot.kick_participant(e.chat_id, user)
+                await Pragyan_bot.kick_participant(e.chat_id, user)
             except BaseException:
                 return await e.eor("`Something Went Wrong.`", time=5)
         elif "mute" in action:
             try:
-                await ultroid_bot.edit_permissions(
+                await Pragyan_bot.edit_permissions(
                     e.chat_id, user, until_date=None, send_messages=False
                 )
             except BaseException:
                 return await e.eor("`Something Went Wrong.`", time=5)
         add_warn(e.chat_id, user, count + 1, r)
         c, r = warns(e.chat_id, user)
-        ok = await ultroid_bot.get_entity(user)
+        ok = await Pragyan_bot.get_entity(user)
         user = inline_mention(ok)
         r = r.split("|$|")
         text = f"User {user} Got {action} Due to {count+1} Warns.\n\n"
@@ -95,7 +95,7 @@ async def warn(e):
         await e.eor(text)
         return reset_warn(e.chat_id, ok.id)
     add_warn(e.chat_id, user, count + 1, r)
-    ok = await ultroid_bot.get_entity(user)
+    ok = await Pragyan_bot.get_entity(user)
     user = inline_mention(ok)
     await eor(
         e,

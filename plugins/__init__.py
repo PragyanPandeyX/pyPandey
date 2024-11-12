@@ -32,15 +32,15 @@ pdB: Database
 Redis = pdB.get_key
 con = TgConverter
 quotly = Quotly()
-OWNER_NAME = ultroid_bot.full_name
-OWNER_ID = ultroid_bot.uid
+OWNER_NAME = Pragyan_bot.full_name
+OWNER_ID = Pragyan_bot.uid
 
-ultroid_bot: PandeyClient
+Pragyan_bot: PandeyClient
 asst: PandeyClient
 
 LOG_CHANNEL = pdB.get_key("LOG_CHANNEL")
 
-ultroid_bot.parse_mode = CustomMarkdown()
+Pragyan_bot.parse_mode = CustomMarkdown()
 
 def inline_pic():
     INLINE_PIC = pdB.get_key("INLINE_PIC")

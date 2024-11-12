@@ -16,7 +16,7 @@ from telethon.tl.functions.photos import UploadProfilePhotoRequest
 from pyPandey.fns.helper import download_file
 from pyPandey.fns.tools import get_google_images
 
-from . import LOGS, get_help, get_string, pdB, ultroid_bot, ultroid_cmd
+from . import LOGS, get_help, get_string, pdB, Pragyan_bot, ultroid_cmd
 
 __doc__ = get_help("help_autopic")
 
@@ -70,8 +70,8 @@ if search := pdB.get_key("AUTOPIC"):
             return
         img = random.choice(images[search])
         filee = await download_file(img["original"], "resources/downloads/autopic.jpg")
-        file = await ultroid_bot.upload_file(filee)
-        await ultroid_bot(UploadProfilePhotoRequest(file))
+        file = await Pragyan_bot.upload_file(filee)
+        await Pragyan_bot(UploadProfilePhotoRequest(file))
         os.remove(filee)
 
     try:

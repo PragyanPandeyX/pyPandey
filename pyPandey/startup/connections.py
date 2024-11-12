@@ -73,7 +73,7 @@ def validate_session(session, logger=LOGS, _exit=True):
         sys.exit()
 
 
-def vc_connection(pdB, ultroid_bot):
+def vc_connection(pdB, Pragyan_bot):
     from strings import get_string
 
     VC_SESSION = Var.VC_SESSION or pdB.get_key("VC_SESSION")
@@ -91,4 +91,4 @@ def vc_connection(pdB, ultroid_bot):
         except Exception as er:
             LOGS.info("While creating Client for VC.")
             LOGS.exception(er)
-    return ultroid_bot
+    return Pragyan_bot

@@ -32,14 +32,14 @@ from . import (
     get_string,
     inline_mention,
     pdB,
-    ultroid_bot,
+    Pragyan_bot,
 )
 
 CACHE_SPAM = {}
 TAG_EDITS = {}
 
 
-@ultroid_bot.on(
+@Pragyan_bot.on(
     events.NewMessage(
         incoming=True,
         func=lambda e: (e.mentioned),
@@ -113,7 +113,7 @@ async def all_messages_catcher(e):
 
 if pdB.get_key("TAG_LOG"):
 
-    @ultroid_bot.on(events.MessageEdited(func=lambda x: not x.out))
+    @Pragyan_bot.on(events.MessageEdited(func=lambda x: not x.out))
     async def upd_edits(event):
         x = event.sender
         if isinstance(x, User) and (x.bot or x.verified):
@@ -184,7 +184,7 @@ if pdB.get_key("TAG_LOG"):
         except Exception as er:
             LOGS.exception(er)
 
-    @ultroid_bot.on(
+    @Pragyan_bot.on(
         events.NewMessage(
             outgoing=True,
             chats=[pdB.get_key("TAG_LOG")],
@@ -196,7 +196,7 @@ if pdB.get_key("TAG_LOG"):
         chat, msg = who_tag(id)
         if chat and msg:
             try:
-                await ultroid_bot.send_message(chat, e.message, reply_to=msg)
+                await Pragyan_bot.send_message(chat, e.message, reply_to=msg)
             except BaseException as er:
                 LOGS.exception(er)
 
@@ -230,18 +230,18 @@ async def when_added_or_joined(event):
 asst.add_event_handler(
     when_added_or_joined, events.ChatAction(func=lambda x: x.user_added)
 )
-ultroid_bot.add_event_handler(
+Pragyan_bot.add_event_handler(
     when_added_or_joined,
     events.ChatAction(func=lambda x: x.user_added or x.user_joined),
 )
-_client = {"bot": asst, "user": ultroid_bot}
+_client = {"bot": asst, "user": Pragyan_bot}
 
 
 @callback(
     re.compile(
         "leave_ch_(.*)",
     ),
-    from_users=[ultroid_bot.uid],
+    from_users=[Pragyan_bot.uid],
 )
 async def leave_ch_at(event):
     cht = event.data_match.group(1).decode("UTF-8")
