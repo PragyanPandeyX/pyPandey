@@ -1,3 +1,3 @@
 build:
   docker:
-      Pragyan: Dockerfile
+      pragyan: Dockerfile
