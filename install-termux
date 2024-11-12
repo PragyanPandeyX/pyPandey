@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Pandey - UserBot
+# Copyright (C) 2021-2023 TeamPandey
+#
+# This file is a part of < https://github.com/TeamPandey/Pandey/ >
+# PLease read the GNU Affero General Public License in <https://www.github.com/TeamPandey/Pandey/blob/main/LICENSE/>.
+
+if [ -d "resources" ]
+then
+    echo "Current directory Identified.."
+else
+    apt install git -y
+    git clone https://github.com/TeamPandey/Pandey
+    cd Pandey
+fi
+bash resources/startup/termux.sh
