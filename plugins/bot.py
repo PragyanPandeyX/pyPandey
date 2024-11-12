@@ -116,7 +116,7 @@ async def lol(ult):
 #    y = Repo().active_branch
     y = "main"
 #    xx = Repo().remotes[0].config_reader.get("url")
-    xx = "https://github.com/ufoptg/PandeyBackup.git"
+    xx = "https://github.com/TeamPandey/PandeyBackup.git"
     rep = xx.replace(".git", f"/tree/{y}")
     kk = f" `[{y}]({rep})` "
     if inline:

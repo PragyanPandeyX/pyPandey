@@ -129,7 +129,7 @@ Pandey is licensed under [GNU Affero General Public License](https://www.gnu.org
 
 #### You git clone the repo
 
-### git clone https://github.com/ufoptg/PandeyBackup.git
+### git clone https://github.com/TeamPandey/PandeyBackup.git
 
 ### cd PandeyBackup
 

@@ -1,7 +1,7 @@
 # Pandey ~ UserBot
 # Copyright (C) 2023 Pandey
 #
-# This file is a part of < https://github.com/ufoptg/PandeyBackup/ >
+# This file is a part of < https://github.com/TeamPandey/PandeyBackup/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/ufoptg/PandeyBackup/blob/main/LICENSE/>.
 

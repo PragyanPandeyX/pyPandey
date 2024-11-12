@@ -73,7 +73,7 @@ def load_other_plugins(addons=None, pmbot=None, manager=None, vcbot=None):
             rmtree("addons")
         if not os.path.exists("addons"):
             subprocess.run(
-                f"git clone -q -b main https://github.com/ufoptg/PandeyAddons.git addons",
+                f"git clone -q -b main https://github.com/TeamPandey/PandeyAddons.git addons",
                 shell=True,
             )
         else:
@@ -81,7 +81,7 @@ def load_other_plugins(addons=None, pmbot=None, manager=None, vcbot=None):
 
         if not os.path.exists("addons"):
             subprocess.run(
-                "git clone -q https://github.com/ufoptg/PandeyAddons.git addons",
+                "git clone -q https://github.com/TeamPandey/PandeyAddons.git addons",
                 shell=True,
             )
         if os.path.exists("addons/addons.txt"):
