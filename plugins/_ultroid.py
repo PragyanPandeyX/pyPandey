@@ -14,7 +14,7 @@ from telethon.errors import (
 from . import LOG_CHANNEL, LOGS, Button, asst, eor, get_string, Pragyan_cmd
 
 REPOMSG = """
-• **ULTROID USERBOT** •\n
+• **PANDEY USERBOT** •\n
 • Repo - [Click Here](https://github.com/TeamPandey/Pandey)
 • Addons - [Click Here](https://github.com/TeamPandey/PandeyAddons)
 • Support - @PandeySupportChat
