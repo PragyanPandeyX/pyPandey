@@ -47,10 +47,4 @@
             "required": false
         }
     },
-    "formation": {
-        "Pragyan": {
-            "quantity": 1,
-            "size": "worker"
-        }
-    }
-}
+    
