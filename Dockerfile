@@ -14,7 +14,7 @@ COPY installer.sh .
 RUN bash installer.sh
 
 # changing workdir
-WORKDIR "/root/TeamPragyan"
+WORKDIR "/root/TeamUltroid"
 
 # start the bot.
 CMD ["bash", "startup"]
